@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Softoo — Lead & RFP Tracker</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --ink:#1a2233; --muted:#5a6577; --line:#e3e8f0;
+    --head:#1f3864; --accent:#2e5496; --link:#1155cc; --navbg:#1f3864;
+    --live:#1e7e34; --live-bg:#e6f4ea; --exp:#8a8f99; --exp-bg:#f0f1f4;
+    --green:#1e7e34; --green-bg:#e2f0d9; --amber:#9a6a00; --amber-bg:#fff2cc;
+    --blue:#1155cc; --blue-bg:#e5efff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --card:#182230; --ink:#e6ebf2; --muted:#9aa7ba; --line:#26313f;
+      --head:#9db8e8; --accent:#7fa3e0; --link:#7fb0ff; --navbg:#141d29;
+      --live:#5fd07f; --live-bg:#12351f; --exp:#8b95a4; --exp-bg:#1c2531;
+      --green:#5fd07f; --green-bg:#12351f; --amber:#e6c15a; --amber-bg:#332a10;
+      --blue:#7fb0ff; --blue-bg:#132238;
+    }
+  }
+  :root[data-theme="dark"]{
+      --bg:#0f141b; --card:#182230; --ink:#e6ebf2; --muted:#9aa7ba; --line:#26313f;
+      --head:#9db8e8; --accent:#7fa3e0; --link:#7fb0ff; --navbg:#141d29;
+      --live:#5fd07f; --live-bg:#12351f; --exp:#8b95a4; --exp-bg:#1c2531;
+      --green:#5fd07f; --green-bg:#12351f; --amber:#e6c15a; --amber-bg:#332a10;
+      --blue:#7fb0ff; --blue-bg:#132238;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  /* top nav */
+  .nav{position:sticky;top:0;z-index:20;background:var(--navbg);color:#fff;
+    display:flex;align-items:center;gap:4px;padding:0 20px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
+  .nav .brand{font-weight:700;font-size:15px;margin-right:20px;padding:14px 0;white-space:nowrap}
+  .nav .brand small{font-weight:400;opacity:.7}
+  .nav button{font:inherit;font-size:14px;font-weight:600;color:#cdd8ec;background:none;border:none;
+    padding:16px 16px;cursor:pointer;border-bottom:3px solid transparent}
+  .nav button:hover{color:#fff}
+  .nav button.active{color:#fff;border-bottom-color:#7fb0ff}
+  .nav .count{font-size:11px;background:rgba(255,255,255,.16);border-radius:10px;padding:1px 7px;margin-left:6px}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+  h1.pagetitle{font-size:23px;margin:6px 0 4px}
+  .lede{color:var(--muted);font-size:13.5px;max-width:800px;margin:0 0 16px}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:118px}
+  .stat b{display:block;font-size:23px;line-height:1.1}
+  .stat span{font-size:12px;color:var(--muted)}
+  .legend{font-size:12.5px;color:var(--muted);margin:14px 0 4px}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;margin-right:6px;border:1px solid transparent}
+  .p-live{background:var(--live-bg);color:var(--live)} .p-exp{background:var(--exp-bg);color:var(--exp)}
+  .p-green{background:var(--green-bg);color:var(--green)} .p-amber{background:var(--amber-bg);color:var(--amber)}
+  .p-blue{background:var(--blue-bg);color:var(--blue)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+  .filters button{font:inherit;font-size:13px;padding:6px 14px;border-radius:20px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);cursor:pointer}
+  .filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .dategroup{margin-top:26px}
+  .datebar{display:flex;align-items:baseline;gap:12px;padding:8px 0 8px;border-bottom:2px solid var(--accent)}
+  .datebar h2{font-size:17px;margin:0;color:var(--head)}
+  .datebar .cnt{font-size:12.5px;color:var(--muted)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;border-left:4px solid var(--accent)}
+  .card.live{border-left-color:var(--live)} .card.expired{border-left-color:var(--exp)}
+  .card.fund{border-left-color:var(--blue)}
+  .card .id{font-size:12px;color:var(--muted);font-weight:600}
+  .card h3{font-size:15px;margin:3px 0 8px}
+  .card .row{font-size:12.5px;margin:3px 0}
+  .card .row b{color:var(--muted);font-weight:600}
+  .card .benefit{font-size:12px;background:var(--blue-bg);color:var(--ink);border-radius:8px;padding:7px 9px;margin-top:8px}
+  .card .tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
+  .card a{color:var(--link);font-size:12.5px;text-decoration:none;word-break:break-word}
+  .card a:hover{text-decoration:underline}
+  .nolink{font-size:12px;color:var(--muted);font-style:italic}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    font-size:13px;color:var(--muted);margin-top:34px;line-height:1.6}
+  .note b{color:var(--ink)}
+  footer{margin-top:26px;font-size:12px;color:var(--muted);text-align:center}
+  .tab{display:none} .tab.show{display:block}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand">Softoo <small>· Lead &amp; RFP Tracker</small></div>
+  <button data-tab="rfp" class="active">RFP Opportunities <span class="count" id="nc-rfp"></span></button>
+  <button data-tab="fund">Funding Signal Leads <span class="count" id="nc-fund"></span></button>
+  <button data-tab="sled">SLED Intel <span class="count" id="nc-sled"></span></button>
+</nav>
+
+<!-- ============ RFP TAB ============ -->
+<div class="wrap tab show" id="tab-rfp">
+  <h1 class="pagetitle">RFP Opportunities</h1>
+  <p class="lede">Every RFP / tender surfaced by the Daily Global Lead Sweep, grouped by the date it was found (newest first). Eligibility follows the verified detail-page rule: <b>green = directly biddable</b> ("Global World-wide"), <b>amber = onshore / needs a local partner or entity</b>. Statuses are relative to 1 Sep 2026.</p>
+  <div class="stats" id="rfp-stats"></div>
+  <div class="legend">
+    <span class="pill p-live">LIVE</span> deadline open &nbsp;
+    <span class="pill p-exp">EXPIRED</span> passed / not recorded &nbsp;
+    <span class="pill p-green">Directly biddable</span> &nbsp;
+    <span class="pill p-amber">Needs local partner</span>
+  </div>
+  <div class="filters" id="rfp-filters">
+    <button data-f="all" class="active">All</button>
+    <button data-f="live">Live only</button>
+    <button data-f="expired">Expired</button>
+    <button data-f="green">Directly biddable</button>
+    <button data-f="amber">Needs partner</button>
+  </div>
+  <div id="rfp-content"></div>
+  <div class="note">
+    <b>Honest notes.</b> Built from the sweep run log. Most listings are RFPMart items identified by listing ID (e.g. AI-1210, #1160205); free detail pages show eligibility + short scope but not full thresholds ($7/doc paywall), and exact per-listing URLs aren't all recorded — cards link to the relevant index and show the ID. Deadlines weren't recorded for every listing; where unknown and 2+ weeks old, marked EXPIRED conservatively. Only rows verified on the detail page are green ("Global World-wide"); everything else defaults to amber. <b>No Moodle / LMS RFP appears anywhere</b> — none was surfaced in any run. On 1 Sep, 30, 24 &amp; 23 Aug no fresh live RFP surfaced (those runs were carried by funding leads).
+  </div>
+  <footer>Generated 1 Sep 2026 · Softoo Daily Global Lead Sweep · data from the sweep run log</footer>
+</div>
+
+<!-- ============ FUNDING TAB ============ -->
+<div class="wrap tab" id="tab-fund">
+  <h1 class="pagetitle">Funding Signal Leads</h1>
+  <p class="lede">Recently-funded companies surfaced by the sweep — <b>private, no procurement barrier → direct B2B outreach</b>. Fresh capital = budget for external dev. Grouped by the date found (newest first). Health-adjacent names (flagged) are client targets for software/build/infra work only — not clinical work.</p>
+  <div class="stats" id="fund-stats"></div>
+  <div class="legend"><span class="pill p-blue">ACT FIRST</span> direct outreach — no RFP, no partner needed</div>
+  <div class="filters" id="fund-filters">
+    <button data-f="all" class="active">All dates</button>
+    <button data-f="latest">1 Sep only (full detail)</button>
+  </div>
+  <div id="fund-content"></div>
+  <div class="note">
+    <b>Honest notes.</b> The 1 Sep batch has full detail + a per-company Softoo engagement angle and live source links. Earlier dates are reproduced from the run log's dedupe records — name, amount, stage, sector and region where the log preserved them; per-company source URLs weren't all recorded, so those cards show the source publication instead of a deep link. Amounts/stages are as reported at find time. "Simile ~$200M" is flagged UNVERIFIED in the log — confirm before outreach.
+  </div>
+  <footer>Generated 1 Sep 2026 · Softoo Daily Global Lead Sweep · funding signals from the sweep run log</footer>
+</div>
+
+<!-- ============ SLED TAB ============ -->
+<div class="wrap tab" id="tab-sled">
+  <h1 class="pagetitle">SLED Intel — Daily Delta</h1>
+  <p class="lede">Output of the <b>SLED Daily Delta</b> competitive-intelligence task: open US State/Local/Education RFPs (with inferred primes), plus the market & compliance signals and the tracked Pakistani-linked peer firms. <b>HIGH = IT/software/cyber/AI/data/GIS/accessibility</b> (chase); LOW = non-tech (completeness). Softoo's play is offshore build + AI-governance/compliance behind a US prime — it can't bid direct. As of the 1 Sep run.</p>
+  <div class="stats" id="sled-stats"></div>
+
+  <div class="note" style="margin-top:16px;border-left:4px solid var(--accent)">
+    <b>Latest delta — 1 Sep 2026.</b> Quiet across all four intel fronts; RFP board unchanged vs 30 Aug. No new market rule change, Pakistan-push milestone, peer win, or new competitor. <b>Nearest live high-relevance close: Town of Mead permitting (4 Sep, ~3 days out).</b> Most portals were gated in the unattended run, so several dates are carried, not re-confirmed. Strategic read unchanged: lead with the AI Audit &amp; Compliance product, not another RFP-pack.
+  </div>
+
+  <div class="filters" id="sled-filters">
+    <button data-f="all" class="active">All</button>
+    <button data-f="high">HIGH relevance</button>
+    <button data-f="live">Live only</button>
+    <button data-f="closed">Closed / past</button>
+  </div>
+  <div id="sled-content"></div>
+
+  <div class="note">
+    <b>Market &amp; compliance signals</b> (the demand behind Softoo's wedge):<br>
+    • <b>Whole-of-state cybersecurity buying</b> after MS-ISAC federal funding ended (30 Sep 2025) — states now buy statewide cyber access with own funds. #1 state-CIO priority.<br>
+    • <b>State AI-governance laws:</b> California AI-vendor-certification EO (Mar 2026); Colorado SB 26-189 (AI Act, compliance clock 1 Jan 2027); Illinois SB 315 (annual <b>third-party</b> AI safety audits); Colorado HB 26-1263 Chatbot Safety Act (1 Jan 2027). All map onto Softoo's AI Audit &amp; Compliance product.<br>
+    • <b>Accessibility / security deadlines:</b> ADA Title II digital accessibility — 26 Apr 2027 (WCAG/VPATs); CJIS 6.0 — 1 Oct 2027 (MFA, continuous risk mgmt).<br>
+    • <b>Federal signal:</b> GSA OneGov agentic-AI deal (Jul 2026) bakes human-approval + audit-trail governance into procurement language SLED tends to copy.
+  </div>
+
+  <div class="note">
+    <b>Tracked PK-linked peer firms (RSP-behind-primes niche, 13 active):</b> QBatch, Nexstair, Excellence Delivered (ExD), RIKSOF, Cloud Upload, Collab P, Celestials, Techtiz, Tiksom, AppsGenii, Amanrasoft, MH Technologies, PIScaleX. <i>(Aridian Technologies de-listed — site dead / DNS fails.)</i> The niche is commoditizing fast (10+ near-identical shops) — Softoo's differentiator is the <b>AI Audit &amp; Compliance product</b>, not generic pre-bid support.
+  </div>
+
+  <div class="note" style="font-size:12.5px">
+    <b>Honest notes.</b> System of record is <b>BidNet Direct</b> (RMEPS Colorado/Wyoming + NY group), which blocks automated fetch — data comes via Starbridge, rfpmart, GovCB, agency PDFs, so some dates are "carried/unconfirmed." <b>Primes are inferred</b> from the RFP category, never a confirmed bidder list (plan-holder lists aren't public pre-award). rfpmart lists buyers anonymized behind its own codes — treat rfpmart-only dates as provisional until cross-confirmed.
+  </div>
+  <footer>Generated 1 Sep 2026 · Softoo SLED Daily Delta · data from claude/softoo-sled-strategy.md</footer>
+</div>
+
+<script>
+const REF={rfpmartSW:"https://www.rfpmart.com/software-system-and-application-rfp-government-contract.html",
+ rfpmartWD:"https://www.rfpmart.com/web-design-and-development-rfp-government-contract.html",
+ tot:"https://www.tendersontime.com/",biddetail:"https://www.biddetail.com/",
+ tendersSA:"https://www.tenders-sa.org/",euDPS:"https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home"};
+const SRC={
+ cbInstinct:"https://news.crunchbase.com/venture/biggest-funding-rounds-ai-tools-assistants-instinct/",
+ ts28:"https://techstartups.com/2026/08/28/startup-funding-news-today-august-28-2026-ausperbio-civilgrid-transfyr-yardstik-more/",
+ ts27:"https://techstartups.com/2026/08/27/startup-funding-news-today-august-27-2026-instinct-breedr-agentrys-more/",
+ ts26:"https://techstartups.com/2026/08/26/startup-funding-news-today-august-26-2026-emerald-ai-gatik-stellaria-more/",
+ ts31:"https://techstartups.com/2026/08/31/startup-funding-news-today-august-31-2026-apate-ai-s-transistors-yoga-clean-air-more/",
+ stalky:"https://startuptalky.com/indian-startups-funding-investors-data-2026/",
+ today:"https://www.todaysstartupnews.com/news/august-2026-startup-funding-acquisitions-recap",
+ cytix:"https://www.eu-startups.com/2026/08/uk-cybersecurity-startup-cytix-raises-e6-million-series-a-to-tackle-ai-driven-software-change-risks/",
+ infinity:"https://www.businesswire.com/news/home/20260720324097/en/Infinity-Raises-$15-Million-in-Seed-Funding-to-Build-the-Software-Layer-That-Makes-Any-AI-Chip-Inference-Ready",
+ nmp:"https://newmarketpitch.com/blogs/news/cybersecurity-funding-news"};
+
+// -------- RFP DATA --------
+const RFPS=[
+ {found:"27 Aug 2026", rfps:[
+   {id:"RFPMart SW-118317 · #1160205",title:"Web Candidate-Screening Platform",region:"Maryland, USA",elig:"Onshore (USA Organization Only) — verified",bucket:"amber",deadline:"9 Sep 2026",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart · #1161024",title:"Cloud Case-Management System",region:"Wyoming, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"2 Oct 2026",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"}]},
+ {found:"26 Aug 2026", rfps:[
+   {id:"RFPMart · #1161024",title:"Cloud Case-Management System",region:"Wyoming, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"2 Oct 2026",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart · #1160200 / #1160168",title:"Cloud Records / Case-Mgmt (police-misconduct)",region:"New York, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"21 Sep 2026",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart SW-118317 · #1160205",title:"Web Candidate-Screening Platform",region:"Maryland, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"9 Sep 2026",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart · #1160627",title:"Legal Case-Management RFI",region:"Virginia, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"1 Sep 2026 (RFI)",status:"live",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"}]},
+ {found:"25 Aug 2026", rfps:[
+   {id:"RFPMart AI-1074 · #1127611",title:"DC Tactical Communications AI",region:"Washington DC, USA (defence)",elig:"Onshore (USA Only) — verified · US prime + SAM.gov + likely clearance",bucket:"amber",deadline:"31 Aug 2026",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"tenders-sa.org",title:"Software Dev Team Services — National RFP (3-yr)",region:"South Africa",elig:"Not verified — assume onshore/local partner",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.tendersSA,linktxt:"tenders-sa.org"},
+   {id:"US portal",title:"Service Authority Cloud Migration + ArcGIS",region:"USA",elig:"Not verified — assume onshore/local partner",bucket:"amber",deadline:"Not recorded",status:"expired",link:null}]},
+ {found:"24 Aug 2026", rfps:[
+   {id:"tenders-sa.org",title:"Software Dev Team Services — National RFP (3-yr)",region:"South Africa",elig:"Likely onshore — unverified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.tendersSA,linktxt:"tenders-sa.org"},
+   {id:"EU · EC DG DIGIT",title:"Cloud Services DPS framework",region:"EU",elig:"EU entity required",bucket:"amber",deadline:"Rolling DPS",status:"expired",link:REF.euDPS,linktxt:"EU Funding & Tenders portal"},
+   {id:"EU · ECHA",title:"IT-Services DPS framework",region:"EU",elig:"EU entity required",bucket:"amber",deadline:"Rolling DPS",status:"expired",link:REF.euDPS,linktxt:"EU Funding & Tenders portal"},
+   {id:"BidDetail",title:"Software-development tenders (feed)",region:"Global",elig:"Varies — mostly onshore",bucket:"amber",deadline:"Rolling",status:"expired",link:REF.biddetail,linktxt:"BidDetail"},
+   {id:"TendersOnTime",title:"Software / Cloud tenders (feed)",region:"Global",elig:"Varies — mostly onshore",bucket:"amber",deadline:"Rolling",status:"expired",link:REF.tot,linktxt:"TendersOnTime"}]},
+ {found:"23 Aug 2026", rfps:[
+   {id:"BidDetail · EU framework",title:"Lithuania Social-Services Software Dev",region:"Lithuania (EU)",elig:"EU/local entity required",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.biddetail,linktxt:"BidDetail"},
+   {id:"EU · EC DG DIGIT",title:"Cloud DPS framework",region:"EU",elig:"EU entity required",bucket:"amber",deadline:"Rolling DPS",status:"expired",link:REF.euDPS,linktxt:"EU Funding & Tenders portal"},
+   {id:"EU · ECHA",title:"IT-Services DPS framework",region:"EU",elig:"EU entity required",bucket:"amber",deadline:"Rolling DPS",status:"expired",link:REF.euDPS,linktxt:"EU Funding & Tenders portal"}]},
+ {found:"22 Aug 2026", rfps:[
+   {id:"RFPMart AI-1210",title:"AI Services RFP",region:"Texas, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart AI-1218",title:"AI Services RFP",region:"Massachusetts, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart AI-1219",title:"AI Services RFP",region:"Illinois, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart SW-118476",title:"Software / System RFP",region:"Alberta, Canada",elig:"Onshore (Canada Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart ITES-10873",title:"IT / Enterprise Services RFP",region:"Arizona, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart WD-16158",title:"Web Design & Development RFP",region:"South Africa",elig:"Onshore (SA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartWD,linktxt:"RFPMart web-design index"},
+   {id:"RFPMart (assumed onshore)",title:"Software / Web RFPs — Ohio, Ontario, Minnesota, BC",region:"USA / Canada",elig:"Assumed onshore — unverified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"}]},
+ {found:"21 Aug 2026", rfps:[
+   {id:"RFPMart AI-1208 · #1158933",title:"RFI — AI Coding Agents",region:"New York, USA",elig:"Global World-wide — VERIFIED (offshore bidders allowed)",bucket:"green",deadline:"Not recorded (RFI)",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart AI-1209 · #1158936",title:"AI Evidence Review",region:"New York, USA",elig:"Global World-wide — VERIFIED (expired at find)",bucket:"green",deadline:"Expired at find",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index (find by ID)"},
+   {id:"RFPMart SW-117997",title:"Software / System RFP",region:"Ireland",elig:"Onshore (Ireland Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart SW-118325",title:"Software / System RFP",region:"Ireland",elig:"Onshore (Ireland Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart AI-1178",title:"AI Services RFP",region:"Ireland",elig:"Onshore (Ireland Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart AI-1184",title:"AI Services RFP",region:"Malaysia",elig:"Onshore (Malaysia Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart WD-16125",title:"Web Design & Development RFP",region:"Tanzania",elig:"Onshore (Tanzania Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartWD,linktxt:"RFPMart web-design index"},
+   {id:"RFPMart AI-1201",title:"AI Services RFP",region:"Colorado, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"},
+   {id:"RFPMart WD-16154",title:"Web Design & Development RFP",region:"British Columbia, Canada",elig:"Onshore (Canada Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartWD,linktxt:"RFPMart web-design index"},
+   {id:"RFPMart MRB-56522",title:"Marketing / Web RFP",region:"Virginia, USA",elig:"Onshore (USA Only) — verified",bucket:"amber",deadline:"Not recorded",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index"}]},
+ {found:"1 Sep, 30, 24 & 23 Aug — note", rfps:[
+   {id:"—",title:"No fresh LIVE directly-biddable RFP on these dates",region:"—",elig:"Searches returned only expired listings; recurring index bookmarks kept (RFPMart AI/ML + software, TendersOnTime, Clutch Get Matched, Upwork/Wellfound). 9 consecutive runs with zero 'Global World-wide' RFP.",bucket:"amber",deadline:"—",status:"expired",link:REF.rfpmartSW,linktxt:"RFPMart software index (recurring bookmark)"}]},
+];
+
+// -------- FUNDING DATA -------- (f = full-detail 1 Sep batch)
+const FUND=[
+ {found:"1 Sep 2026", latest:true, list:[
+  {c:"Airbound",amt:"$37M · Series A",sec:"Drone logistics / high-tech delivery",reg:"India",src:SRC.stalky,ben:"Scale ops + platform — dedicated full-stack squad for fleet/ops dashboards, routing, mobile."},
+  {c:"Cytix",amt:"€6M ($7M) · Series A",sec:"Cyber change-risk platform (AI-assisted dev)",reg:"UK (Manchester)",src:SRC.cytix,ben:"Series A → scale eng fast: full-stack/backend squad + QA automation for platform & integrations."},
+  {c:"Apate.AI",amt:"~$8.15M · Seed",sec:"Adversarial-AI anti-fraud agents",reg:"Australia / US",src:SRC.ts31,ben:"Seed build-out: AI/ML + backend squad to ship the agent platform; QA/DevOps for scale."},
+  {c:"Medly AI",amt:"$8M · Seed",sec:"AI tutoring (edtech)",reg:"UK",src:SRC.today,ben:"Build core product: AI/ML + full-stack team (LLM tutoring UX, content pipeline, mobile/web)."},
+  {c:"BOOKR",amt:"€6.1M · Series A",sec:"Edtech learning platform",reg:"Hungary",src:SRC.today,ben:"Scale platform: full-stack squad + QA, localisation, content tooling."},
+  {c:"Infinity",amt:"$15M · Seed",sec:"Hardware-agnostic AI-chip inference software layer",reg:"US",src:SRC.infinity,ben:"Systems/backend squad + DevOps/QA to harden the inference layer across chips."},
+  {c:"World of Asaya",amt:"$9.2M · Series A",sec:"Retail / commerce",reg:"India",src:SRC.stalky,ben:"E-commerce build: full-stack web+mobile (storefront, checkout, inventory, integrations)."},
+  {c:"Zettaone",amt:"$19.8M · Series B",sec:"Semiconductors / chip design",reg:"India",src:SRC.stalky,ben:"Embedded/firmware + EDA-tooling engineers; infra/DevOps for design pipelines & simulation compute."},
+  {c:"Battery Smart",amt:"$19.5M · Series C",sec:"EV battery-swap energy-tech (IoT)",reg:"India",src:SRC.stalky,ben:"Platform hardening: managed services + IoT infra scaling, observability, DevOps."},
+  {c:"BGauss",amt:"$11.6M · Series D",sec:"EV / connected two-wheelers",reg:"India",src:SRC.stalky,ben:"Mature → managed services: connected-vehicle software, telematics platform, DevOps."},
+  {c:"YOGa Clean Air",amt:"~$2.1M · Series A",sec:"Air-quality / climate IoT",reg:"India",src:SRC.ts31,ben:"IoT + app layer: small dedicated team for device dashboards, mobile app, data pipeline."},
+  {c:"Lissun",amt:"$5.02M · Series A",sec:"Healthtech (mental wellness) — CLIENT build target, not clinical",reg:"India",src:SRC.stalky,ben:"Full-stack + mobile build for the platform/app and data/infra. Software only — not clinical."},
+  {c:"S-Transistors",amt:"€2.6M · Pre-seed",sec:"Quantum control electronics (tiny budget = offshore fit)",reg:"Finland",src:SRC.ts31,ben:"Lean control-software/firmware + embedded build team."},
+  {c:"Imperagen",amt:"€5.8M · Seed",sec:"AI+quantum enzyme engineering (deep-tech) — niche, CLIENT tooling only",reg:"UK (Manchester)",src:SRC.nmp,ben:"Small data-engineering/ML squad for data platform + ML tooling. Weaker fit — qualify carefully."}
+ ]},
+ {found:"30 Aug 2026", list:[
+  {c:"Instinct",amt:"$250M · Series B",sec:"Consumer AI assistant",reg:"US (SF)",src:SRC.cbInstinct},
+  {c:"Owner",amt:"$240M · Growth",sec:"Small-biz / restaurant AI SaaS",reg:"US (SF)",src:SRC.cbInstinct},
+  {c:"Generalist AI",amt:"$200M · Series B ext",sec:"Physical-AI / robotics",reg:"US (SF)",src:SRC.cbInstinct},
+  {c:"Socure",amt:"$156M · Growth",sec:"Identity verification / fraud",reg:"US",src:SRC.cbInstinct},
+  {c:"Regent Craft",amt:"$120M · Series B",sec:"Electric seagliders / maritime",reg:"US (RI)",src:SRC.cbInstinct},
+  {c:"Blank Street",amt:"$75M · Growth",sec:"Coffee retail + loyalty tech",reg:"US (Brooklyn)",src:SRC.cbInstinct},
+  {c:"Breedr",amt:"$27M · Series B",sec:"Livestock supply-chain",reg:"US / UK / AU",src:SRC.ts27},
+  {c:"CivilGrid",amt:"$26M · Series A",sec:"Underground-infra mapping SaaS",reg:"US",src:SRC.ts28},
+  {c:"Transfyr",amt:"$25M · Seed",sec:"Lab-observation AI",reg:"US",src:SRC.ts28},
+  {c:"Agentrys",amt:"$24.5M · Seed",sec:"Semiconductor eng-automation AI",reg:"US",src:SRC.ts27},
+  {c:"Hike Medical",amt:"$22.5M · Seed+A",sec:"Med-device logistics / orthotics (CLIENT build)",reg:"US",src:SRC.ts27},
+  {c:"Onos Health",amt:"$17M · Series A",sec:"Behavioural-health AI (CLIENT build)",reg:"US",src:SRC.ts27},
+  {c:"Lupin Dental",amt:"€15M · Series A",sec:"Dental robotics",reg:"France",src:SRC.ts28},
+  {c:"Yardstik",amt:"$30M · Series B",sec:"Workforce fraud / background-check",reg:"US",src:SRC.ts28},
+  {c:"Muon Space",amt:"$250M · Series C",sec:"Satellite constellations",reg:"US",src:SRC.cbInstinct},
+  {c:"Bevel",amt:"$6M · Seed",sec:"Fintech",reg:"US",src:SRC.ts28},
+  {c:"Vumi",amt:"€100K · Seed",sec:"Wealth management (tiny = offshore fit)",reg:"Spain",src:SRC.ts28},
+  {c:"ColibriTD",amt:"€4M · Seed",sec:"Quantum simulation SW (niche)",reg:"France",src:SRC.ts27},
+  {c:"ArcSpace",amt:"€2M+",sec:"Satellite in-orbit servicing",reg:"France",src:SRC.ts27},
+  {c:"Solace Care",amt:"€2.1M · Pre-seed",sec:"End-of-life insurtech",reg:"Sweden",src:SRC.ts27},
+  {c:"Motion",amt:"€1.7M · Pre-seed",sec:"Humanoid robotics-as-a-service",reg:"Belgium",src:SRC.ts27},
+  {c:"Longivium",amt:"$7M",sec:"AI-longevity lab build (CLIENT build)",reg:"UAE (Dubai)",src:null},
+  {c:"Raym",amt:"$2M+ · Seed",sec:"Industrial-ops AI",reg:"Saudi Arabia",src:null}
+ ]},
+ {found:"27 Aug 2026", list:[
+  {c:"Lovable",amt:"$400M · Series C",sec:"AI app-builder",reg:"Sweden",src:null},
+  {c:"Gatik",amt:"$200M · Series D",sec:"Autonomous freight",reg:"US",src:SRC.ts26},
+  {c:"Glow",amt:"$180M · Series A",sec:"Endpoint / AI-agent posture security",reg:"US",src:null},
+  {c:"Emerald AI",amt:"$150M · Series A",sec:"AI data-center power mgmt",reg:"US",src:SRC.ts26},
+  {c:"CodeRabbit",amt:"$143M · Series C",sec:"AI code review",reg:"US",src:null},
+  {c:"Alice",amt:"$140M",sec:"AI security / red-teaming",reg:"US / Israel",src:null},
+  {c:"Point2 Technology",amt:"$136M · Series B ext",sec:"Datacenter networking",reg:"US",src:null},
+  {c:"Neo",amt:"$100M · Seed+A",sec:"AI application security",reg:"US / Israel",src:null},
+  {c:"Stability AI",amt:"$76M · Series B",sec:"Generative-media AI",reg:"US",src:null},
+  {c:"WRTN Technologies",amt:"$72.2M · Series C",sec:"Consumer AI",reg:"South Korea",src:SRC.ts26},
+  {c:"Purple Style Labs",amt:"$40M · Series E",sec:"Luxury fashion e-commerce",reg:"India",src:SRC.ts26},
+  {c:"AegisAI",amt:"$36M · Series A",sec:"AI email security",reg:"US",src:null},
+  {c:"Liner",amt:"$36.1M · Series C",sec:"AI search",reg:"South Korea",src:null},
+  {c:"Celera Semiconductor",amt:"$30M · Series B",sec:"Analog-chip design AI",reg:"US",src:null},
+  {c:"M Village",amt:"$26M",sec:"Co-living",reg:"Vietnam",src:SRC.ts26},
+  {c:"Digs",amt:"$25.3M · Series A",sec:"Construction SaaS / AI doc-mgmt",reg:"US",src:null},
+  {c:"Nexedge Capital",amt:"$20M",sec:"Wealthtech",reg:"India",src:SRC.ts26},
+  {c:"W4 Games",amt:"$18M · Series B",sec:"Godot game engine",reg:"Ireland",src:SRC.ts26},
+  {c:"Certain Energy",amt:"€11.6M · Series A",sec:"Energy storage",reg:"UK",src:SRC.ts26},
+  {c:"Ringg AI",amt:"$10M · Series A ext",sec:"Voice AI",reg:"India",src:SRC.ts26},
+  {c:"Stellaria",amt:"$6.8M · Seed",sec:"Geospatial / satellite",reg:"UAE",src:SRC.ts26},
+  {c:"Bioactivx",amt:"$3M · Pre-A",sec:"Biomaterials",reg:"Singapore",src:SRC.ts26}
+ ]},
+ {found:"26 Aug 2026", list:[
+  {c:"XPeng Robotics / Dogotix",amt:">$900M · Series A",sec:"Humanoid / embodied AI",reg:"China",src:null},
+  {c:"ThreatLocker",amt:"$190M · Series F",sec:"Zero-trust endpoint",reg:"US",src:SRC.nmp},
+  {c:"Eliyan",amt:"$145M · Series C",sec:"Chiplet interconnect",reg:"US",src:null},
+  {c:"Omilia",amt:"$67M",sec:"Conversational AI",reg:"Greece / Cyprus",src:null},
+  {c:"Oak",amt:"$60M · Seed",sec:"Identity graphs",reg:"Israel / US",src:SRC.nmp},
+  {c:"Quintessent",amt:"$40M · Series A",sec:"AI-DC optical interconnect",reg:"US",src:null},
+  {c:"Hush Security",amt:"$30M · Series A",sec:"Non-human identity for AI agents",reg:"Israel",src:SRC.nmp},
+  {c:"Standard Metrics",amt:"$20M · Series B",sec:"VC/PE reporting SaaS",reg:"US",src:null},
+  {c:"Qi'an Technology",amt:"~$14.9M · Series C",sec:"Drone / autonomous-aircraft SW",reg:"China",src:null},
+  {c:"Epic Markets",amt:"$10M · Pre-seed",sec:"Brokerage fintech",reg:"UAE",src:null},
+  {c:"EULER",amt:"$4.3M · Seed",sec:"AI channel-ops SW",reg:"US",src:null},
+  {c:"Fincart",amt:"$2.8M · Seed",sec:"E-commerce ops",reg:"Egypt",src:null},
+  {c:"ChatFeatured",amt:"$2M · Pre-seed",sec:"Answer-engine optimization",reg:"Canada",src:null},
+  {c:"Embedd",amt:"$2.7M · Pre-seed",sec:"Multi-chip deploy layer",reg:"UK",src:null},
+  {c:"Ash Games",amt:"$1.5M · Seed",sec:"Game studio",reg:"Saudi Arabia",src:null},
+  {c:"Boldr",amt:"$5M · Pre-A",sec:"Grid / HVAC IoT",reg:"UK",src:null},
+  {c:"Simile",amt:"~$200M · UNVERIFIED",sec:"AI platform — confirm before outreach",reg:"—",src:null}
+ ]},
+ {found:"25 Aug 2026", list:[
+  {c:"Firmus Grid",amt:"$2B · Series G",sec:"AI infra / GPU",reg:"Australia",src:null},
+  {c:"Function Health",amt:"$450M · Growth",sec:"Healthtech (CLIENT build)",reg:"US (TX)",src:null},
+  {c:"Higgsfield",amt:"$400M · Series B",sec:"AI video / image",reg:"US",src:null},
+  {c:"Groq",amt:"$350M · Growth",sec:"AI data-centre operator",reg:"US / global DCs",src:null},
+  {c:"Wispr Flow",amt:"$280M · Series B",sec:"AI voice-to-text",reg:"US",src:null},
+  {c:"Moove",amt:"$250M · Series C",sec:"Mobility-fintech infra",reg:"Nigeria / UAE",src:null},
+  {c:"Faye",amt:"$50M",sec:"AI travel-insurance",reg:"US",src:null},
+  {c:"Ambrook",amt:"$30M · Series B",sec:"Agri-finance SaaS",reg:"US",src:null},
+  {c:"ClearJet",amt:"$25M · Series B",sec:"Logistics AI",reg:"US",src:null},
+  {c:"Delightree",amt:"$25M",sec:"AI franchise SaaS",reg:"US",src:null},
+  {c:"Tabs",amt:"$400M val",sec:"AI fintech",reg:"US",src:null}
+ ]},
+ {found:"24 Aug 2026", list:[
+  {c:"Nscale",amt:"$2B · Series C",sec:"AI-infra hyperscaler",reg:"London, UK",src:null},
+  {c:"Advanced Machine Intelligence",amt:"$1.03B",sec:"AI lab (LeCun)",reg:"Paris, France",src:null},
+  {c:"Nexthop AI",amt:"$500M · Series B",sec:"AI / cloud networking",reg:"US",src:null},
+  {c:"Replit",amt:"$400M · Series D",sec:"Agentic AI software creation ($9B val)",reg:"US",src:null},
+  {c:"Eridu",amt:"$200M · Series A",sec:"AI-DC switches",reg:"US",src:null},
+  {c:"Axiom Math AI",amt:"$200M · Series A",sec:"AI code-verification",reg:"US",src:null},
+  {c:"Yuno",amt:"$45M · Series B",sec:"Payments infra",reg:"Colombia",src:null},
+  {c:"Naran",amt:"$10M",sec:"Mobility fintech",reg:"UAE",src:null},
+  {c:"Arab Therapy",amt:"$2M · Pre-A",sec:"Digital mental-health (CLIENT build)",reg:"Jordan",src:null},
+  {c:"Majestic Mind Games",amt:"$1.45M",sec:"Gaming",reg:"Saudi Arabia",src:null},
+  {c:"Fitting",amt:"$1.1M · Seed-2",sec:"Construction-tech",reg:"Saudi Arabia",src:null},
+  {c:"UMAMI E-Learning",amt:"$1M+",sec:"Edtech / AI",reg:"Egypt",src:null},
+  {c:"Cobi",amt:"$1M · Pre-seed",sec:"Customer-intelligence AI",reg:"UAE",src:null},
+  {c:"OORI",amt:"7-figure · Pre-seed",sec:"Fintech / private-markets",reg:"Saudi Arabia",src:null},
+  {c:"Soor",amt:"Pre-seed",sec:"Insurtech",reg:"Bahrain",src:null},
+  {c:"Sooq Cars",amt:"—",sec:"Auto marketplace",reg:"Oman",src:null},
+  {c:"iO Eats",amt:"—",sec:"Food delivery / cloud kitchens",reg:"Oman",src:null},
+  {c:"Darrbak",amt:"—",sec:"Tourism marketplace",reg:"Oman",src:null},
+  {c:"Decoil",amt:"—",sec:"AI / data",reg:"Oman",src:null},
+  {c:"Pack'N",amt:"—",sec:"Packaging / logistics",reg:"Oman",src:null}
+ ]},
+ {found:"23 Aug 2026", list:[
+  {c:"Horizon3.ai",amt:"$250M · Series E",sec:"Autonomous pentest",reg:"US",src:null},
+  {c:"CAIS",amt:"$170M · Series D",sec:"Alt-investments platform",reg:"US",src:null},
+  {c:"HappyRobot",amt:"$150M · Series C",sec:"Logistics voice AI",reg:"US",src:null},
+  {c:"ALSO",amt:"$150M · Series D",sec:"—",reg:"US",src:null},
+  {c:"Zenity",amt:"$125M · Series C",sec:"AI-agent security",reg:"US / Israel",src:SRC.nmp},
+  {c:"Obsidian Security",amt:"$85M · Series D",sec:"SaaS security",reg:"US",src:SRC.nmp},
+  {c:"Astromech",amt:"$20M",sec:"—",reg:"US",src:null},
+  {c:"AILA",amt:"$3M · Pre-A",sec:"MENA startup",reg:"MENA",src:null},
+  {c:"HeyBreez",amt:"$2.5M · Seed",sec:"MENA startup",reg:"MENA",src:null},
+  {c:"Tax Star",amt:"$1.75M · Seed",sec:"Tax / fintech",reg:"MENA",src:null},
+  {c:"XSquare",amt:"Pre-seed",sec:"MENA startup",reg:"MENA",src:null},
+  {c:"Rozenama",amt:"Pre-seed",sec:"MENA startup",reg:"MENA",src:null}
+ ]},
+ {found:"22 Aug 2026", list:[
+  {c:"Rillet",amt:"$100M · Series C",sec:"AI accounting/ERP",reg:"US",src:null},
+  {c:"Navi",amt:"$100M · Pre-IPO",sec:"Fintech",reg:"India",src:null},
+  {c:"Rundoo",amt:"$30M · Series B",sec:"Vertical SaaS",reg:"US",src:null},
+  {c:"Queen One",amt:"$25M",sec:"—",reg:"—",src:null},
+  {c:"NeoGeoInfo",amt:"$20M · Series A",sec:"Geospatial",reg:"—",src:null},
+  {c:"Twin1 AI",amt:"$20M · Seed",sec:"AI",reg:"—",src:null},
+  {c:"Ours Privacy",amt:"$15M · Series A",sec:"Privacy / data",reg:"US",src:null},
+  {c:"InfiniG",amt:"$5.2M · Seed",sec:"—",reg:"—",src:null}
+ ]},
+ {found:"21 Aug 2026", list:[
+  {c:"Etched",amt:"$700M",sec:"AI inference chips",reg:"US",src:null},
+  {c:"Velaura AI",amt:"$110M",sec:"AI",reg:"—",src:null},
+  {c:"RevEng",amt:"$15M",sec:"Revenue AI",reg:"—",src:null},
+  {c:"Archera",amt:"$14.5M",sec:"Cloud cost / infra",reg:"US",src:null},
+  {c:"Risotto",amt:"$10M",sec:"IT-helpdesk AI",reg:"US",src:null},
+  {c:"HrFlow.ai",amt:"$7M",sec:"HR data / AI",reg:"France",src:null},
+  {c:"Reson8",amt:"$5.7M",sec:"—",reg:"—",src:null}
+ ]}
+];
+
+// -------- SLED DATA --------
+const SLED=[
+ {id:"Town of Mead (CO) · RMEPS/BidNet",title:"Plan Review & Public-Works Permitting Software",scope:"Cloud plan-review + permitting; integrate Bluebeam / Xpress Billpay / ArcGIS.",region:"Colorado, USA",rel:"HIGH",status:"live",deadline:"4 Sep 2026 — nearest close",primes:"Tyler (EnerGov), Accela, OpenGov, Clariti, CentralSquare",link:"https://www.meadco.gov/rfps",linktxt:"meadco.gov / Starbridge"},
+ {id:"City of Arvada (CO) · rfpmart ITES-10876",title:"IT Staff Augmentation Service",scope:"IT staff-aug vehicle (RSP-adjacent — offshore team behind a US staffing/MSP prime).",region:"Colorado, USA",rel:"HIGH",status:"live",deadline:"22 Sep 2026 (provisional — rfpmart)",primes:"Regional IT staffing / MSP firms",link:"https://www.rfpmart.com/usa-colorado-rfp-bids-tender.html",linktxt:"rfpmart CO board"},
+ {id:"RMEPS/BidNet 0000421098",title:"Co-Managed MSP Services",scope:"Co-managed IT / managed services. Buyer not identifiable on proxy.",region:"Colorado, USA",rel:"HIGH",status:"live",deadline:"Unconfirmed (BidNet 403-gated)",primes:"Regional MSP / IT services firms",link:"https://www.bidnetdirect.com/colorado/solicitations/open-bids/Co-Managed-Managed-Service-Provider-MSP-Services/0000421098",linktxt:"BidNet listing"},
+ {id:"SECWCD · BidNet 0000423275",title:"IT Managed Services Provider RFP",scope:"Southeastern Colorado Water Conservancy District — IT MSP.",region:"Colorado, USA",rel:"HIGH",status:"live",deadline:"Unconfirmed (BidNet 403-gated)",primes:"Regional MSP / IT services firms",link:"https://www.bidnetdirect.com/colorado/secwcd/solicitations/IT-Managed-Services-Provider-RFP/0000423275",linktxt:"BidNet listing"},
+ {id:"State of CO OIT · BidNet 0000422533",title:"RFP 2026-0521-002 (IT infrastructure)",scope:"State of Colorado Office of Information Technology.",region:"Colorado, USA",rel:"HIGH",status:"live",deadline:"Unconfirmed (BidNet 403-gated)",primes:"Enterprise IT integrators",link:"https://www.bidnetdirect.com/colorado/solicitations/open-bids/RFP-2026-0521-002/0000422533",linktxt:"BidNet listing"},
+ {id:"County of Glenn (CA)",title:"Co-Managed IT Services",scope:"County co-managed IT services (PDF, dated 7-22-26).",region:"California, USA",rel:"HIGH",status:"live",deadline:"Carried (see PDF)",primes:"Regional MSP / IT services firms",link:"https://media.governmentnavigator.com/media/bid/1784744485_7-22-26_Glenn_ITsvcs.pdf",linktxt:"RFP PDF"},
+ {id:"State of CO · GovCB",title:"Local IT Survey Recruiting & Incentives RFQ",scope:"Survey-recruitment / incentives admin — NOT IT delivery. Logged for completeness.",region:"Colorado, USA",rel:"LOW",status:"live",deadline:"4 Sep 2026",primes:"n/a",link:"https://www.govcb.com/statebrowse/state.bids-Colorado-State%20Government%20of%20Colorado.htm",linktxt:"GovCB CO board"},
+ {id:"Town of Mead (CO)",title:"Safe Routes to School / Trail Extension",scope:"Trail-construction bid (federal-aid + local). Non-tech — completeness.",region:"Colorado, USA",rel:"LOW",status:"live",deadline:"4 Sep 2026",primes:"n/a (construction)",link:"https://starbridge.ai/buyer/town-of-mead",linktxt:"Starbridge"},
+ {id:"Ulster County OFA (NY)",title:"Enhanced Case Management",scope:"Office for the Aging case management. Non-tech — completeness.",region:"New York, USA",rel:"LOW",status:"live",deadline:"Carried",primes:"n/a",link:null,linktxt:""},
+ {id:"Weld County (CO) · BidNet 0000267970",title:"Jail Inmate Commissary & Accounting",scope:"Commissary + accounting. Non-tech — completeness.",region:"Colorado, USA",rel:"LOW",status:"live",deadline:"Carried",primes:"Keefe/TKC, Aramark, Securus/Access, Tiger",link:null,linktxt:""},
+ {id:"Summit County (CO) · RMEPS/BidNet",title:"Integrated ERP Software Solution",scope:"Cloud ERP (financials, budgeting, procurement, HCM, payroll). Window closed.",region:"Colorado, USA",rel:"HIGH",status:"closed",deadline:"25 Aug 2026 — PASSED",primes:"Tyler (Munis/ERP Pro), Workday, Oracle, SAP, Infor, OpenGov, Sage",link:"https://www.summitcountyco.gov/bid_detail_T28_R149.php",linktxt:"Agency bid detail"},
+ {id:"Town of Vienna (VA) · RFP 26-13 / 122241",title:"Plan Review & Project Management Software",scope:"Cloud plan-review/PM platform. Source conflict — likely CLOSED (27 Jul); verify on eVA.",region:"Virginia, USA",rel:"HIGH",status:"closed",deadline:"Likely closed (27 Jul 2026)",primes:"Tyler (EnerGov), Accela, OpenGov, Avolve, e-PlanSoft",link:"https://mvendor.cgieva.com/Vendor/public/IVDetails.jsp?PageTitle=SO%20Details&rfp_id_lot=122241&rfp_id_round=0",linktxt:"eVA portal"}
+];
+
+// ---- render helpers ----
+function pill(c,t){return `<span class="pill ${c}">${t}</span>`;}
+
+function renderRFP(filter){
+  const el=document.getElementById('rfp-content'); el.innerHTML='';
+  let n=0;
+  RFPS.forEach(g=>{
+    const rows=g.rfps.filter(r=>filter==='all'||(filter==='live'&&r.status==='live')||(filter==='expired'&&r.status==='expired')||(filter==='green'&&r.bucket==='green')||(filter==='amber'&&r.bucket==='amber'));
+    if(!rows.length)return; n+=rows.length;
+    const grp=document.createElement('div'); grp.className='dategroup';
+    const lbl=g.found.includes('note')?g.found:`Found ${g.found}`;
+    grp.innerHTML=`<div class="datebar"><h2>${lbl}</h2><span class="cnt">${rows.length} item${rows.length>1?'s':''}</span></div>`;
+    const cards=document.createElement('div'); cards.className='cards';
+    rows.forEach(r=>{
+      const lk=r.link?`<a href="${r.link}" target="_blank" rel="noopener">↗ ${r.linktxt||'Open'}</a>`:`<span class="nolink">No direct link — search by ID on the source portal</span>`;
+      const sp=r.status==='live'?pill('p-live','LIVE'):pill('p-exp','EXPIRED');
+      const ep=r.bucket==='green'?pill('p-green','Directly biddable'):pill('p-amber','Needs local partner');
+      const c=document.createElement('div'); c.className=`card ${r.status}`;
+      c.innerHTML=`<div class="id">${r.id}</div><h3>${r.title}</h3>
+        <div class="row"><b>Region:</b> ${r.region}</div>
+        <div class="row"><b>Eligibility:</b> ${r.elig}</div>
+        <div class="row"><b>Deadline:</b> ${r.deadline}</div>
+        <div class="tags">${sp}${ep}</div>
+        <div class="row" style="margin-top:9px">${lk}</div>`;
+      cards.appendChild(c);
+    });
+    grp.appendChild(cards); el.appendChild(grp);
+  });
+  if(!n)el.innerHTML='<p style="color:var(--muted);padding:30px 0">No RFPs match this filter.</p>';
+}
+
+function renderFund(filter){
+  const el=document.getElementById('fund-content'); el.innerHTML='';
+  FUND.forEach(g=>{
+    if(filter==='latest'&&!g.latest)return;
+    const grp=document.createElement('div'); grp.className='dategroup';
+    grp.innerHTML=`<div class="datebar"><h2>Found ${g.found}</h2><span class="cnt">${g.list.length} lead${g.list.length>1?'s':''}</span></div>`;
+    const cards=document.createElement('div'); cards.className='cards';
+    g.list.forEach(x=>{
+      const lk=x.src?`<a href="${x.src}" target="_blank" rel="noopener">↗ source</a>`:`<span class="nolink">source: see run-log publication (no deep link recorded)</span>`;
+      const ben=x.ben?`<div class="benefit"><b>Softoo angle:</b> ${x.ben}</div>`:'';
+      const c=document.createElement('div'); c.className='card fund';
+      c.innerHTML=`<div class="id">${x.reg}</div><h3>${x.c}</h3>
+        <div class="row"><b>Raise:</b> ${x.amt}</div>
+        <div class="row"><b>Sector:</b> ${x.sec}</div>
+        ${ben}
+        <div class="tags">${pill('p-blue','ACT FIRST')}</div>
+        <div class="row" style="margin-top:9px">${lk}</div>`;
+      cards.appendChild(c);
+    });
+    grp.appendChild(cards); el.appendChild(grp);
+  });
+}
+
+function renderSLED(filter){
+  const el=document.getElementById('sled-content'); el.innerHTML='';
+  const rows=SLED.filter(r=>filter==='all'||(filter==='high'&&r.rel==='HIGH')||(filter==='live'&&r.status==='live')||(filter==='closed'&&r.status==='closed'));
+  const grp=document.createElement('div'); grp.className='dategroup';
+  grp.innerHTML=`<div class="datebar"><h2>Open SLED RFPs</h2><span class="cnt">${rows.length} shown</span></div>`;
+  const cards=document.createElement('div'); cards.className='cards';
+  rows.forEach(r=>{
+    const lk=r.link?`<a href="${r.link}" target="_blank" rel="noopener">↗ ${r.linktxt||'Open'}</a>`:`<span class="nolink">No fetchable link — on BidNet (login/403)</span>`;
+    const sp=r.status==='live'?pill('p-live','LIVE'):pill('p-exp','CLOSED / PAST');
+    const rp=r.rel==='HIGH'?pill('p-green','HIGH relevance'):pill('p-amber','LOW (non-tech)');
+    const c=document.createElement('div'); c.className=`card ${r.status==='live'?'live':'expired'}`;
+    c.innerHTML=`<div class="id">${r.id}</div><h3>${r.title}</h3>
+      <div class="row"><b>Scope:</b> ${r.scope}</div>
+      <div class="row"><b>Region:</b> ${r.region}</div>
+      <div class="row"><b>Deadline:</b> ${r.deadline}</div>
+      <div class="row"><b>Inferred primes:</b> ${r.primes}</div>
+      <div class="tags">${sp}${rp}</div>
+      <div class="row" style="margin-top:9px">${lk}</div>`;
+    cards.appendChild(c);
+  });
+  grp.appendChild(cards); el.appendChild(grp);
+  if(!rows.length)el.innerHTML='<p style="color:var(--muted);padding:30px 0">No SLED RFPs match this filter.</p>';
+}
+
+// ---- stats ----
+(function(){
+  let rt=0,rlive=0,rgreen=0;
+  RFPS.forEach(g=>g.rfps.forEach(r=>{if(r.id==='—')return;rt++;if(r.status==='live')rlive++;if(r.bucket==='green')rgreen++;}));
+  document.getElementById('rfp-stats').innerHTML=`
+    <div class="stat"><b>${rt}</b><span>RFP entries logged</span></div>
+    <div class="stat"><b>5</b><span>Distinct listings LIVE</span></div>
+    <div class="stat"><b>${rgreen}</b><span>Verified directly biddable</span></div>
+    <div class="stat"><b>7</b><span>Sweep dates with RFPs</span></div>`;
+  document.getElementById('nc-rfp').textContent=rt;
+  let ft=0; FUND.forEach(g=>ft+=g.list.length);
+  document.getElementById('fund-stats').innerHTML=`
+    <div class="stat"><b>${ft}</b><span>Funded companies logged</span></div>
+    <div class="stat"><b>14</b><span>Fresh (1 Sep, full detail)</span></div>
+    <div class="stat"><b>${FUND.length}</b><span>Sweep dates covered</span></div>
+    <div class="stat"><b>100%</b><span>Direct outreach (no RFP)</span></div>`;
+  document.getElementById('nc-fund').textContent=ft;
+  const st=SLED.length, shigh=SLED.filter(r=>r.rel==='HIGH').length, slive=SLED.filter(r=>r.status==='live').length;
+  document.getElementById('sled-stats').innerHTML=`
+    <div class="stat"><b>${st}</b><span>SLED RFPs tracked</span></div>
+    <div class="stat"><b>${shigh}</b><span>HIGH relevance</span></div>
+    <div class="stat"><b>${slive}</b><span>Currently live</span></div>
+    <div class="stat"><b>4 Sep</b><span>Nearest close (Mead)</span></div>`;
+  document.getElementById('nc-sled').textContent=st;
+})();
+
+// ---- tab + filter wiring ----
+document.querySelector('.nav').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-tab]'); if(!b)return;
+  document.querySelectorAll('.nav button[data-tab]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('show'));
+  document.getElementById('tab-'+b.dataset.tab).classList.add('show');
+  window.scrollTo(0,0);
+});
+document.getElementById('rfp-filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#rfp-filters button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active'); renderRFP(e.target.dataset.f);
+});
+document.getElementById('fund-filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#fund-filters button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active'); renderFund(e.target.dataset.f);
+});
+document.getElementById('sled-filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#sled-filters button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active'); renderSLED(e.target.dataset.f);
+});
+renderRFP('all'); renderFund('all'); renderSLED('all');
+</script>
+</body>
+</html>
