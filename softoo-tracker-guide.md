@@ -62,13 +62,14 @@ plus its ID), and no row was duplicated from an earlier group.
 
 ### Step 3 — Commit & push (straight to main)
 ```
-git pull --rebase origin main
 git add index.html
 git commit -m "Daily tracker update <today's date>"
+git pull --rebase origin main
 git push origin main
 ```
-The rebase pull comes first so a commit made elsewhere (a web upload, another machine) does not become a
-divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
+Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
+pulling first would fail on the very file this run just edited. Pulling after the commit still catches a
+commit made elsewhere (a web upload, another machine) and keeps it from becoming a divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
 error and tell Sajid he can finish it with one `git push` in this folder.
 
 ### Step 4 — Report
