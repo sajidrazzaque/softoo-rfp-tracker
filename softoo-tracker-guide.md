@@ -82,7 +82,7 @@ Keep tone tight. Timezone: Asia/Karachi.
 
 ### Tab 1 — RFP Opportunities
 Open US/global software/AI/IT RFPs & tenders. Every row needs a working link.
-**Sources:** RFPMart (software + AI/ML + web-design indexes), TendersOnTime, BidDetail, InstantMarkets, BidNet, gov procurement portals.
+**Sources, in this order:** (1) **RFPMart Global/Offshore index** https://www.rfpmart.com/global-rfp-government-contract.html . Check this FIRST every run. The category indexes (software, AI/ML, web design) do not show eligibility, so a run that reads only those will report zero greens even when greens exist. That is exactly what happened on 1 Sep 2026, when the Global index yielded 7 verified greens after a reported 10-run drought. Still open each listing's detail page: index placement is not proof, and at least one listing on the Global index (SW-118310) reads Onshore on its detail page. (2) RFPMart category indexes (software, AI/ML, web design). (3) TendersOnTime, BidDetail, InstantMarkets, BidNet, gov procurement portals.
 **Eligibility rule (critical):** the ONLY proof Softoo can bid directly is a detail-page "Eligibility: Global World-wide" → mark `bucket:"green"`. Anything reading "Onshore (<Country> Only)" or unverified → `bucket:"amber"` (needs a local partner/entity). Default unknown to amber. Mark `status:"expired"` if the deadline has passed or is unknown and the listing is 2+ weeks old.
 **Reality:** live directly-biddable RFPs are rare (9+ straight runs with none). If none surface, keep the recurring index bookmarks and lean on funding.
 
