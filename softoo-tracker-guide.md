@@ -41,6 +41,10 @@ still rebuilds and stays published) — say clearly in your final reply that dat
 Open `index.html`. Find the three arrays in the `<script>` block: `const RFPS=[...]`, `const FUND=[...]`,
 `const SLED=[...]`. For each tab, add a NEW date group at the TOP (newest first) using the exact object
 shape already used in that array (copy an existing entry as your template — do not change field names).
+**If a group for today already exists** (a second run on the same date, which happens whenever a manual
+run and the 19:00 scheduled run land on one day), MERGE today's new rows into that existing group. Never
+add a second group with the same date, and never re-add a row already present: enrich the existing row
+instead. `verify-tracker.js` fails the run on a duplicate date group, so this is enforced, not advisory.
 Update the "Generated <date>" text near the top of the page to today's date. Change nothing else —
 keep all CSS, tabs, filters, colour-coding and honest-notes boxes exactly as they are. Save the file.
 
@@ -50,15 +54,18 @@ Object shapes (match these exactly):
 - **SLED**: flat list of `{id, title, scope, region, rel:"HIGH|LOW", status:"live|closed", deadline, primes, link, linktxt}`
 
 ### Step 2b — Verify before committing (mandatory, do not skip)
-The push deploys straight to the live site, so the file gets checked before it goes anywhere:
+The push deploys straight to the live site, so the file is checked before it goes anywhere:
 ```
-node -e "const fs=require('fs');const m=fs.readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/s);fs.writeFileSync('tracker-check.js',m[1])"
-node --check tracker-check.js
-del tracker-check.js
+node verify-tracker.js
 ```
-A failed check means a broken page for every visitor. Fix it and re-run, never commit past it. Then eyeball
-three things: one group per date in each array, every new row carries a working link (or the source index
-plus its ID), and no row was duplicated from an earlier group.
+It gates on: the script block parsing (`node --check`), one date group per date per array, the three arrays
+being present, and all three footers carrying today's date. It warns (does not block) on repeated row IDs,
+repeated company names and rows with no link.
+
+Exit 0 means commit. **Exit 1 means DO NOT COMMIT**: fix what it names and run it again. A syntax error
+here is a blank page for every visitor, and there is no human in the loop at 19:00 to catch it.
+Warnings are judgement calls: fix the ones this run introduced, and leave inherited ones alone unless
+Sajid asked for a cleanup.
 
 ### Step 3 — Commit & push (straight to main)
 ```
