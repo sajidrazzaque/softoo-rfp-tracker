@@ -13,11 +13,18 @@ then push. Do NOT redesign the page. Only touch the data arrays and the "Generat
 
 ---
 
-## ONE-TIME PREREQUISITES (assume done; verify on first run)
-- This folder is the local clone of the repo and already contains `index.html`.
-- Git identity is set:  `git config user.name "Sajid Razzaque"` and `git config user.email "sajid.razzaque@softoo.co"`
-- `git push` works from this folder (credentials cached via GitHub Desktop or the credential manager).
-- If `index.html` is missing, STOP and tell Sajid — do not invent the whole page from scratch.
+## ONE-TIME PREREQUISITES (verify on first run)
+- **This run must happen in Claude Code on Sajid's own Windows machine.** The push needs the GitHub
+  credential cached in his Windows user session. A cloud or bridged session (Cowork with this folder
+  connected) can sweep, edit and commit, but its shell is sandboxed away from the credential store and
+  `git push` fails with `could not read Username for 'https://github.com'`. If that happens, commit and
+  hand the push back to Sajid. Do not try to work around it, and never ask him for a token.
+- This folder is the local clone and contains `index.html`. If `index.html` is missing, STOP and tell
+  Sajid, do not invent the whole page from scratch. One exception: if the clone is empty but
+  `git ls-remote origin` shows refs, restore it with `git fetch origin && git checkout -B main origin/main`
+  and continue from the restored file.
+- Git identity is set: `git config user.name "Sajid Razzaque"` and `git config user.email "sajid.razzaque@softoo.co"`
+- Node is on PATH, for the syntax gate in Step 2b.
 
 ---
 
@@ -42,15 +49,27 @@ Object shapes (match these exactly):
 - **FUND**: grouped by `{found:"<date>", latest:true|false, list:[ {c:company, amt:"$X · Stage", sec:sector, reg:region, src:url|null, ben:"Softoo angle (optional)"} ]}`
 - **SLED**: flat list of `{id, title, scope, region, rel:"HIGH|LOW", status:"live|closed", deadline, primes, link, linktxt}`
 
-### Step 3 — Commit & push
-Run in this folder:
+### Step 2b — Verify before committing (mandatory, do not skip)
+The push deploys straight to the live site, so the file gets checked before it goes anywhere:
 ```
+node -e "const fs=require('fs');const m=fs.readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/s);fs.writeFileSync('tracker-check.js',m[1])"
+node --check tracker-check.js
+del tracker-check.js
+```
+A failed check means a broken page for every visitor. Fix it and re-run, never commit past it. Then eyeball
+three things: one group per date in each array, every new row carries a working link (or the source index
+plus its ID), and no row was duplicated from an earlier group.
+
+### Step 3 — Commit & push (straight to main)
+```
+git pull --rebase origin main
 git add index.html
 git commit -m "Daily tracker update <today's date>"
-git push
+git push origin main
 ```
-If the push fails, DO NOT retry blindly — report the exact error to Sajid and tell him he can push it
-himself with one `git push` (or upload `index.html` via GitHub → Add file → Upload files).
+The rebase pull comes first so a commit made elsewhere (a web upload, another machine) does not become a
+divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
+error and tell Sajid he can finish it with one `git push` in this folder.
 
 ### Step 4 — Report
 Reply in 2-3 lines: what you added to each tab, and whether the push succeeded (or the exact error).
@@ -88,7 +107,21 @@ Open US State/Local/Education RFPs + the SLED market/competitor picture. Softoo 
 
 ---
 
+## SCHEDULED (UNATTENDED) RUNS
+Set up 1 Sep 2026: weekday evenings, 19:00 Asia/Karachi, pushing straight to `main`.
+- **Wrapper:** `run-daily-tracker.cmd` in this folder. Creates `logs\`, pulls, runs Claude Code headless
+  against this guide, then records the exit code and the resulting git state.
+- **Permissions:** `.claude\settings.json` pre-grants exactly the tools a run needs, with
+  `defaultMode: "dontAsk"`, so nothing prompts and anything outside the allow list is denied rather than
+  waiting for a human who is not there.
+- **Task Scheduler:** one task. Trigger Weekly, Mon to Fri, 19:00. Action:
+  `cmd /c "C:\Users\Sajid Razzaque\softoo-rfp-tracker\run-daily-tracker.cmd"`.
+  Leave "Run whether user is logged on or not" OFF: the push needs the logged-in session's credential.
+- **Logs:** `logs\run-<timestamp>.log` per run, gitignored. Exit code 0 means the run completed; anything
+  else means it did not, and the log says why.
+- Because the push is unreviewed, Step 2b is the only thing between a bad sweep and production.
+
 ## IF THE PUSH IS BLOCKED
-If `git push` from this session is blocked by network/egress, that's expected in some setups — it is NOT a reason to
-retry in a loop. Report the exact error, and Sajid can finish it in one step (either `git push` in this folder himself,
-or GitHub → Add file → Upload files → drag `index.html` → Commit). The site still deploys the moment the file lands.
+A blocked push is expected in a sandboxed or bridged session and is NOT a reason to retry in a loop.
+Report the exact error. Sajid can finish it in one step: `git push` in this folder, or GitHub, Add file,
+Upload files, drag `index.html`, Commit. The site deploys the moment the file lands.
