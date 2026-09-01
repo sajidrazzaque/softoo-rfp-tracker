@@ -62,12 +62,12 @@ plus its ID), and no row was duplicated from an earlier group.
 
 ### Step 3 — Commit & push (straight to main)
 ```
-git add index.html
+git add index.html softoo-tracker-guide.md
 git commit -m "Daily tracker update <today's date>"
 git pull --rebase origin main
 git push origin main
 ```
-Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
+Stage the guide alongside the page, so any notes Sajid added to this file since the last run go up with the same commit instead of blocking the pull. Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
 pulling first would fail on the very file this run just edited. Pulling after the commit still catches a
 commit made elsewhere (a web upload, another machine) and keeps it from becoming a divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
 error and tell Sajid he can finish it with one `git push` in this folder.
@@ -77,6 +77,18 @@ Reply in 2-3 lines: what you added to each tab, and whether the push succeeded (
 Keep tone tight. Timezone: Asia/Karachi.
 
 ---
+
+## EDITING THIS GUIDE (Sajid, or a run that learns something)
+This file is the memory, so it is meant to be edited. Rules that keep edits safe:
+- An edit takes effect on the NEXT run, scheduled or manual. Nothing needs restarting or re-registering.
+- Add to the existing sections, do not restructure or renumber the steps. A run looks for Step 1, Step 2,
+  Step 2b, Step 3, Step 4 and the SPEC headings by name.
+- Leave the edit uncommitted if you like: Step 3 now stages this file too, so the next run carries it up.
+  Committing it yourself is fine as well, the run pulls with rebase either way.
+- When a run learns something that would have changed its own output (a source that was not listed, a rule
+  that was wrong, an eligibility trap), it should write that into the SPEC or HONESTY section in the same
+  commit, not just mention it in the reply. A lesson only stated in a chat reply is lost by the next run.
+  Worked example: on 1 Sep 2026 a run discovered the Global/Offshore index and recorded it as source 1.
 
 ## THE SPEC (memory) — what each tab needs and where to look
 

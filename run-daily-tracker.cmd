@@ -35,6 +35,8 @@ git --version >> "%LOG%" 2>&1
 echo --- git pull --rebase --- >> "%LOG%" 2>&1
 git pull --rebase origin main >> "%LOG%" 2>&1
 
+echo --- working tree before run --- >> "%LOG%" 2>&1
+git status --short >> "%LOG%" 2>&1
 echo --- claude headless run --- >> "%LOG%" 2>&1
 call claude -p "Read softoo-tracker-guide.md in this folder and follow it end to end for today's run: gather today's data, update the three data arrays and the Generated date in index.html, run the Step 2b verification, then commit and push to main. Do not redesign the page. Do not pad the data." --output-format text >> "%LOG%" 2>&1
 set "RC=%ERRORLEVEL%"
