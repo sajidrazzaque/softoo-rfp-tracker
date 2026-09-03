@@ -32,6 +32,10 @@ where node >> "%LOG%" 2>&1
 if errorlevel 1 echo WARN: node not on PATH, the Step 2b syntax gate cannot run. >> "%LOG%" 2>&1
 git --version >> "%LOG%" 2>&1
 
+rem A crashed or interrupted run can leave a .git lock behind, which makes every later
+rem "git add" fail. Sweep locks older than 10 minutes; a live git process never has one that old.
+echo --- stale git locks --- >> "%LOG%" 2>&1
+powershell -NoProfile -Command "Get-ChildItem -Path '.git' -Filter '*.lock' -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -lt (Get-Date).AddMinutes(-10) } | ForEach-Object { Write-Output ('removing stale lock: ' + $_.FullName); Remove-Item -Force -LiteralPath $_.FullName }" >> "%LOG%" 2>&1
 echo --- git pull --rebase --- >> "%LOG%" 2>&1
 git pull --rebase origin main >> "%LOG%" 2>&1
 

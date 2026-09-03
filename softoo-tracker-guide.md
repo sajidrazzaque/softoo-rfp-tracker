@@ -197,6 +197,10 @@ Set up 1 Sep 2026: weekday evenings, 19:00 Asia/Karachi, pushing straight to `ma
 - **Task Scheduler:** one task. Trigger Weekly, Mon to Fri, 19:00. Action:
   `cmd /c "C:\Users\Sajid Razzaque\softoo-rfp-tracker\run-daily-tracker.cmd"`.
   Leave "Run whether user is logged on or not" OFF: the push needs the logged-in session's credential.
+- **Stale git locks:** the wrapper sweeps `.git\**\*.lock` files older than 10 minutes before pulling.
+  A run killed mid-commit (machine shutdown, crash) leaves `index.lock` behind, and every later `git add`
+  then fails with "Unable to create index.lock: File exists". This happened on 3 Sep 2026 and would have
+  silently broken that evening's run. If git ever refuses to stage, look for a lock file first.
 - **Logs:** `logs\run-<timestamp>.log` per run, gitignored. Exit code 0 means the run completed; anything
   else means it did not, and the log says why.
 - Because the push is unreviewed, Step 2b is the only thing between a bad sweep and production.
