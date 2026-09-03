@@ -49,14 +49,41 @@ for (const name of ['RFPS', 'SLED']) {
   if (n) warn.push(name + ': ' + n + ' row(s) with no link -- add one or say "no public listing" in the row');
 }
 
-// 5. Footer date must be today (Asia/Karachi), matching "1 Sep 2026" style.
-const today = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Karachi',
-  day: 'numeric', month: 'short', year: 'numeric' }).format(new Date()).replace(/,/g, '');
-// Node renders September as "Sept" under en-GB; the page uses 3-letter months.
-const norm = s => s.replace(/\bSept\b/, 'Sep').trim();
+// 5. Date consistency. The footers must agree with each other AND with the newest
+//    date group, which is what catches a run that adds today's rows but forgets the
+//    footer. Whether that date is TODAY is only informational: running this checker
+//    before today's run has happened is normal and must not block.
+const MON = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
+function parse(d) {
+  const m = /^(\d+)\s+([A-Za-z]+)\s+(\d{4})$/.exec(d.trim());
+  if (!m) return null;
+  const mo = MON[m[2].slice(0, 3).toLowerCase()];
+  return mo === undefined ? null : new Date(Date.UTC(+m[3], mo, +m[1]));
+}
 const stamps = [...new Set([...html.matchAll(/Generated (\d+ \w+ \d{4})/g)].map(x => x[1]))];
-if (stamps.length !== 1) fail.push('footer dates disagree: ' + stamps.join(' | '));
-else if (norm(stamps[0]) !== norm(today)) fail.push('footer says "' + stamps[0] + '", today is "' + today + '"');
+if (stamps.length !== 1) fail.push('footer dates disagree across tabs: ' + stamps.join(' | '));
+
+const newest = [...block('RFPS').matchAll(/\{found:"([^"]+)"/g)]
+  .map(x => parse(x[1])).filter(Boolean).sort((a, b) => b - a)[0];
+
+if (stamps.length === 1 && newest) {
+  const f = parse(stamps[0]);
+  if (!f) fail.push('cannot parse footer date "' + stamps[0] + '"');
+  else if (f.getTime() !== newest.getTime())
+    fail.push('footer says "' + stamps[0] + '" but the newest date group is ' +
+      newest.toISOString().slice(0, 10) + ' -- update the Generated line to match the rows');
+}
+
+const todayUTC = (() => {
+  const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi',
+    year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).split('-');
+  return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+})();
+if (newest) {
+  if (newest > todayUTC) fail.push('newest date group is in the future: ' + newest.toISOString().slice(0, 10));
+  else if (newest < todayUTC) console.log('INFO  newest date group is ' + newest.toISOString().slice(0, 10) +
+    ', today is ' + todayUTC.toISOString().slice(0, 10) + ' -- no run yet today (not an error)');
+}
 
 warn.forEach(w => console.log('WARN  ' + w));
 fail.forEach(f => console.log('FAIL  ' + f));

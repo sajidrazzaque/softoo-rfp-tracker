@@ -118,9 +118,63 @@ Recently-funded companies = budget for external dev → direct B2B outreach (no 
 **Flag health-adjacent names** (mental health, biotech, clinical) as CLIENT build/infra targets only — never clinical work. Keep good regional balance (not all US).
 
 ### Tab 3 — SLED Intel
-Open US State/Local/Education RFPs + the SLED market/competitor picture. Softoo can't bid direct — it sits behind a US prime.
-**Sources:** BidNet Direct (RMEPS Colorado/Wyoming + NY group) is the system of record but blocks fetch — read via Starbridge.ai, rfpmart, GovCB, coloradobids, agency PDFs. `rel:"HIGH"` = IT/software/cyber/AI/data/GIS/accessibility; `rel:"LOW"` = non-tech (completeness).
-**Primes are INFERRED** from the RFP category (plan-holder lists aren't public pre-award) — always label them inferred, never a confirmed bidder list. Treat rfpmart-only dates as provisional.
+Open US State/Local/Education RFPs plus the SLED market and competitor picture. Softoo cannot bid direct, it
+sits behind a US prime.
+
+**READ THIS FIRST: this tab is NOT the pipeline system of record.** Softoo runs a paid bid aggregator that
+feeds matched SLED solicitations into the CRM, complete with bid document packages and named buyer contacts.
+This tab is a free-public-source sweep. It has no documents and no contacts, and it will always be a subset.
+Never present it as complete coverage, and do not pad it to look comprehensive.
+
+**Coverage audit, 2 Sep 2026 (why the scope changed).** This tab held 25 rows, 15 of them Colorado and ZERO
+in Michigan, while the CRM feed the same week carried Michigan (Wayne RESA SMART ERP APIs, Macomb Community
+College switches, City of Eastpointe, Ypsilanti, Monroe, Traverse City, Detroit Transportation kiosks),
+Arizona, Arkansas, Rhode Island, Massachusetts, Florida, Idaho and more. Cause: the old spec called
+"BidNet Direct (RMEPS Colorado/Wyoming + NY group)" the system of record, which silently capped every sweep
+at those states. RMEPS is the Rocky Mountain group, one regional group among many, not the US.
+
+**Scope: any US state.** Do not anchor on one procurement group.
+
+**Sources, in priority order. Record the outcome of each fetch in the log at the bottom of this section so a
+later run does not rediscover the same block.**
+1. **BidNet Direct groups, per region, not just RMEPS.** Michigan is `/mitn` (Michigan Intergovernmental
+   Trade Network), which is where most of the CRM's Michigan local-agency items live. Colorado and Wyoming
+   are `/rmeps`. There are further state and regional groups. Anonymous fetch 403s on all of them, so read
+   via proxies, but at least sweep the RIGHT groups.
+2. **Free state eProcurement portals** (real documents, no login). Verified 2 Sep 2026: Michigan active
+   solicitations are on **SIGMA Vendor Self Service (VSS)**, reached via michigan.gov DTMB Contract Connect.
+   NOT michigan.gov/dtmb/procurement/contractconnect/bid-proposals, which is an ARCHIVE of already-awarded
+   procurements and says so on the page. Unverified, check on first use and log the result: COMMBUYS (MA),
+   Vendor Bid System / MyFloridaMarketPlace (FL), Arizona Procurement Portal (AZ), Ocean State Procures (RI),
+   Cal eProcure (CA), VendorNet (WI), MissouriBUYS (MO), ARBuy (AR), NYS Contract Reporter (NY),
+   Colorado VSS / BIDS (CO), Idaho's state portal.
+3. **Multi-state free boards:** GovCB, InstantMarkets, DemandStar, GovDirections, Starbridge.ai.
+4. **rfpmart category indexes** (dates provisional, treat as leads to verify).
+
+**Competitor intel source, new.** That Michigan award archive is worth a visit on its own: it lists awarded
+vendor, award date and synopsis PDFs per procurement. Award history is the only public way to see who
+actually wins this work, which beats inferring primes. Most states publish an equivalent. Use it to replace
+inferred primes with real ones wherever an award record exists.
+
+**Relevance is BINARY in the renderer** (`rel:"HIGH"` or anything else renders as "LOW (non-tech)"). Do not
+invent a third band, it would need a design change. Classify:
+- `HIGH` = software, IT services, AI, data, cyber, GIS, accessibility, AND tech-adjacent buys whose
+  deliverable is substantially software, data or integration work: asset-management and predictive modelling,
+  project management for a system replacement, ERP APIs, kiosk hosting, fiber and network installation,
+  AV and technology procurement, licensing where implementation is in scope.
+- `LOW` = genuinely non-tech, logged only for completeness: drainage design, park expansion, security
+  boulders, bill printing, assessor plats, pump station repair. Softoo cannot deliver civil engineering.
+  Do NOT inflate HIGH to make the tab look busy.
+
+**Primes are INFERRED** from the RFP category (plan-holder lists are not public pre-award). Always label them
+inferred, never a confirmed bidder list, unless an award record gives a real name. Treat rfpmart-only dates
+as provisional.
+
+**Source fetch log** (append one line per source per run when the outcome changes):
+- 2 Sep 2026: bidnetdirect.com (any group), anonymous fetch 403. Proxy required.
+- 2 Sep 2026: michigan.gov DTMB bid-proposals page, fetch OK but it is an award archive, not open bids.
+  Active Michigan solicitations are on SIGMA VSS. Archive is useful for competitor and award intel.
+- 2 Sep 2026: commbuys.com, fetch not completed (permission prompt timed out). Retry.
 
 ---
 
