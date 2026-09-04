@@ -45,13 +45,25 @@ shape already used in that array (copy an existing entry as your template — do
 run and the 19:00 scheduled run land on one day), MERGE today's new rows into that existing group. Never
 add a second group with the same date, and never re-add a row already present: enrich the existing row
 instead. `verify-tracker.js` fails the run on a duplicate date group, so this is enforced, not advisory.
-Update the "Generated <date>" text near the top of the page to today's date. Change nothing else —
+Update the "Generated <date>" text near the top of the page to today's date.
+**Also add a dated paragraph at the TOP of each tab's honest-note box** summarising what that tab gained today,
+and demote the previous "Latest delta" heading to a plain date. This is not optional: on 3 Sep 2026 a run added
+six SLED rows but no paragraph, and the tab read as stale to Sajid even though the data had moved. The note box is
+how a human sees the delta; the arrays alone do not communicate it. `verify-tracker.js` now fails the run if the
+newest note date is older than the newest date group. Change nothing else —
 keep all CSS, tabs, filters, colour-coding and honest-notes boxes exactly as they are. Save the file.
 
 Object shapes (match these exactly):
-- **RFPS**: grouped by `{found:"<date>", rfps:[ {id, title, region, elig, bucket:"green|amber", deadline, status:"live|expired", link, linktxt} ]}`
+- **RFPS**: grouped by `{found:"<date>", rfps:[ {id, title, region, elig, bucket:"green|amber", deadline, status:"live|expired", link, linktxt, primes} ]}`
+  `primes` is REQUIRED on every row: it is what Sajid contacts. For a green row write "Not required. Eligibility
+  verified Global World-wide, so Softoo can bid direct". For an amber US row, name real firms that plausibly prime
+  that category, prefixed "INFERRED: ". For an amber non-US row, "INFERRED: locally registered partner or entity in
+  <country> is required", plus a category fit if one applies. Never present an inferred prime as a confirmed bidder.
 - **FUND**: grouped by `{found:"<date>", latest:true|false, list:[ {c:company, amt:"$X · Stage", sec:sector, reg:region, src:url|null, ben:"Softoo angle (optional)"} ]}`
-- **SLED**: flat list of `{id, title, scope, region, rel:"HIGH|LOW", status:"live|closed", deadline, primes, link, linktxt}`
+- **SLED**: grouped by date, exactly like RFPS: `{found:"<date>", sled:[ {id, title, scope, region, rel:"HIGH|LOW",
+  status:"live|closed", deadline, primes, link, linktxt} ]}`. Newest group first. The oldest group is labelled
+  "Carried from earlier runs (before 1 Sep 2026)" and holds the rows that came with the original page.
+  `SLED_ROWS` (defined right after the array) is the flattened view the stat tiles use; do not remove it.
 
 ### Step 2b — Verify before committing (mandatory, do not skip)
 The push deploys straight to the live site, so the file is checked before it goes anywhere:

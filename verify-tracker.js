@@ -28,7 +28,7 @@ const dup = a => [...new Set(a.filter((v, i) => a.indexOf(v) !== i))];
 
 // 2. One group per date, per array. This is the same-day trap: a second run on a
 //    date that already has a group must MERGE into it, never append a new one.
-for (const name of ['RFPS', 'FUND']) {
+for (const name of ['RFPS', 'FUND', 'SLED']) {
   const dates = [...block(name).matchAll(/\{found:"([^"]+)"/g)].map(x => x[1]);
   const d = dup(dates);
   if (d.length) fail.push(name + ': duplicate date group(s): ' + d.join(' | ') +
@@ -39,7 +39,7 @@ for (const name of ['RFPS', 'FUND']) {
 for (const [name, re, label] of [['RFPS', /\{id:"([^"]+)"/g, 'id'],
                                  ['SLED', /\{id:"([^"]+)"/g, 'id'],
                                  ['FUND', /\{c:"([^"]+)"/g, 'company']]) {
-  const d = dup([...block(name).matchAll(re)].map(x => x[1]));
+  const d = dup([...block(name).matchAll(re)].map(x => x[1]).filter(v => v !== '\u2014' && v.trim() !== ''));
   if (d.length) warn.push(name + ': repeated ' + label + ': ' + d.join(' | '));
 }
 
@@ -83,6 +83,28 @@ if (newest) {
   if (newest > todayUTC) fail.push('newest date group is in the future: ' + newest.toISOString().slice(0, 10));
   else if (newest < todayUTC) console.log('INFO  newest date group is ' + newest.toISOString().slice(0, 10) +
     ', today is ' + todayUTC.toISOString().slice(0, 10) + ' -- no run yet today (not an error)');
+}
+
+// 6. Every RFPS and SLED row must carry a route to market (primes). It is the
+//    field Sajid acts on, so a missing one is a blocking omission, not a nit.
+for (const name of ['RFPS', 'SLED']) {
+  const b = block(name);
+  const ids = (b.match(/\{id:"/g) || []).length;
+  const withPrimes = (b.match(/primes:"[^"]/g) || []).length;
+  if (ids !== withPrimes)
+    fail.push(name + ': ' + (ids - withPrimes) + ' of ' + ids +
+      ' row(s) have no primes value -- every row needs a route to market');
+}
+
+// 7. Each tab's honest-note box must carry a paragraph for the newest date group.
+//    A run that adds rows but no note reads as stale to a human (this happened 3 Sep 2026).
+{
+  const noteDates = [...html.matchAll(/<b>(?:Latest delta,?\s*)?(\d+ \w+ \d{4})[.<]/g)]
+    .map(x => parse(x[1])).filter(Boolean).sort((a, b) => b - a);
+  if (newest && noteDates.length && noteDates[0] < newest)
+    fail.push('the newest note-box paragraph is ' + noteDates[0].toISOString().slice(0, 10) +
+      ' but the newest date group is ' + newest.toISOString().slice(0, 10) +
+      ' -- add a dated paragraph summarising today to the note box');
 }
 
 warn.forEach(w => console.log('WARN  ' + w));
