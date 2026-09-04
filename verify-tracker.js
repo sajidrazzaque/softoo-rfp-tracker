@@ -96,6 +96,16 @@ for (const name of ['RFPS', 'SLED']) {
       ' row(s) have no primes value -- every row needs a route to market');
 }
 
+// 6b. How many rows actually name a firm. Not a blocker, but the number to drive down:
+//     a category without names is not something Sajid can act on.
+for (const name of ['RFPS', 'SLED']) {
+  const b = block(name);
+  const vals = [...b.matchAll(/primes:"([^"]*)"/g)].map(x => x[1]);
+  const actionable = vals.filter(v => /^(CONFIRMED|INFERRED)/.test(v) && !/not yet researched/i.test(v)).length;
+  const todo = vals.filter(v => /not yet researched/i.test(v)).length;
+  if (todo) warn.push(name + ': ' + todo + ' row(s) name no firm yet (' + actionable + ' do) -- research them or leave the placeholder honest');
+}
+
 // 7. Each tab's honest-note box must carry a paragraph for the newest date group.
 //    A run that adds rows but no note reads as stale to a human (this happened 3 Sep 2026).
 {

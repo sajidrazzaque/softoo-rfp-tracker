@@ -184,6 +184,26 @@ invent a third band, it would need a design change. Classify:
 inferred, never a confirmed bidder list, unless an award record gives a real name. Treat rfpmart-only dates
 as provisional.
 
+**ROUTE TO MARKET (`primes`) is required on every row in BOTH the RFP and SLED tabs.** It is the field Sajid
+acts on, so it must name firms he can actually contact, not a category. Order of preference:
+1. **CONFIRMED**, from a published award notice or framework award. Prefix "CONFIRMED" and set `primesrc` to the
+   source URL so the card shows a clickable source. Two verified sources so far:
+   - **Ireland:** the OGP publishes named framework suppliers on eu-supply. The Business, Management and ICT
+     Consultancy framework (Lots 5 and 11, award notice 12 Sep 2022) names Version 1, Storm Technology, IT Alliance
+     Group, BearingPoint Ireland, 4OC, Accenture Ireland, Crowe, Deloitte Ireland, EY, KPMG, PwC, PA Consulting and
+     Tata Consultancy Services. https://irl.eu-supply.com/ctm/Supplier/PublicPurchase/206194/1/1
+   - **Michigan:** the DTMB award archive lists awarded vendor, award date and synopsis PDFs per procurement.
+2. **INFERRED**, real named firms that plausibly prime that category in the buyer's country. Prefix "INFERRED".
+   Never present an inferred name as a confirmed bidder.
+3. For a green row: "Not required. Eligibility verified Global World-wide, so Softoo can bid direct".
+4. For a method note or a framework/feed listing: "n/a" with the reason.
+
+**Where to find real winner names, by country.** Mine these instead of guessing, and upgrade INFERRED rows to
+CONFIRMED as you go:
+Ireland eu-supply / OGP · UK Contracts Finder · Switzerland simap.ch · EU and Lithuania TED · Canada: Ontario
+Tenders Portal, BC Bid, Alberta Purchasing Connection · South Africa National Treasury eTenders · Philippines
+PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the buyer's state award archive.
+
 **Source fetch log** (append one line per source per run when the outcome changes):
 - 2 Sep 2026: bidnetdirect.com (any group), anonymous fetch 403. Proxy required.
 - 2 Sep 2026: michigan.gov DTMB bid-proposals page, fetch OK but it is an award archive, not open bids.
