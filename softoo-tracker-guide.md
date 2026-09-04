@@ -118,6 +118,24 @@ Open US/global software/AI/IT RFPs & tenders. Every row needs a working link.
 **The Global index lags the category indexes by about a day — so read both.** On 2 Sep 2026 the Global index carried no tech row posted that day (its newest `SW-`/`WD-`/`AI-` rows were still 1 Sep), yet the software category index had ~80 fresh 2 Sep listings, one of which (SW-119011, Switzerland) verified green. The cheap trick: on the category indexes, look for the word **`global` inside the detail-page URL slug** — that is what flags a candidate worth opening. The slug is a candidate signal ONLY, never proof (AI-1235/AI-1236 carry it and read Onshore); the detail page still decides. Net effect: Global index first for anything 2+ days old, category indexes for same-day postings.
 **Grep `index.html` for every candidate ID before writing a row, not after.** On 3 Sep 2026 a run re-added SW-118336 as a fresh find when it was already in the 1 Sep group; `verify-tracker.js` caught it as a repeated-id warning and the row had to be pulled and folded back into the existing one. The Global index re-lists the same rows for weeks, so anything it shows that is more than a day old is probably already in the array. One grep of the ID prefixes up front costs nothing and saves the rework.
 **The `global`-in-slug trick held up on 3 Sep 2026.** Across ~100 rows posted that day on the category indexes, not one tech row carried `global` in its slug, and six 3 Sep tech detail pages opened anyway (Switzerland AI-1246, UK SW-119089, Texas AI-1247, Ireland WD-16197, Ontario WD-16195) all read Onshore. The day's only green came off the Global index. So the slug filter is a sound way to pick which same-day detail pages to open — it just does not license marking anything green without the detail page.
+**THE GLOBAL INDEX HAS A BACK-CATALOGUE. OPEN EVERY TECH ROW NOT ALREADY IN THE ARRAY, WHATEVER ITS POSTING DATE.**
+Discovered 4 Sep 2026, and it is the most expensive miss found so far. The Global index holds only ~22 tech rows
+in total, and on 4 Sep *eight* of them had never been opened by any previous sweep. Opening all eight returned
+**five more detail-page-verified "World-Wide Globle" greens — and every one had already expired**, between 25 Aug
+and 1 Sep (SW-118407 Virginia CRM, ITES-10859 Illinois managed IT, SEO-2348 California social media, WD-16129 and
+WD-16128 Virginia website). The ID-prefix filter from 1 Sep was working correctly; what failed was reading only the
+*recently posted* rows near the top of the table. Greens sit in that index for weeks with live deadlines, so the
+backlog is exactly where the biddable work was, and five real chances were lost to it. This does NOT contradict the
+3 Sep line below about anything old probably already being in the array — that rule is about not RE-ADDING rows.
+Both hold together as: grep the ID first, and if the ID is absent, open the page no matter how old the posting is.
+The index is ~22 tech rows, so opening every unseen one costs very little.
+
+**Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
+4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
+`live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
+for deadline strings that today's date has overtaken, including relative phrases like "closes in 3 days" and
+"closes TODAY", which are wrong the moment the date changes. Same for the SLED tab's "nearest close" row.
+
 **Eligibility rule (critical):** the ONLY proof Softoo can bid directly is a detail-page "Eligibility: Global World-wide" → mark `bucket:"green"`. Anything reading "Onshore (<Country> Only)" or unverified → `bucket:"amber"` (needs a local partner/entity). Default unknown to amber. Mark `status:"expired"` if the deadline has passed or is unknown and the listing is 2+ weeks old.
 **Re-check rows marked expired only because the deadline was unknown.** That flag is a guess, and it goes stale in the wrong direction — it hides live work. Open the detail page and read the "Expiry Date" line: on 1 Sep the fourth sweep found AI-1208 (a verified-green AI Coding Agents RFI) marked expired while its detail page read "Expiry Date: Monday, 14 September, 2026". Enrich the existing row (correct deadline + `status:"live"`), do not add a new one.
 **WebFetch's summariser sometimes asserts a wrong "current" date** (it claimed "we are currently in 2024" and called a 14 Sep 2026 deadline expired). Trust the verbatim date it quotes off the page, never its expiry reasoning; today's date comes from the run context.
@@ -128,6 +146,25 @@ Recently-funded companies = budget for external dev → direct B2B outreach (no 
 **Sources (fetch clean):** techstartups.com "Startup Funding News Today" (daily) + roundups; **entrackr.com** homepage (daily India feed — added 1 Sep after the fourth sweep found 6 same-day names on it that no other source carried; note its `/exclusive/` posts are rounds *being led*, not closed, so tag them REPORTED); Crunchbase News "Week's 10 Biggest Funding Rounds" (check the stated week — some slugs are stale); startuptalky.com India weekly; todaysstartupnews.com recap (EU/US small rounds the daily feeds miss — these carry older round dates, group them under the date found); entARABI / Arab News "Startup Wrap" (MENA); eu-startups.com article pages; New Market Pitch (cyber).
 **Known fetch behaviour:** eu-startups.com index and category pages return HTTP 403 to automated fetch. **Changed 3 Sep 2026: individual ARTICLE URLs now 403 as well**, so the article body is no longer reachable at all. What still works is WebSearch against `allowed_domains:["eu-startups.com"]` — its result snippets carry company, amount, lead investor and city, which is enough for a row. Cite the article URL (it is valid for a human) and say in the row that the detail is snippet-level, so the row is not passed off as fully read. The weekly/roundup sources (Crunchbase, New Market Pitch, StartupTalky) usually have nothing new on a same-day second run — check the stated last-updated date and say "dry" rather than re-listing what is already in the array.
 **Two sources that keep coming back empty or wrong (checked again 2 Sep 2026):** the Arab News `startup-wrap` tag has published nothing since 25 Apr 2026, so MENA coverage now has to come from elsewhere; and the Crunchbase `biggest-funding-rounds` *index* URL returns a stale 2023 article to automated fetch. A stale fetch is **not** the same as "no rounds this week" — say the source went unswept rather than reporting it dry, and reach the current week's article via search if it matters.
+**Revisit every REPORTED row on later runs and convert it when it closes.** Added 4 Sep 2026, after two converted
+in one run: Comet (logged 2 Sep as "₹99 Cr, REPORTED" off an Entrackr `/exclusive/`) closed at **₹100 Cr Series B led
+by Verlinvest**, and Ultrahuman (logged 1 Sep as "$60M, REPORTED, Qualcomm Ventures to lead") closed **larger than
+reported, at $70M**. Both were already-known names, so no new sweep would have surfaced them — they only turned up
+because the Entrackr feed was read for what had *changed*, not just for what was new. A REPORTED row is a lead with
+a blocker on it ("confirm before outreach"); converting it discharges the blocker and is often worth more than a
+fresh small round. Enrich the existing row in place, never add a second one.
+
+**Read a cyber-specific source every run.** On 3 Sep the sweep read only techstartups and Entrackr and therefore
+missed **Guardio** ($40M at a $1.1B valuation, Tel Aviv, past $150M ARR) — a far better-qualified buyer than most of
+what that day did log. It was picked up on 4 Sep only via a general WebSearch. New Market Pitch is the listed cyber
+source but it is a weekly and often stale, so when it is dry run a WebSearch for the day's cyber rounds instead of
+treating the category as covered.
+
+**A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
+Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
+a guess. Also skipped that day: Rentomojo's ₹1,256 Cr IPO RHP filing — a filing is not closed capital, so it is not
+a funding signal for this tab.
+
 **For each:** company, amount+stage, sector, region, source link, and a one-line "Softoo angle" (`ben`) — what to sell given the stage (seed → build MVP/first team; Series A/B → dedicated squad / staff aug; Series C+ → managed services / platform hardening / AI-ML delivery).
 **Flag health-adjacent names** (mental health, biotech, clinical) as CLIENT build/infra targets only — never clinical work. Keep good regional balance (not all US).
 
@@ -216,12 +253,35 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   went UNSWEPT this run — that is a gap, not a dry source.
 - 3 Sep 2026: instantmarkets.com search pages return only the page header to fetch (rows are JS-rendered),
   so it yields nothing without a proxy or a rendering fetch.
+- 4 Sep 2026: Michigan still unswept — Contract Connect 403 and SIGMA VSS HTTP 500 both unchanged from 3 Sep.
+  Two runs in a row now. Treat as a standing gap and stop re-testing it every run; it needs a proxy or credentials.
+- 4 Sep 2026: rfpmart category indexes fetched clean and yielded five US state/local rows. **Data-quality pattern
+  worth knowing:** a stated question deadline falling AFTER the close date has now appeared twice in two days
+  (Tennessee SW-119103 on 3 Sep, Cicero CSE-24602 on 4 Sep). It is probably an RFPMart field error rather than a
+  buyer error. Log both dates as the listing states them, flag the contradiction in the row, and say "confirm with
+  the buyer" — do not silently pick one.
+- 4 Sep 2026: eu-startups article pages still 403 to fetch; WebSearch against the domain works but returned nothing
+  that was not already logged. Report it as swept-but-dry, which is different from the unswept weekly sources.
 
 **Known gap in the page itself (flagged 3 Sep 2026, not changed).** The SLED tab's in-page "Honest notes"
 box still reads "System of record is BidNet Direct (RMEPS Colorado/Wyoming + NY group)". The 2 Sep coverage
 audit above retired exactly that claim — the system of record is the paid aggregator feeding the CRM, and
 RMEPS is one regional group. A run is scoped to data arrays plus the Generated date, so this run did not
 rewrite prose. Sajid: one line to approve and a future run can correct that box.
+
+**Three more hardcoded/stale bits of the page, flagged 4 Sep 2026, NOT changed (all need Sajid's approval).**
+A run is scoped to the data arrays, the Generated date and the note boxes, so these were left alone deliberately:
+1. **The stat tiles contain hardcoded numbers that no longer move with the data** (in the stats IIFE): the RFP tab
+   shows a literal `5` for "Distinct listings LIVE" and `7` for "Sweep dates with RFPs"; the funding tab shows `14`
+   for "Fresh (1 Sep, full detail)"; the SLED tab shows a literal `4 Sep` for "Nearest close (Mead)" — which is
+   correct today by coincidence and wrong from tomorrow, since Mead closes 4 Sep. These should be computed from the
+   arrays like `rt`, `rgreen`, `shigh` and `slive` already are.
+2. **"Verified directly biddable" counts `bucket:"green"` regardless of `status`.** That was harmless while greens
+   were rare and live; it stopped being harmless on 4 Sep, when five expired backlog greens went in and the tile
+   jumped without a single new biddable opportunity. Either count only live greens or relabel the tile. Until then,
+   every run that adds an expired green must say so in the note box, as the 4 Sep run did.
+3. **The funding tab's filter button still reads "2 Sep only (full detail)"** while it actually filters on
+   `latest:true`, which is now the 4 Sep group. The label needs to either track the newest group or lose the date.
 
 ---
 
