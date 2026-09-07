@@ -130,6 +130,22 @@ backlog is exactly where the biddable work was, and five real chances were lost 
 Both hold together as: grep the ID first, and if the ID is absent, open the page no matter how old the posting is.
 The index is ~22 tech rows, so opening every unseen one costs very little.
 
+**THE BACK-CATALOGUE IS NOW CLOSED OUT, AND THE `EXTRA-` PREFIX WAS TESTED AND REJECTED (7 Sep 2026).**
+Every tech row on the Global index (~26 of them) has now been opened by a sweep, so the 4 Sep backlog problem is
+discharged — from here it is only the new postings that need opening, plus any row whose ID is absent from the array.
+The 7 Sep run also spent four fetches testing whether the ID-prefix filter is too narrow, and the answer is no:
+three `EXTRA-` rows with tech-sounding titles all read as non-technical consultancy (EXTRA-75339 Colorado
+"Development Operations and Database Consultant Services" is actually donor-data QC and fundraising ops, and its
+eligibility line reads the self-contradictory "Onshore (World-Wide Global)"; EXTRA-75550 Saint Paul human-centred
+design; EXTRA-75548 Charlotte information-management evaluation). One `GIS-` row was also a false positive
+(GIS-2043 Austria = pharmaceutical-supply-chain sustainability consultancy). Keep the filter at
+`SW- WD- AI- ITES- SEO- GIS-`, do not add `EXTRA-`, and expect the occasional non-tech false positive inside GIS-.
+
+**Weekends and US public holidays are a real gap in the source, not a dry sweep.** On 7 Sep 2026 (a Monday, and US
+Labor Day) the Global index and all three category indexes carried NOTHING posted on 6 or 7 Sep; the newest rows
+anywhere were 5 Sep. A Monday run is therefore a three-day catch-up over Saturday's postings, and a Monday-after-a-
+holiday run may find nothing at all posted that day. Say so in the note box rather than reporting the sweep as dry.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -160,6 +176,23 @@ what that day did log. It was picked up on 4 Sep only via a general WebSearch. N
 source but it is a weekly and often stale, so when it is dry run a WebSearch for the day's cyber rounds instead of
 treating the category as covered.
 
+**The cyber-source rule cost a SECOND miss before it was followed (7 Sep 2026).** Upwind Security's **$300M Series C
+at a $3.8B valuation** (Tel Aviv, cloud and AI runtime security, Bessemer and TCV leading) was announced 2-3 Sep and
+was missed by BOTH the 3 and 4 Sep sweeps — the 4 Sep run wrote the "read a cyber-specific source every run" rule
+because of Guardio and then did not apply it to the same week's bigger round. It was found on 7 Sep by a plain
+WebSearch for the category. So: the cyber search is not optional and not satisfied by New Market Pitch being stale.
+Run `WebSearch` for the week's cyber rounds explicitly, every run, and check the two or three days before the last
+run's date as well as today — a round announced on a Wednesday is still news to a Friday sweep that never looked.
+
+**Third REPORTED conversion, and the pattern is now proven (7 Sep 2026).** Mokobara, logged 2 Sep off an Entrackr
+`/exclusive/` as "₹99 Cr… set to raise", closed at **₹170 Cr led by Sauce.vc** — nearly double the reported figure.
+That is three conversions (Comet, Ultrahuman, Mokobara) in two runs, and in every case the closed round was LARGER
+than the exclusive reported. Re-checking the open REPORTED rows is now the highest-yield five minutes of the funding
+sweep. Also worth doing properly: a row that is still reported can still be **enriched** — Slice was re-checked on
+7 Sep and is still unannounced, but is now corroborated by several outlets, names Neo Wealth as lead, and turns out
+to be a ~70% down round by a company that has since turned profitable. Those two facts change how to qualify it,
+so they belong on the card even though the REPORTED flag stays.
+
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
 a guess. Also skipped that day: Rentomojo's ₹1,256 Cr IPO RHP filing — a filing is not closed capital, so it is not
@@ -185,6 +218,18 @@ Arizona, Arkansas, Rhode Island, Massachusetts, Florida, Idaho and more. Cause: 
 at those states. RMEPS is the Rocky Mountain group, one regional group among many, not the US.
 
 **Scope: any US state.** Do not anchor on one procurement group.
+
+**A BLOCKED STATE PORTAL IS NOT A BLOCKED STATE. CHECK THE RFPMART CATEGORY INDEXES BEFORE DECLARING A STATE
+UNSWEPT (discovered 7 Sep 2026).** Michigan had been recorded as a standing gap since 2 Sep — Contract Connect 403s,
+SIGMA VSS returns HTTP 500 — and the 4 Sep run went further and said to stop re-testing it without a proxy. On
+7 Sep, Michigan produced a row (WD-16203, a state WordPress rebuild with Salesforce and HubSpot integration) off
+**RFPMart's web-design category index, in one fetch, with no proxy**. Massachusetts did the same thing: written off
+on 3 Sep because COMMBUYS puts open bids behind a login, yet the statewide MyMassGov IDP identity-platform RFI
+surfaced on RFPMart. The lesson is about what "unswept" means: the state's own portal being unreachable only blocks
+the *documents and buyer contacts*, not the existence of the solicitation. Source 4 (rfpmart category indexes) was
+listed last in this section and treated as a leads-only afterthought; on the evidence it is the most reliable
+*multi-state* free source available, and it should be read every run for US state/local rows regardless of which
+state portals are blocked. Keep logging portal blocks — they are real — but stop reading them as state-level gaps.
 
 **Sources, in priority order. Record the outcome of each fetch in the log at the bottom of this section so a
 later run does not rediscover the same block.**
@@ -262,6 +307,17 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   the buyer" — do not silently pick one.
 - 4 Sep 2026: eu-startups article pages still 403 to fetch; WebSearch against the domain works but returned nothing
   that was not already logged. Report it as swept-but-dry, which is different from the unswept weekly sources.
+- 7 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all fetched clean and yielded four RFP rows and
+  five SLED rows in five states, INCLUDING Michigan and Massachusetts, both of which had been written off as
+  portal-blocked. See the "a blocked state portal is not a blocked state" rule above. No proxy used.
+- 7 Sep 2026: rfpmart indexes carried nothing posted 6 or 7 Sep (Sat/Sun plus US Labor Day). Newest rows were 5 Sep.
+- 7 Sep 2026: Michigan Contract Connect and SIGMA VSS NOT re-tested, per the 4 Sep instruction to stop burning a
+  fetch on them. Michigan coverage came from rfpmart instead. The portals remain a documents-and-contacts gap.
+- 7 Sep 2026: eu-startups article pages still 403; WebSearch against the domain works and DID yield two new names
+  today (AI Score, iPronics), so mark those cards snippet-level. techstartups and entrackr both fresh and read full.
+- 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
+  therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
+  names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
 
 **Known gap in the page itself (flagged 3 Sep 2026, not changed).** The SLED tab's in-page "Honest notes"
 box still reads "System of record is BidNet Direct (RMEPS Colorado/Wyoming + NY group)". The 2 Sep coverage
