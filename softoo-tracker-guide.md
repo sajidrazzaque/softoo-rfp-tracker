@@ -146,6 +146,26 @@ Labor Day) the Global index and all three category indexes carried NOTHING poste
 anywhere were 5 Sep. A Monday run is therefore a three-day catch-up over Saturday's postings, and a Monday-after-a-
 holiday run may find nothing at all posted that day. Say so in the note box rather than reporting the sweep as dry.
 
+**READ THE AI/ML CATEGORY INDEX AS A FULL TABLE, THE WAY THE GLOBAL INDEX IS READ (9 Sep 2026).** The
+back-catalogue lesson from 4 Sep was written about the Global index and was never applied to the category
+indexes, and it cost a real listing. **AI-1249** (Washington DC, AI Transcription System) was posted on
+**4 September** and was missed by the 4 Sep sweep — which read the AI/ML index that very day and took only
+AI-1251 off it — and again by the 7 Sep sweep. It was finally found on 9 Sep, the day it expired. On the
+technical merits it was the best-specified build either tab has carried: on-premises Ubuntu with no cloud
+dependency, interview audio through **three independent transcription engines** with outputs aligned and
+material discrepancies flagged for human review, GPU orchestration inside a 16GB budget, SHA-256 result
+manifests. That is verifiable-AI engineering sitting exactly on the AI Audit and Compliance wedge, and it was
+lost to a skim. So: on the AI/ML index, do not stop at the newest postings — read the whole table and grep
+each `AI-` / `SW-` ID against `index.html`, same as the Global index.
+
+**A BLANK DAY IS NOT ALWAYS A WEEKEND — CHECK WHICH DATES ARE ACTUALLY MISSING BEFORE EXPLAINING THE GAP
+(9 Sep 2026).** The 7 Sep run correctly attributed its dry sweep to Saturday, Sunday and US Labor Day. On
+9 Sep the Global index and all three category indexes were read in full and the newest rows before that day
+were still dated **5 Sep** — meaning **Tuesday 8 September, an ordinary working day, carried nothing at all**.
+That is a source outage or a publishing pause, not an absence of solicitations, and it is a different claim
+from the weekend one. Name the specific dates that are missing in the note box rather than reaching for the
+nearest calendar explanation, and do not describe a catch-up run as covering days the source never published.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -192,6 +212,20 @@ sweep. Also worth doing properly: a row that is still reported can still be **en
 7 Sep and is still unannounced, but is now corroborated by several outlets, names Neo Wealth as lead, and turns out
 to be a ~70% down round by a company that has since turned profitable. Those two facts change how to qualify it,
 so they belong on the card even though the REPORTED flag stays.
+
+**An IPO filing is not capital, but an ANCHOR-INVESTOR allocation is (9 Sep 2026).** On 4 Sep, Rentomojo's
+₹1,256 Cr IPO RHP filing was correctly skipped on the "a filing is not closed capital" rule. On 9 Sep the same
+company appeared with **₹376 Cr raised from anchor investors ahead of the IPO** — money that is committed and
+priced, so it qualifies where the filing did not, and it was logged. Keep both halves of the rule: a filing,
+a term sheet or a "set to raise" is not a funding signal; an anchor book, a closed round or a converted
+REPORTED row is. Pre-IPO companies are also a specific pitch (audit-grade reporting, data, platform hardening)
+rather than a generic one.
+
+**Two cyber names in one run, three runs after the rule was written (9 Sep 2026).** The mandatory cyber search
+returned **Cylake** ($245M Series B convertible note, Lightspeed/Picture/Redpoint, $290M total, ~40 staff, beta
+end-2026) and **QNu Labs** (₹200 Cr Series A1, Bengaluru, quantum-safe crypto). Neither was carried by
+techstartups or Entrackr. That is now three consecutive runs where the category search paid for itself
+(Upwind, then these two), after two runs where skipping it cost Guardio and Upwind. Treat it as settled.
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
@@ -315,6 +349,22 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   fetch on them. Michigan coverage came from rfpmart instead. The portals remain a documents-and-contacts gap.
 - 7 Sep 2026: eu-startups article pages still 403; WebSearch against the domain works and DID yield two new names
   today (AI Score, iPronics), so mark those cards snippet-level. techstartups and entrackr both fresh and read full.
+- 9 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all fetched clean. NOTHING was posted on
+  6, 7 or 8 Sep — the newest rows before 9 Sep were still 5 Sep. Weekend plus Labor Day covers 6 and 7; **8 Sep
+  was an ordinary Tuesday and is unexplained**, so log it as a source outage, not a quiet market.
+- 9 Sep 2026: the Global index yielded exactly ONE new tech row (AI-1256, verified green). Every other tech row
+  on it was already in the array — the 7 Sep back-catalogue close-out is holding, so a single full read of the
+  Global index per run is now cheap.
+- 9 Sep 2026: **RFPMart eligibility fields can contradict the buyer's country.** SW-119267 is an Alberta
+  municipal HRIS/payroll buy whose eligibility line reads verbatim "Onshore (USA Organization Only)". This joins
+  the 4 Sep "question deadline after the close date" pattern as an RFPMart data-quality issue. Same handling:
+  quote the field as printed, flag the contradiction on the row, say "confirm with the buyer", default to amber.
+- 9 Sep 2026: techstartups published an 8 Sep daily, a separate 8 Sep VC roundup and two standalone round
+  stories — **the roundup carries names the daily does not** (Forus, Split Pay, Blee were roundup-only). Read
+  both, not just the daily. No 9 Sep techstartups daily existed at sweep time.
+- 9 Sep 2026: entrackr fresh, read in full. Swish, DaMENSCH and Slice all re-checked and all still unannounced,
+  so no REPORTED conversion this run — the first run in three without one. eu-startups article pages still 403;
+  WebSearch against the domain yielded one new name (Tellia), marked snippet-level.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
