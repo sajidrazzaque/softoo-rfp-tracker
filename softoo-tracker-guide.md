@@ -391,6 +391,20 @@ A run is scoped to the data arrays, the Generated date and the note boxes, so th
 
 ---
 
+## WRITING STYLE AND FIELD DISCIPLINE (page content)
+- **No dashes as punctuation** anywhere you write, in this file or in the page: no em-dashes, no en-dashes, no
+  spaced hyphen as a separator. Use commas, parentheses, colons or separate sentences. Hyphens inside compound
+  words are fine. This is a standing preference of Sajid's and it applies to every row you add.
+- **`title` is a title, not a description.** Keep it under roughly 90 characters. Several existing rows carry a
+  full paragraph in `title`, which on a phone fills the entire screen before any of the useful fields appear.
+  Put the detail in `scope` (SLED) or in the eligibility and deadline fields, not in the title.
+- **Keep the tab ledes current.** The static lede under each tab title says "Statuses are relative to <date>" or
+  "As of the <date> run". Update those to today's date in the same edit as the Generated footer, otherwise the
+  page states a stale reference date while showing fresh rows.
+- The page is responsive as of 9 Sep 2026 (media queries at 900px, 700px and 380px, verified at 320, 390 and
+  768 px wide with no horizontal scroll on any tab). Keep new content inside the existing card and row
+  structure so it stays that way. Do not add fixed pixel widths or tables.
+
 ## HONESTY RULES (apply to every tab)
 - Every specific RFP row must have a working reference URL; if you only have an ID, link the source index and show the ID.
 - Never present inferred SLED primes as confirmed bidders.

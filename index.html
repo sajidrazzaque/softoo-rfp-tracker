@@ -79,6 +79,55 @@
   .note b{color:var(--ink)}
   footer{margin-top:26px;font-size:12px;color:var(--muted);text-align:center}
   .tab{display:none} .tab.show{display:block}
+
+  /* ---------- responsive ---------- */
+  img,svg{max-width:100%}
+  .card .id,.card h3,.card .row,.note,.lede{overflow-wrap:anywhere}
+
+  @media (max-width:900px){
+    .cards{grid-template-columns:repeat(auto-fill,minmax(258px,1fr))}
+  }
+
+  @media (max-width:700px){
+    /* the tab strip scrolls sideways rather than forcing the whole page to.
+       overflow lives on the sticky element itself, so sticky still works. */
+    .nav{padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .nav::-webkit-scrollbar{display:none}
+    .nav .brand{font-size:14px;margin-right:12px;padding:12px 0}
+    .nav .brand small{display:none}
+    .nav button{padding:13px 11px;font-size:13px;white-space:nowrap}
+
+    .wrap{padding:16px 14px 48px}
+    h1.pagetitle{font-size:20px}
+    .lede{font-size:13px}
+
+    /* two stat tiles per row beats four squeezed onto one */
+    .stats{gap:8px;margin:14px 0 6px}
+    .stat{flex:1 1 calc(50% - 4px);min-width:0;padding:10px 12px}
+    .stat b{font-size:20px}
+
+    /* one card per row: minmax(320px) overflows a 320px viewport */
+    .cards{grid-template-columns:1fr;gap:12px;margin-top:12px}
+    .card{padding:13px 14px}
+    /* several rows carry a whole paragraph in the title field, which dominates a phone
+       screen. Tighter leading keeps it readable without hiding any of it. */
+    .card h3{font-size:14.5px;line-height:1.35}
+    .card .row,.card .benefit{font-size:12.5px;line-height:1.5}
+
+    /* finger-sized tap targets */
+    .filters{gap:6px}
+    .filters button{padding:9px 14px;min-height:40px}
+
+    .dategroup{margin-top:20px}
+    .datebar{flex-wrap:wrap;gap:2px 10px}
+    .datebar h2{font-size:16px}
+    .note{padding:14px;margin-top:26px;font-size:12.5px}
+  }
+
+  @media (max-width:380px){
+    .stat{flex:1 1 100%}
+    .nav button{padding:13px 9px;font-size:12.5px}
+  }
 </style>
 </head>
 <body>
