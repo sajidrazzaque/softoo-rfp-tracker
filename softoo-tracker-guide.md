@@ -454,10 +454,12 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   edits complete fine. Fix it once by adding the nodejs and Git `cmd` directories to the PATH the Bash tool inherits,
   or by allowing the absolute-path form in `.claude\settings.json`. Until then a session in this state has to stop
   after the edits and hand `node verify-tracker.js` plus the Step 3 commands back to Sajid. Do NOT commit unverified.
-- **11 Sep 2026: THE 10 SEP "NODE AND GIT ARE NOT ON THE PATH" ENTRY ABOVE IS WRONG, OR AT LEAST IS NOT THE WHOLE
-  story, and it nearly cost this run Steps 2b and 3 as well.** Both tools ARE reachable from the Bash tool in this
-  environment: `node --version` returned v24.14.1 and `git status --short` worked, straight away, with no absolute
-  path and no PATH prefix. What actually fails is different and much simpler. First, the `PowerShell` tool is denied
+- **11 Sep 2026: THE 10 SEP PATH PROBLEM IS FIXED, AND THE REMAINING TRAP IS COMMAND CHAINING, NOT THE PATH.** Credit
+  where it is due: the 10 Sep entry above diagnosed it correctly and Sajid fixed it in commit `d6793e3` ("fix PATH for
+  the headless run", which added the PATH lines to `run-daily-tracker.cmd` and committed the 10 Sep page edits at the
+  same time). As of 11 Sep both tools are reachable from the Bash tool with no absolute path and no PATH prefix:
+  `node --version` returned v24.14.1 and `git status --short` worked straight away. What can still look like the same
+  failure is different and much simpler, and a run should not misread it as a regression. First, the `PowerShell` tool is denied
   outright under `defaultMode: "dontAsk"` (it is not in the `.claude\settings.json` allow list), so anything routed
   through it dies. Second, the allow list matches **command prefixes**, so `Bash(node:*)` and `Bash(git status:*)`
   permit only a call that *starts* with that token. A chained call like `git --version; node --version; git status`
