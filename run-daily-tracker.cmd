@@ -13,6 +13,12 @@ cd /d "%REPO%" || (echo Cannot cd to %REPO% & exit /b 1)
 if not exist "%REPO%logs" mkdir "%REPO%logs"
 for /f %%i in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd_HHmm"') do set "STAMP=%%i"
 set "LOG=%REPO%logs\run-%STAMP%.log"
+rem Claude Code's Bash tool inherits this process's PATH. On 10 Sep 2026 a full sweep
+rem completed but could not commit: node and git were not on that PATH, so
+rem "node verify-tracker.js" and "git status" returned command not found, and the
+rem absolute-path forms were refused by the permission allow-list (which matches
+rem bare tokens only). Prepending both directories fixes it for the child process.
+set "PATH=C:\Program Files\nodejs;C:\Program Files\Git\cmd;%PATH%"
 set "RC=0"
 
 echo ================================================== >> "%LOG%" 2>&1

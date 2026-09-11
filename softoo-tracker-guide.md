@@ -166,6 +166,33 @@ That is a source outage or a publishing pause, not an absence of solicitations, 
 from the weekend one. Name the specific dates that are missing in the note box rather than reaching for the
 nearest calendar explanation, and do not describe a catch-up run as covering days the source never published.
 
+**THE AI/ML FULL-TABLE RULE PAID ON ITS FIRST RUN, AND THE 8 SEP BLANK WAS A ONE-DAY OUTAGE (10 Sep 2026).**
+Two follow-ups to the 9 Sep entries above. First, the rule written after the AI-1249 miss was applied for the first
+time on 10 Sep: every `AI-` row on the AI/ML category index was grepped against `index.html`, eleven were absent, and
+four were opened. Three of the four were worth a row, including **AI-1257** (Virginia, LLMs Evaluating Services), a
+build for a full LLM benchmarking ecosystem with datasets, scoring scripts, replication documentation and publication
+to the agency's GitHub. That is the best product fit either tab has carried, and it would have been invisible to a
+newest-rows-only skim. Keep the rule. Second, **8 September turned out to be a genuine one-day source outage, not a
+change in the source**: on 10 Sep the Global index carried rows posted 9 and 10 Sep and the software category index
+carried roughly 70 rows posted that day. So the 9 Sep instruction to name the specific missing dates was right, and
+the right follow-up is to check whether a gap repeats before treating it as anything structural.
+
+**FIVE LIVE GREENS IN ONE RUN, ALL FROM THE GLOBAL INDEX, ALL WITH `global` IN THE SLUG (10 Sep 2026).** The best RFP
+day so far: SW-119266 (DC, Microsoft Fabric and Purview), SW-119286 (California, document-AI mail workflow), WD-16213
+(New York, CMS site), SW-119268 (DC, ERP) and WD-16214 (California, mobile web RFI), every one verified on its detail
+page and every one still open. Two things this confirms rather than changes: the Global index is still where the
+greens are even after the back-catalogue close-out, and on a day when the source is publishing normally the slug
+signal and the Global index agree. It does not license skipping the detail page, which is what separated these five
+from the AI-1235/AI-1236 slug traps.
+
+**THE RFPMART DATE ANOMALY HAS A THIRD VARIANT: A QUESTION DEADLINE BEFORE THE POSTING DATE (10 Sep 2026).** Oregon
+SW-119321 was posted 10 September and prints a question deadline of **31 August**, i.e. ten days before it was
+published. The 3 Sep (Tennessee SW-119103) and 4 Sep (Cicero CSE-24602) cases both had a question deadline falling
+*after* the close; this one runs the other way, and 9 Sep added an eligibility field contradicting the buyer's
+country. Generalise the handling rather than cataloguing each shape: **treat every RFPMart date and eligibility field
+as unverified metadata.** Quote it exactly as printed, flag the contradiction on the row, say "confirm with the
+buyer", and never silently pick the reading that suits the row.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -226,6 +253,24 @@ returned **Cylake** ($245M Series B convertible note, Lightspeed/Picture/Redpoin
 end-2026) and **QNu Labs** (₹200 Cr Series A1, Bengaluru, quantum-safe crypto). Neither was carried by
 techstartups or Entrackr. That is now three consecutive runs where the category search paid for itself
 (Upwind, then these two), after two runs where skipping it cost Guardio and Upwind. Treat it as settled.
+
+**THREE CONVERSIONS IN ONE RUN, AND THE FIRST ONE THAT CONVERTED *DOWNWARD* (10 Sep 2026).** Swish, Theater and
+DaMENSCH all closed on the same day. Two points worth keeping. First, **Theater converted in ONE day**: it was logged
+on 9 Sep off an Entrackr `/exclusive/` with no amount stated at all, and was announced on 10 Sep at ₹75 Cr led by
+Niveshaay, above the reported ₹400 Cr valuation. So re-check the open REPORTED rows *every* run, not every few runs,
+because the window between exclusive and announcement can be a single day. Second, and this corrects the 7 Sep
+entry above: DaMENSCH closed at **₹17.4 Cr**, which is small, and the round is an insider top-up (₹15 Cr from
+existing investor A91 Partners plus ₹2.4 Cr from Tancom Electronics) at a flat valuation. The 7 Sep line said the
+closed round was LARGER than reported "in every case"; that was true of Comet, Ultrahuman and Mokobara and is now
+not a law. **A conversion is a qualification step, not automatically good news.** It can turn a placeholder row into
+a deprioritise decision, which is still worth the five minutes because it stops effort going to the wrong name.
+
+**THE CYBER SEARCH HAS NOW PAID FOR ITSELF FOUR RUNS RUNNING (10 Sep 2026).** After Upwind (7 Sep) and Cylake plus
+QNu Labs (9 Sep), the 10 Sep search returned **Bynario** (€2.1M pre-seed, Milan, AI vulnerability discovery and
+prioritisation, 360 Capital Partners leading). Useful detail on method: Bynario appeared on BOTH the techstartups
+daily and eu-startups, which meant it did not have to be marked snippet-level, unlike the eu-startups-only names.
+When a European round shows up in a source that fetches cleanly, cite that one, so the card is fully read rather
+than snippet-level.
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
@@ -365,6 +410,23 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
 - 9 Sep 2026: entrackr fresh, read in full. Swish, DaMENSCH and Slice all re-checked and all still unannounced,
   so no REPORTED conversion this run — the first run in three without one. eu-startups article pages still 403;
   WebSearch against the domain yielded one new name (Tellia), marked snippet-level.
+- 10 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all fetched clean and the source is publishing
+  normally again (roughly 70 software rows posted that day). The 8 Sep blank was a ONE-DAY outage and did not repeat.
+  The Global index yielded five new tech rows, all five verified green and all five live.
+- 10 Sep 2026: techstartups published a 10 Sep daily, a 9 Sep VC roundup and two standalone round stories (Harvey,
+  Cognition AI), all four read in full. Entrackr fresh and read in full, and it carried three REPORTED conversions.
+  eu-startups article pages still 403 to fetch; WebSearch against the domain yielded IVEX and Fluencify (both marked
+  snippet-level) plus Bynario, which was corroborated by the techstartups daily and so did not need the flag.
+- **10 Sep 2026: STEPS 2b AND 3 COULD NOT RUN IN THIS SESSION, and the cause is worth recording so a later run does
+  not lose time to it.** Neither `node` NOR `git` is on the Bash tool's PATH, so `node verify-tracker.js` and
+  `git status` both fail with "command not found". Both are installed: `C:\Program Files\nodejs\node.exe` and
+  `C:\Program Files\Git\cmd\git.exe`. The pre-granted permissions (`Bash(node:*)`, `Bash(git ...)`) match only the
+  bare `node` and `git` tokens, so the two obvious workarounds, an absolute path
+  (`"/c/Program Files/nodejs/node.exe" verify-tracker.js`) and a PATH prefix (`PATH=... node ...`), are refused by the
+  permission layer rather than by the shell. This is an environment problem, not a data problem: the sweep and the
+  edits complete fine. Fix it once by adding the nodejs and Git `cmd` directories to the PATH the Bash tool inherits,
+  or by allowing the absolute-path form in `.claude\settings.json`. Until then a session in this state has to stop
+  after the edits and hand `node verify-tracker.js` plus the Step 3 commands back to Sajid. Do NOT commit unverified.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
