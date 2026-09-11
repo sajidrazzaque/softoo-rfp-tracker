@@ -193,6 +193,33 @@ country. Generalise the handling rather than cataloguing each shape: **treat eve
 as unverified metadata.** Quote it exactly as printed, flag the contradiction on the row, say "confirm with the
 buyer", and never silently pick the reading that suits the row.
 
+**THE `PM-` PREFIX PRODUCED A REAL ROW, AND THE FULL-TABLE READ IS WHY (11 Sep 2026).** The 7 Sep entry above tested
+`EXTRA-` and rejected it, and concluded "keep the filter at `SW- WD- AI- ITES- SEO- GIS-`". That conclusion still holds
+as a *filter*, but it is not the whole method. On 11 Sep, **PM-23948** (St. Louis, Missouri, "Print and Mail API
+Services") turned out to be genuine API platform engineering: sandbox and production environments behind a RESTful
+API, a dynamic template engine with metadata mapping, a mandatory pre-send proofing gate with rendering URLs, and
+identity management supporting data-residency compliance and per-department budget tracking. It surfaced only because
+RFPMart **cross-categorises** it into Artificial Intelligence and Machine Learning as well as into Software, System and
+Application, so it appears on the AI/ML index, and the AI/ML index is now read as a full table. Lesson: do not extend
+the prefix list speculatively (the `EXTRA-` test says that wastes fetches), but when a full-table read puts an
+unfamiliar prefix in front of you on a *tech* category index, judge it on its title and scope rather than skipping it
+on the prefix. The prefix filter is for deciding what to open on the Global index; the category indexes are read whole.
+
+**THE TECHSTARTUPS ROUNDUP FOR DAY N IS PUBLISHED AFTER DAY N'S SWEEP HAS ALREADY RUN (11 Sep 2026).** This is a
+scheduling fact with a real cost, and it generalises the 9 Sep "read the roundup as well as the daily" rule. The
+10 September VC roundup went up after the 10 Sep sweep had read the 9 September one, and on 11 Sep it supplied FOUR of
+the seven funding rows, including Rogo Technologies (the day's best-qualified buyer) and the sector detail that
+discharged the blocker on the Graph AI row. So every run should read **the previous day's roundup as well as today's**,
+because today's may not exist yet at 19:00 Asia/Karachi and yesterday's certainly did not exist at yesterday's sweep.
+
+**A DRY CYBER SEARCH IS A RESULT, AND IT NEEDS DATE-CHECKING TO BE ONE (11 Sep 2026).** After four runs where the
+mandatory cyber search paid for itself (Upwind, then Cylake and QNu Labs, then Bynario), the 11 Sep search returned
+nothing new. What made that a usable answer rather than a shrug was date-checking every candidate it surfaced: Onyx
+Security ($113M Series B, Bessemer) announced 29 July, Zenity ($125M Series C, Norwest) 3 August, Corma ($60M seed,
+Sequoia, Tel Aviv, defensive-cybersecurity foundation models) 10 August, Above Security ($43M Series A) 23 March. A
+cyber search will always return *something*, because the category is heavily indexed by listicle sites; without a date
+check those look like finds. Date-check before logging, and report the search as dry rather than skipping it.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -427,6 +454,40 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   edits complete fine. Fix it once by adding the nodejs and Git `cmd` directories to the PATH the Bash tool inherits,
   or by allowing the absolute-path form in `.claude\settings.json`. Until then a session in this state has to stop
   after the edits and hand `node verify-tracker.js` plus the Step 3 commands back to Sajid. Do NOT commit unverified.
+- **11 Sep 2026: THE 10 SEP "NODE AND GIT ARE NOT ON THE PATH" ENTRY ABOVE IS WRONG, OR AT LEAST IS NOT THE WHOLE
+  story, and it nearly cost this run Steps 2b and 3 as well.** Both tools ARE reachable from the Bash tool in this
+  environment: `node --version` returned v24.14.1 and `git status --short` worked, straight away, with no absolute
+  path and no PATH prefix. What actually fails is different and much simpler. First, the `PowerShell` tool is denied
+  outright under `defaultMode: "dontAsk"` (it is not in the `.claude\settings.json` allow list), so anything routed
+  through it dies. Second, the allow list matches **command prefixes**, so `Bash(node:*)` and `Bash(git status:*)`
+  permit only a call that *starts* with that token. A chained call like `git --version; node --version; git status`
+  is refused as a whole, which looks exactly like "command not found" if you do not read the error. **So: issue one
+  command per Bash call, starting with the bare `git` or `node` token, and do not reach for PowerShell or an absolute
+  path.** No PATH change and no settings change is needed. Verified on 11 Sep by running `node verify-tracker.js` and
+  the full Step 3 sequence successfully.
+- 11 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all fetched clean, and **NOTHING at all was
+  posted on 11 September**, an ordinary working Friday. Newest rows everywhere were 10 Sep. That is the second blank
+  in four days after the 8 Sep one-day outage, so check on the next run whether 11 Sep fills in late before treating
+  the pattern as structural. The Global index yielded **zero** new tech rows for the first time: all ~26 tech rows on
+  it were grepped against `index.html` and every one was already logged or already opened and rejected. The run's
+  entire output came from the ~60 non-global 10 Sep software rows the 10 Sep run said it had not opened, which is the
+  4 Sep back-catalogue lesson applying to a one-day-old backlog rather than a weeks-old one.
+- 11 Sep 2026: **the category-index URLs in the guide's prose do not match the ones the page actually uses**, and two
+  fetches were wasted finding that out. The working URLs are the ones in the `REF` object in `index.html`:
+  `software-system-and-application-rfp-government-contract.html` and
+  `web-design-and-development-rfp-government-contract.html`, plus
+  `artificial-intelligence-and-machine-learning-rfp-government-contract.html` for AI/ML. The shorter guesses
+  (`software-rfp-...`, `website-design-rfp-...`, `artificial-intelligence-rfp-...`) all resolve to a generic latest
+  listings page that returns unrelated federal and non-tech rows, which is easy to mistake for a dry category.
+- 11 Sep 2026: techstartups published **no 11 Sep post at all** at sweep time; the 10 Sep VC roundup was read in full
+  instead and supplied four rows. Entrackr fresh and read in full, carrying exactly one 11 Sep round (Popo Global).
+  eu-startups article pages still 403 to fetch; WebSearch against the domain yielded one new name (Furo, marked
+  snippet-level) and confirmed that Cato and Backbone, which the search also surfaced, were already logged.
+- 11 Sep 2026: Slice re-checked for the fourth consecutive run and **still not announced**, so the REPORTED flag
+  stands. The re-check was still worth it: the $100M includes a **secondary** share sale, and Neo Wealth's own cheque
+  is reported at roughly $20M to $40M, so the primary capital actually landing is a fraction of the headline. Add this
+  to the 10 Sep "a conversion is a qualification step, not automatically good news" lesson: an *unconverted* row can
+  also be qualified downward without ever closing.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
