@@ -220,6 +220,50 @@ Sequoia, Tel Aviv, defensive-cybersecurity foundation models) 10 August, Above S
 cyber search will always return *something*, because the category is heavily indexed by listicle sites; without a date
 check those look like finds. Date-check before logging, and report the search as dry rather than skipping it.
 
+**A SAME-DAY BLANK ON RFPMART IS A PUBLISHING LAG, NOT AN OUTAGE. RE-READ THE PREVIOUS RUN'S DATE, EVERY RUN
+(15 Sep 2026).** This is the most expensive source lesson since the 4 Sep back-catalogue one, and it corrects the
+9 Sep and 11 Sep entries above rather than adding to them. The 11 Sep run read the Global index and all three
+category indexes in full and reported that RFPMart had published nothing at all that Friday. It was reading the
+indexes correctly; the rows simply did not exist yet at 19:00 Asia/Karachi. Re-read on 15 Sep, the same indexes
+carry roughly **21 software rows, 6 AI rows, 8 web-design rows and one Global-index row all dated Friday 11
+September**. The cost was a green: **ITES-10977** (Maryland, IT systems cybersecurity audit and systems
+integration review, "World-Wide Globle" verified verbatim, closes 16 Oct) was posted 11 Sep and went unseen for
+four days, and it was the ONLY green in the four-day catch-up. So: **every run must re-read the previous run's
+date as well as its own**, which is exactly the habit the funding tab already has for the techstartups roundup.
+Do not write "the source published nothing today" as a finding; today's own postings are expected to be
+incomplete. This does NOT retract the 8 September outage: 8 Sep was re-read on 10 Sep and again on 15 Sep and
+is still genuinely empty, so that one was real. The distinction is the rule: **a blank seen on the day is a lag;
+only a blank that persists on a LATER run is an outage.**
+
+**WEEKEND QUIET IS NOT RELIABLE FOR THIS SOURCE EITHER (15 Sep 2026).** The 7 Sep entry above treats weekends as
+a real gap. On this run, **Saturday 12 September was the busiest of the four days swept**, with 54 software rows,
+while Sunday 13 Sep carried only US federal notices and Monday 14 Sep carried 12 rows. Combined with the lag rule
+above, the honest position is that RFPMart's publishing rhythm is not predictable from the calendar, so name the
+dates actually missing and re-check them rather than explaining a gap with the day of the week.
+
+**THE `global` SLUG CAN BE PART OF THE SYSTEM'S NAME (15 Sep 2026).** A new shape of the slug trap, alongside the
+AI-1235/AI-1236 cases. **SW-119468** (Washington DC) is an "RFI for Global Talent Acquisition System" and carries
+`global` in its URL slug purely because the word is in the product name; the detail page reads Onshore USA Only.
+Read the title before spending the fetch: if `global` sits inside a noun phrase that names the system, it is not
+an eligibility signal.
+
+**THE DATE-ANOMALY RULE NOW HAS A FOURTH SHAPE, WHICH IS WHY IT IS A RULE AND NOT A CATALOGUE (15 Sep 2026).**
+Three anomalies surfaced in a single run, one in each known shape plus a new one: SW-119454 (Belgium) states a
+question deadline **after** the close; SW-119458 (California) states one four days **before** the posting date and
+AI-1266 (California) eleven days before; and ITES-10977 (Maryland) states a question deadline **on the posting day
+itself**, so the window was shut the moment the listing appeared. The 10 Sep instruction stands unchanged and is
+the right one: treat every RFPMart date and eligibility field as unverified metadata, quote it exactly as printed,
+flag the contradiction on the row, say "confirm with the buyer", and stop cataloguing new shapes.
+
+**AI GOVERNANCE IS TURNING UP AS A LINE ITEM INSIDE ORDINARY SYSTEM BUYS (15 Sep 2026).** Worth watching as a
+market signal rather than as a sourcing rule. Two unrelated US buyers specified human control over AI output in
+listings that are not AI solicitations: SW-119468 (DC talent acquisition) requires vendors to confirm whether
+resume parsing, candidate matching and skills extraction can be **disabled by the customer** without losing core
+functionality, and SW-119399 (Georgia public-safety training) makes administrative review of AI-generated content
+**mandatory**. AI-1261 (Florida) writes **model monitoring** and regulatory compliance into a five-year build.
+When qualifying a row, check the requirements for this pattern: it is the AI Audit and Compliance wedge appearing
+inside a build budget rather than as a separate advisory buy, which is a better place to sell from.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -490,6 +534,32 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   is reported at roughly $20M to $40M, so the primary capital actually landing is a fraction of the headline. Add this
   to the 10 Sep "a conversion is a qualification step, not automatically good news" lesson: an *unconverted* row can
   also be qualified downward without ever closing.
+- 15 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all fetched clean, covering 12 to 15 Sep.
+  **11 September filled in completely, late** (see the publishing-lag rule above). 12 Sep (Saturday) carried 54
+  software rows, 13 Sep (Sunday) only US federal notices, 14 Sep 12 rows, and **nothing anywhere is dated 15 Sep**,
+  which is the same lag showing at the front of the table. The Global index yielded exactly one new tech row for
+  the second run running (ITES-10977, verified green), so the 7 Sep back-catalogue close-out is still holding.
+- 15 Sep 2026: the AI/ML full-table read produced four rows. Every `AI-` row was grepped against `index.html`,
+  seven were absent (AI-1260 to AI-1266), and five were opened. AI-1264 (a written guide to AI adoption at
+  airports) and AI-1265 (Connecticut inpatient pre-bill review, clinical revenue cycle) were judged out of scope
+  without a fetch. The rule keeps paying: three of the five opened became rows.
+- 15 Sep 2026: **techstartups published no daily on 12, 13 or 15 Sep and no VC roundup at all since 10 Sep.** The
+  11 Sep daily (Kinetix AI, AIDIN Robotics, Enigmata, Furo) did not exist at the 11 Sep sweep and was read today,
+  supplying two rows. Entrackr fresh and read in full, carrying only two items across four days (UniqYou, Furnishka).
+  eu-startups article pages still 403 to fetch; WebSearch against the domain yielded EUCLYD and Zero, both marked
+  snippet-level. Weekly sources (Crunchbase, New Market Pitch, StartupTalky, todaysstartupnews) NOT re-read, so
+  unswept rather than dry.
+- 15 Sep 2026: the mandatory cyber search paid again after the 11 Sep dry run, returning **Fortaegis** ($50M
+  Series A, Amsterdam, Serendipity Capital, silicon-rooted key derivation). It was carried by the techstartups
+  14 Sep daily, so it did not need a snippet-level flag, which is the 10 Sep "cite the source that fetches cleanly"
+  point holding.
+- 15 Sep 2026: **Slice re-checked for the FIFTH consecutive run and still not announced.** The re-check still paid:
+  Neo Wealth's cheque is now reported at $20M to $25M of the $100M (narrowing the 11 Sep $20M to $40M range) and
+  the valuation fall is put at roughly 68% from the $1.4B set in 2021. Five re-checks with no close is itself a
+  signal, so the row is now framed as a watch item rather than a live lead. Also worth recording as method:
+  **UniqYou appeared on BOTH techstartups and an Entrackr exclusive on the same day**, techstartups carrying the
+  amount and Entrackr the valuation, so the two together completed the row and it needed no REPORTED flag. When
+  an Entrackr exclusive is corroborated by a source that states the amount, check before flagging it REPORTED.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
