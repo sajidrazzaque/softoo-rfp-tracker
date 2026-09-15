@@ -235,6 +235,17 @@ incomplete. This does NOT retract the 8 September outage: 8 Sep was re-read on 1
 is still genuinely empty, so that one was real. The distinction is the rule: **a blank seen on the day is a lag;
 only a blank that persists on a LATER run is an outage.**
 
+**THE LAG RULE PAID ON THE DAY IT WAS WRITTEN, AND THE LAG VARIES BY CATEGORY INDEX (15 Sep 2026, second run).**
+The publishing-lag rule above was written by the first 15 Sep run, which reported that nothing anywhere was dated
+15 September. A second run the same day, a few hours later, found the software index carrying roughly **57** rows
+posted 15 Sep, the AI/ML index five, the web-design index five and the Global index one, including **WD-16231**
+(Estonia, verified "World-Wide Globle" green, closes 9 Oct) which was simply not visible earlier. So the rule is
+confirmed, and a same-day blank should never be reported as a finding. One refinement it adds: **the lag does not
+have one clean front edge across the source, it varies by category index.** On this run the web-design index carried
+15 Sep rows while showing NOTHING posted on 14 Sep, even though the software index carried thirteen 14 Sep rows. So
+do not infer one index's state from another's, and do not conclude a date is empty until every index has been read
+for it on a LATER run.
+
 **WEEKEND QUIET IS NOT RELIABLE FOR THIS SOURCE EITHER (15 Sep 2026).** The 7 Sep entry above treats weekends as
 a real gap. On this run, **Saturday 12 September was the busiest of the four days swept**, with 54 software rows,
 while Sunday 13 Sep carried only US federal notices and Monday 14 Sep carried 12 rows. Combined with the lag rule
@@ -342,6 +353,26 @@ prioritisation, 360 Capital Partners leading). Useful detail on method: Bynario 
 daily and eu-startups, which meant it did not have to be marked snippet-level, unlike the eu-startups-only names.
 When a European round shows up in a source that fetches cleanly, cite that one, so the card is fully read rather
 than snippet-level.
+
+**GREP THE COMPANY NAME BEFORE WRITING A FUNDING ROW, THE WAY THE RFP TAB GREPS THE LISTING ID (15 Sep 2026,
+second run).** The RFP tab has had a grep-the-ID-first rule since 3 Sep; this tab had no equivalent, and it cost a
+near-miss. **Zeit AI** (Munich, autonomous data engineering) was published by eu-startups on 15 Sep and written up as
+a fresh find, when it had already been logged on **3 September** off techstartups. It was caught only by the
+duplicate-company check in `verify-tracker.js`, after the row was already in the file. **A round resurfacing on a
+second outlet days or weeks later is not a second round**, and the European sources in particular republish rounds
+well after the US dailies carry them, so this will recur. Grep the company name against `index.html` before writing,
+not after. The re-read is still worth doing rather than skipping the name: the eu-startups version carried the €4.3M
+figure, the full backer list (Y Combinator, Oxford's Seed Fund, the Sequoia Scout Fund, ACE Ventures, Hasso Plattner
+VC), Palantir-alumni founders and six named industrial customers already in production, none of which the 3 Sep row
+had. Enrich in place, exactly as with a REPORTED conversion.
+
+**THE TECHSTARTUPS DAILY IS SUBJECT TO THE SAME LAG AS THE ROUNDUP (15 Sep 2026, second run).** The 11 Sep entry
+above established that day N's *roundup* is published after day N's sweep. The same is true of the **daily**. The
+first 15 Sep run recorded that no daily had been published on 12, 13 or 15 September; a second run hours later found
+a **15 September daily** that supplied the two best items on the tab, **Exein** ($270M at a $1.7B valuation, Rome,
+led by Headline) and the full EUCLYD detail that discharged that row's snippet-level flag. So the re-read-the-
+previous-date habit applies to the daily as well as the roundup, and "no daily today" is never a finding at 19:00
+Asia/Karachi.
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
@@ -560,6 +591,23 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   **UniqYou appeared on BOTH techstartups and an Entrackr exclusive on the same day**, techstartups carrying the
   amount and Entrackr the valuation, so the two together completed the row and it needed no REPORTED flag. When
   an Entrackr exclusive is corroborated by a source that states the amount, check before flagging it REPORTED.
+- 15 Sep 2026 (second run): rfpmart global + software + AI/ML + web-design indexes all re-read a few hours after the
+  first run of the day. **15 September filled in completely in the interval** (~57 software rows, 5 AI, 5 web-design,
+  1 Global), which confirms the lag rule on the day it was written. The Global index yielded exactly one new tech row
+  for the THIRD run running (WD-16231, Estonia, verified green), so the 7 Sep back-catalogue close-out still holds.
+  Six US rows went to the SLED tab, including a **Michigan** row (WD-16228) off the web-design index, which is the
+  "a blocked state portal is not a blocked state" rule holding for the second time.
+- 15 Sep 2026 (second run): opened and rejected, recorded so a later run does not re-open them: SW-119539 (Ireland,
+  systematic review platform) is managed SaaS not a build; **SW-119508 (Ohio) is a trap worth naming** because its
+  title, "Human Identity API Solution", reads like API platform engineering while the actual scope is the supply of
+  500 access-management licences; AI-1263 (California) is SaaS courseware AND a Total Small Business Set-Aside, which
+  bars the prime route too; AI-1270 (UK) is research consultancy (methodology document, data collection protocol,
+  spreadsheets) despite the AI- prefix.
+- 15 Sep 2026 (second run): techstartups **15 Sep daily read in full** plus standalone Exein and EUCLYD articles;
+  it did not exist at the first run of the day. Entrackr fresh, one new round (Flam, $40M Series B, QED Investors).
+  eu-startups still 403 to fetch, WebSearch against the domain yielded Zeit AI (already logged 3 Sep, see the
+  grep-the-company-name rule above), Pharosyn and iPremom. Slice re-checked for the SIXTH consecutive run, still
+  reported rather than announced, no new detail, flag stands.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
