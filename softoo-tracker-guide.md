@@ -275,6 +275,26 @@ functionality, and SW-119399 (Georgia public-safety training) makes administrati
 When qualifying a row, check the requirements for this pattern: it is the AI Audit and Compliance wedge appearing
 inside a build budget rather than as a separate advisory buy, which is a better place to sell from.
 
+**THE AI-GOVERNANCE SIGNAL HAS A SECOND FACE: BUYERS WRITING AI *OUT* OF A CONTRACT (16 Sep 2026, second run).**
+The entry above records public buyers writing AI governance requirements INTO ordinary system buys. The same week
+produced the mirror image. A California government authority buying transcription for workplace investigations and
+witness interviews (#1173203, closes 30 Sep) states in the listing that "the use of any form of Artificial
+Intelligence (AI) tools or equivalent such as GenAI is strictly prohibited for the transcription services pertaining
+to this contract due to confidentiality". Both shapes are the same underlying question, whether AI output can be
+trusted with sensitive material, and both are worth logging as market signals even when the listing itself carries no
+deliverable (this one is human transcription, so it got no row). Watch for the prohibition clause specifically: it
+tells you which categories a public buyer currently considers off-limits for automation, which is the boundary any
+AI-assurance pitch has to start from.
+
+**AN ATTESTATION LISTING'S PRIME IS A LICENSED FIRM BY NECESSITY, NOT BY PREFERENCE (16 Sep 2026, second run).**
+WD-16233 (Tennessee) asks for a SOC 2+ Type I examination of a serverless web application. Softoo cannot issue that
+attestation at all: only a licensed CPA firm can. The row is still worth logging, because readiness assessment,
+control implementation, evidence collection and artefact production sit either side of the auditor and are real
+engineering (serverless breaks the evidence model SOC 2 templates assume, since there is no host to screenshot,
+compute is ephemeral and logging is per function). The rule that generalises: when a listing names a regulated
+credential (CPA, licensed engineer, chartered surveyor), write the prime as that credential's holders and say on the
+row what Softoo can and cannot do, rather than implying the whole scope is biddable through a partner.
+
 **A LISTING CAN BE A JOB ADVERT WEARING AN RFP'S CLOTHES. READ THE DETAIL PAGE FOR THAT LINE (16 Sep 2026).**
 RFPMart carries staff-recruitment postings inside its normal category indexes, and they read exactly like a services
 solicitation from the index. **WD-16229** (Washington DC, "Website, Digital Fundraising Ecosystem Management,
@@ -642,6 +662,33 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   and Mercia, CHERI memory-safe chips), announced **9 to 10 September** and therefore missed by both the 11 and 15 Sep
   cyber searches. It got no row (hardware, small), but it is evidence for the 7 Sep instruction to check the two or
   three days *before* the last run's date, which is the part of that rule that keeps being skipped.
+- 16 Sep 2026 (second run): **the lag rule is now settled and should stop being re-litigated.** The first 16 Sep run
+  read all four indexes in full and recorded that nothing anywhere carried today's date. Read again a few hours later,
+  the software index carries **more than sixty** rows posted 16 Sep, the AI/ML index five, the web-design index six and
+  the Global index seven. That is three consecutive same-day pairs of runs (11 Sep corrected on 15 Sep, 15 Sep morning
+  corrected by 15 Sep evening, 16 Sep morning corrected by 16 Sep evening) in which the later run found rows the earlier
+  one could not see. Treat a same-day blank as a non-event: do not write it up, do not explain it, just re-read on the
+  next run. The Global index yielded **zero** new tech rows for the second run running (all seven of its 16 Sep rows are
+  translation, marketing, branding, recruitment, publication and strategy work), so the 7 Sep back-catalogue close-out
+  still holds and there was no green today.
+- 16 Sep 2026 (second run): **the same lag applies to the techstartups DAILY, confirmed twice now in two days.** The
+  first 16 Sep run recorded no 16 Sep post at all; the 16 Sep daily existed hours later and supplied two funding rows
+  (CADDi, Noetive). Combined with the 15 Sep second-run entry above, "no daily today" is never a finding at 19:00
+  Asia/Karachi on either tab. Entrackr fresh, read in full, and genuinely dry: everything on it for 15 and 16 Sep was
+  already logged or already recorded as dropped. eu-startups still 403 to fetch; WebSearch against the domain yielded
+  Hackuity, Veridion and Integral, **all three also carried by sources that fetch cleanly** (Tech.eu, TechFundingNews),
+  so none needed the snippet-level flag.
+- 16 Sep 2026 (second run): **the cyber search paid twice, and the date check is doing the work rather than the search.**
+  Hackuity (€16M led by Forgepoint Capital International, Lyon, a vulnerability operations centre normalising findings
+  from 130+ tools) is a same-day round. Date-checking the rest of the results then caught **Huskeys** ($27M Series A led
+  by Blackstone Innovations Investments, network edge security management, a trillion web requests analysed daily),
+  announced **8 September** and missed by five consecutive cyber searches (9, 10, 11, 15 and the first 16 Sep run). That
+  is the second run running where the date check produced the find and the search itself did not. The 7 Sep instruction
+  to check the days BEFORE the last run's date is the single most-skipped rule in this file.
+- 16 Sep 2026 (second run): six US rows off the 16 Sep postings, including **Michigan for the third time in two days**
+  (SW-119598, surfaced off the **AI/ML index rather than the software index** because the source cross-categorises it,
+  which is the 11 Sep PM-23948 mechanism repeating) and **Massachusetts for the second time** since COMMBUYS was
+  confirmed behind a login on 3 Sep. Both portals remain a documents-and-contacts gap; neither state is a coverage gap.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
