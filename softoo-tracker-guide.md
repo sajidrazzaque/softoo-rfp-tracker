@@ -275,6 +275,19 @@ functionality, and SW-119399 (Georgia public-safety training) makes administrati
 When qualifying a row, check the requirements for this pattern: it is the AI Audit and Compliance wedge appearing
 inside a build budget rather than as a separate advisory buy, which is a better place to sell from.
 
+**A LISTING CAN BE A JOB ADVERT WEARING AN RFP'S CLOTHES. READ THE DETAIL PAGE FOR THAT LINE (16 Sep 2026).**
+RFPMart carries staff-recruitment postings inside its normal category indexes, and they read exactly like a services
+solicitation from the index. **WD-16229** (Washington DC, "Website, Digital Fundraising Ecosystem Management,
+Measurement and Optimization, Digital Operations Specialist") has a scope any run would log without hesitating,
+covering WordPress and Drupal maintenance, donation form configuration, Salesforce Marketing Cloud and CRM
+integration, and behaviour analytics, but its detail page classifies it as a **job recruitment posting, not a bid**.
+There is nothing to tender for and no prime to sit behind. The earlier example is WD-16190 (Oregon, "Full-Stack
+WordPress Developer Service"), which carries `this-is-job-opportunity` in its URL slug; WD-16229 does not, so the slug
+is not a reliable filter and only the detail page settles it. Check for the recruitment classification before writing
+a row, and drop it with the reason stated rather than logging a vacancy as an opportunity. This is different from the
+Ohio licence-supply trap (SW-119508): that one is a real procurement of the wrong thing, this one is not a
+procurement at all.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -608,6 +621,27 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   eu-startups still 403 to fetch, WebSearch against the domain yielded Zeit AI (already logged 3 Sep, see the
   grep-the-company-name rule above), Pharosyn and iPremom. Slice re-checked for the SIXTH consecutive run, still
   reported rather than announced, no new detail, flag stands.
+- 16 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all read in full and **NOTHING anywhere is dated
+  16 September**. Under the 15 Sep lag rule that is not a finding and was not written up as one, which is the first
+  time the rule has been applied to a run's own blank rather than to a correction of an earlier run. The whole output
+  came from re-reading **15 September**, and specifically from the ~40 software rows the second 15 Sep run explicitly
+  closed by saying it had left unopened. Worth stating for later runs: **this was not a lag catch, it was yesterday's
+  declared backlog**, and the two are different claims. Do not describe backlog work as if the source had hidden it.
+- 16 Sep 2026: the Global index yielded **zero** new tech rows (all ~26 grepped against `index.html`, every one already
+  logged or already rejected) and the AI/ML full-table read produced nothing new either, so the run has **no green**.
+  That is the second zero-green day since the back-catalogue close-out and it is a straight report, not a miss.
+- 16 Sep 2026: the Ontario/USA eligibility contradiction recurred (SW-119534, an Ontario conferencing buy whose
+  eligibility line reads verbatim "Onshore (USA Organization Only)"), joining the 9 Sep Alberta case. Same handling,
+  quote as printed and confirm with the buyer. The row was rejected on scope anyway: physical AV installation.
+- 16 Sep 2026: techstartups published **no 16 Sep post** at sweep time, and the **15 Sep VC roundup** (which did not
+  exist when the second 15 Sep run read the 15 Sep daily) supplied five of eight funding rows including AIUC, the best
+  product-fit name this tab has carried. The roundup itself opens by saying the previous day's edition had been
+  missed, so **the lag is sometimes the publisher's own**, not just a timing gap against the sweep.
+- 16 Sep 2026: **the mandatory cyber search was dry, and the date check caught a real two-run miss.** Everything it
+  returned was already logged (Upwind, QNu Labs) or out of date range, except **SCI Semiconductor** (£5M, PXN Ventures
+  and Mercia, CHERI memory-safe chips), announced **9 to 10 September** and therefore missed by both the 11 and 15 Sep
+  cyber searches. It got no row (hardware, small), but it is evidence for the 7 Sep instruction to check the two or
+  three days *before* the last run's date, which is the part of that rule that keeps being skipped.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
