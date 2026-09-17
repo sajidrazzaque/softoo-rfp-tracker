@@ -308,6 +308,26 @@ a row, and drop it with the reason stated rather than logging a vacancy as an op
 Ohio licence-supply trap (SW-119508): that one is a real procurement of the wrong thing, this one is not a
 procurement at all.
 
+**THE BACK-CATALOGUE CLOSE-OUT WAS NOT TRUE, AND ONE BUY CAN BE TWO LISTINGS (17 Sep 2026).** Two corrections in one
+row. First: the 7 Sep entry above declares the Global index back-catalogue closed, meaning every tech row on it had
+been opened by some sweep. On 17 Sep every tech row was grepped against `index.html` again and **SW-118811**
+(Massachusetts, Utility Bill Management Platform, posted 29 August) had never been opened by anyone. It read Onshore
+USA Only, so no green was lost, but the close-out is not a fact and must not be used as a reason to skip the grep.
+Keep grepping every tech row on the Global index every run; it is ~30 rows and costs nothing. Second, and new:
+**the same procurement can appear under two IDs with different metadata, and the OLDER one may be the only one that
+publishes a scope.** SW-118811 (29 Aug) carries the full scope; the same buy re-lists on 16 Sep as **SW-119585**
+marked INFO ONLY with no document, same 16 Oct close, and the buyer is described as "Non-profit Foundation" on one
+listing and "Government Authority" on the other. So before dropping a fresh row for being INFO ONLY, search the array
+and the index for an older listing of the same title and state. This does not soften the INFO ONLY drop rule (Quebec
+SW-119571 was dropped the same day precisely because no older twin existed), it just adds the check before it.
+
+**A ONE-DAY BID WINDOW IS A REAL SHAPE, AND IT IS WHAT THE FREE SWEEP CANNOT COVER (17 Sep 2026).** TELCOM-3035
+(Phoenix, Arizona, telecom expense management platform) was the only row anywhere carrying a 17 September index date,
+its own detail page dated the posting to 16 September, and it expired on 17 September. Whichever date is right, the
+window was at most one day. Log rows like this rather than hiding them, and say plainly on the row that a sweep run
+once a day cannot catch a one-day window and the paid aggregator feeding the CRM is the route for that buyer. It is
+the most concrete version of the "this tab is always a subset" scope note.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -689,6 +709,30 @@ PhilGEPS · Zambia ZPPA · Malaysia ePerolehan · Tanzania PPRA/NeST · USA: the
   (SW-119598, surfaced off the **AI/ML index rather than the software index** because the source cross-categorises it,
   which is the 11 Sep PM-23948 mechanism repeating) and **Massachusetts for the second time** since COMMBUYS was
   confirmed behind a login on 3 Sep. Both portals remain a documents-and-contacts gap; neither state is a coverage gap.
+- 17 Sep 2026: rfpmart global + software + AI/ML + web-design indexes all read in full. Exactly ONE row anywhere
+  carries a 17 September index date (TELCOM-3035) and its own detail page dates it to 16 September, so under the
+  settled lag rule that was not written up. The whole run came from the 16 September rows yesterday's second run
+  declared unopened. The Global index yielded zero new tech rows for the THIRD run running, so no green, but the
+  full grep of its tech rows found SW-118811 had never been opened at all (see the back-catalogue correction above).
+  Nine US rows went to the SLED tab in nine states, including first-ever Maine, Kansas and Arizona rows.
+- 17 Sep 2026: opened and rejected, recorded so a later run does not re-open them: AI-1272 (Ontario, responsible-AI
+  training curriculum across three levels, courseware not a build, same call as AI-1263); SW-119573 (New Brunswick,
+  RFI for ergonomics software, product and licence purchase); SW-119571 (Quebec, supplier collaboration digital
+  marketplace, right shape of work but INFO ONLY with no document and, unlike SW-118811/SW-119585, no older twin
+  listing publishing the scope).
+- 17 Sep 2026: techstartups published **no 17 Sep post** at sweep time (a non-event under the lag rule); the
+  **16 Sep VC roundup** had not been read by either 16 Sep run and supplied eight of twelve funding rows, which is the
+  11 Sep "day N's roundup lands after day N's sweep" rule holding for the fourth time. Entrackr fresh and read in
+  full, one new name for 17 Sep (Enlight Metals). eu-startups still 403 to fetch; WebSearch against the domain
+  returned EnforceShield, Veridion, Chift and Isometric, of which only EnforceShield was new, and it is carried by
+  Tech.eu as well so it needed no snippet-level flag.
+- 17 Sep 2026: **the cyber search itself was useless and the date check produced the find, for the third run running.**
+  The search returned almost entirely undated listicle aggregators (leadmagic, vcbacked, growthlist, failory,
+  fundraiseinsider, projectstartups). Blocking those domains on the second attempt surfaced SiliconANGLE and
+  **Eve Security** ($4.5M seed extension, Austin, Run Ventures, runtime governance for deployed AI agents), announced
+  **15 September** and missed by both 16 Sep runs. The same date check correctly excluded Glow's $180M Series A, which
+  the listicles present as 2026's largest cyber round: it was announced **22 July**. Practical tip worth reusing:
+  pass those aggregator domains in `blocked_domains` on the cyber search, they crowd out dated reporting.
 - 7 Sep 2026: ServiceNow publishes its partner tiers, and a listing that requires an "Elite or premier partner"
   therefore hands over a real, checkable prime list. Add that to the CONFIRMED-primes sources: whenever a listing
   names a required vendor certification or partner tier, the vendor's own partner directory IS the prime list.
