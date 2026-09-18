@@ -40,5 +40,9 @@ window.REFS={
 "u39": "https://techstartups.com/2026/09/08/venture-capital-startup-funding-roundup-september-8-2026-accel-atomico-bessemer-venture-partners-general-catalyst-thrive-capital-y-combinator-more/",
 "u40": "https://www.arabnews.pk/node/2655509/business-economy",
 "u41": "https://oregonbuys.gov",
-"u42": "https://missouribuys.mo.gov"
+"u42": "https://missouribuys.mo.gov",
+"u43": "https://techstartups.com/2026/09/18/startup-funding-news-today-september-18-2026-arcos-crusoe-dtcpay-evas-intelligence-ryft-more/",
+"u44": "https://techstartups.com/2026/09/17/startup-funding-news-today-september-17-2026-d-robotics-treble-tusk-ic-more/",
+"u45": "https://techstartups.com/2026/09/17/venture-capital-startup-funding-roundup-september-17-2026-3kvc-andreessen-horowitz-insight-partners-valor-equity-partners-more/",
+"u46": "https://techstartups.com/2026/09/18/british-ai-startup-mantic-raises-25m-to-build-superhuman-ai-forecasting-after-metaculus-win/"
 };

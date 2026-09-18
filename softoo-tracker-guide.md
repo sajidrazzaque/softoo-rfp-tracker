@@ -85,12 +85,12 @@ the loop at 19:00 to catch it.
 
 ### Step 3 — Commit & push (straight to main)
 ```
-git add index.html softoo-tracker-guide.md
+git add data index.html softoo-tracker-guide.md
 git commit -m "Daily tracker update <today's date>"
 git pull --rebase origin main
 git push origin main
 ```
-Stage the guide alongside the page, so any notes Sajid added to this file since the last run go up with the same commit instead of blocking the pull. Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
+**Stage `data/` first, and do not copy an older version of this command that omits it (corrected 18 Sep 2026).** Since the 18 Sep split the rows live in `data/*.js`, so `git add index.html` alone would push a page whose footers and note boxes claim today while its rows stop at yesterday, and `git pull --rebase` would then abort on the unstaged data files anyway. Stage the guide alongside the page, so any notes Sajid added to this file since the last run go up with the same commit instead of blocking the pull. Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
 pulling first would fail on the very file this run just edited. Pulling after the commit still catches a
 commit made elsewhere (a web upload, another machine) and keeps it from becoming a divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
 error and tell Sajid he can finish it with one `git push` in this folder.
@@ -324,6 +324,14 @@ marked INFO ONLY with no document, same 16 Oct close, and the buyer is described
 listing and "Government Authority" on the other. So before dropping a fresh row for being INFO ONLY, search the array
 and the index for an older listing of the same title and state. This does not soften the INFO ONLY drop rule (Quebec
 SW-119571 was dropped the same day precisely because no older twin existed), it just adds the check before it.
+
+**THE GLOBAL INDEX GREP FOUND A SECOND UNOPENED ROW THE VERY NEXT RUN, SO TREAT THE 7 SEP CLOSE-OUT AS RETRACTED
+(18 Sep 2026).** Yesterday's entry above found SW-118811 unopened and said the close-out "is not a fact". One run later
+the same grep found **WD-16159** (Washington DC, website redesign and rebuild using a CMS, posted 21 August) also
+never opened by anyone. It read Onshore and its detail page gave an **expiry date of 21 August, the same day it was
+posted**, so nothing was lost, but two unopened rows on consecutive runs is a pattern rather than a straggler. Delete
+the close-out from your working assumptions: grep every tech row on the Global index against the array every run, and
+open anything absent whatever its posting date. It is ~30 rows and it has now paid twice in two days.
 
 **A ONE-DAY BID WINDOW IS A REAL SHAPE, AND IT IS WHAT THE FREE SWEEP CANNOT COVER (17 Sep 2026).** TELCOM-3035
 (Phoenix, Arizona, telecom expense management platform) was the only row anywhere carrying a 17 September index date,
