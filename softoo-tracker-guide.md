@@ -340,6 +340,22 @@ window was at most one day. Log rows like this rather than hiding them, and say 
 once a day cannot catch a one-day window and the paid aggregator feeding the CRM is the route for that buyer. It is
 the most concrete version of the "this tab is always a subset" scope note.
 
+**A ROW A PREVIOUS RUN *DROPPED* IS INVISIBLE TO THE ID GREP, SO YOU WILL RE-OPEN IT (21 Sep 2026).** Dropped
+listings are named only in the note-box prose, never in the array, so the grep that protects against re-adding a row
+gives no protection against re-spending a fetch on one. On 21 Sep the Texas web-based LiDAR row was opened as
+document #1174152 and came back as **SW-119734**, which the 18 Sep run had already opened and dropped as a TopoShare
+licence purchase. Two costs to avoid: the wasted fetch, and the worse outcome of logging it as a fresh find. The
+category indexes show the document number, the detail page shows the RFPMart ID, and the note box records only the
+ID, so before opening a candidate also skim the last two or three note-box "opened and dropped" lists. The same
+listing genuinely does re-appear under a second document number, which is the 17 Sep two-IDs-one-buy lesson seen
+from the other side.
+
+**THE RFPMART CATEGORY INDEXES ARE PAGINATED, AND ONE FETCH READS PAGE 1 ONLY (21 Sep 2026).** The 9 Sep rule says
+to read the AI/ML index "as a full table". Worth knowing what that actually buys: the AI/ML index runs to about 32
+pages, and a single fetch returns page 1. That is not a problem in practice, because page 1 reaches back roughly
+three weeks (on 21 Sep it ran back to 2 September), which covers every window a daily run can still bid into. So
+read page 1 in full and do not chase pagination, but do not describe it as having read the entire index either.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -438,6 +454,15 @@ a **15 September daily** that supplied the two best items on the tab, **Exein** 
 led by Headline) and the full EUCLYD detail that discharged that row's snippet-level flag. So the re-read-the-
 previous-date habit applies to the daily as well as the roundup, and "no daily today" is never a finding at 19:00
 Asia/Karachi.
+
+**SECURITYWEEK'S FUNDING CATEGORY NOW 403s, SO THE CYBER SEARCH HAS NO CLEAN INDEX (21 Sep 2026).** New source
+block worth recording so it is not rediscovered: `securityweek.com/category/cybersecurity-funding-news/` returns
+**HTTP 403** to automated fetch, joining eu-startups. That leaves the mandatory cyber sweep with WebSearch only,
+which is fine but makes date-checking non-optional, because a plain category search returns years of listicle
+results ranked by authority rather than by date. On this run it surfaced Mindgard ($30M Series A, announced
+12 August), Oasis Security ($120M Series B, May), Twenty Technologies ($100M Series B) and Ent.AI ($100M seed,
+both in Crunchbase's 13 to 18 June week), and every one of them would have read as a find without the date check.
+A dry cyber search that has been date-checked is a result; an undated one is noise.
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
