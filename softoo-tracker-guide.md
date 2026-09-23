@@ -25,6 +25,12 @@ then push. Do NOT redesign the page. Only touch the data arrays and the "Generat
   and continue from the restored file.
 - Git identity is set: `git config user.name "Sajid Razzaque"` and `git config user.email "sajid.razzaque@softoo.co"`
 - Node is on PATH, for the syntax gate in Step 2b.
+- **Run shell commands one at a time, with no `cd` prefix and no `&&` chaining (learned 23 Sep 2026).** The
+  `.claude\settings.json` allow list matches simple prefixes (`git status`, `git add`, `node`, ...). In `dontAsk`
+  mode a compound line such as `cd "..." && git status && node --version` matches nothing and is denied outright,
+  and PowerShell is denied entirely. The working directory is already this folder, so plain `git status --short`,
+  `node verify-tracker.js` and `git push origin main` each run without prompting. If you need a scratch script
+  (for example the deadline scan above), write it under `logs\`, which is gitignored, and run it with `node`.
 
 ---
 
@@ -361,6 +367,16 @@ read page 1 in full and do not chase pagination, but do not describe it as havin
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
 for deadline strings that today's date has overtaken, including relative phrases like "closes in 3 days" and
 "closes TODAY", which are wrong the moment the date changes. Same for the SLED tab's "nearest close" row.
+
+**SCAN EVERY GROUP WITH A SCRIPT, NOT THE NEWEST TWO OR THREE BY EYE (23 Sep 2026).** The rule above said to read the
+newest groups, and on 22 Sep the run did exactly that and wrote "nothing rolled to expired today, because no live
+row's deadline has actually passed". A node one-liner on 23 Sep that parsed the first date in every `deadline`
+string across ALL groups and compared it with today found **seventeen** rows still `live` with deadlines already
+gone: nine RFP rows (including the California PDF mail workflow green SW-119286, closed 21 Sep) and eight SLED rows,
+the oldest from 18 Sep and several sitting in the 1, 2 and 3 Sep groups where no eye-scan reaches. Rows expire in
+old groups as often as in new ones, because a three week window posted three weeks ago closes now. So: run the scan
+as code over every group every run (parse the first `D Mon YYYY` in `deadline`, flag `status:"live"` where it is
+before today), roll what it finds, and never write "nothing rolled" from a reading of the newest groups alone.
 
 **Eligibility rule (critical):** the ONLY proof Softoo can bid directly is a detail-page "Eligibility: Global World-wide" → mark `bucket:"green"`. Anything reading "Onshore (<Country> Only)" or unverified → `bucket:"amber"` (needs a local partner/entity). Default unknown to amber. Mark `status:"expired"` if the deadline has passed or is unknown and the listing is 2+ weeks old.
 **Re-check rows marked expired only because the deadline was unknown.** That flag is a guess, and it goes stale in the wrong direction — it hides live work. Open the detail page and read the "Expiry Date" line: on 1 Sep the fourth sweep found AI-1208 (a verified-green AI Coding Agents RFI) marked expired while its detail page read "Expiry Date: Monday, 14 September, 2026". Enrich the existing row (correct deadline + `status:"live"`), do not add a new one.
