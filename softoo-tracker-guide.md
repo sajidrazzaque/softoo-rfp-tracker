@@ -362,6 +362,14 @@ pages, and a single fetch returns page 1. That is not a problem in practice, bec
 three weeks (on 21 Sep it ran back to 2 September), which covers every window a daily run can still bid into. So
 read page 1 in full and do not chase pagination, but do not describe it as having read the entire index either.
 
+**THE RFPMART CATEGORY URLS ENDING `-rfp-bids.html` RETURN THE SITE-WIDE ALL-LISTINGS PAGE, NOT THE CATEGORY
+(24 Sep 2026).** Three fetches on this run were spent on `software-system-and-application-rfp-bids.html` and its AI/ML
+and web-design equivalents; each returned the same listing of the day's ~125 postings across every category (puppies,
+janitorial, hangar rental), which reads plausibly as an index and is not one. The working URLs are the
+`-rfp-government-contract.html` form already held in `data/refs.js` as u1 (software) and u30 (web design); the AI/ML
+one is `artificial-intelligence-and-machine-learning-rfp-government-contract.html`. Take the index URLs from refs
+rather than guessing the slug, and if a "category" page shows US-FED rows and construction bids, it is the wrong page.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -479,6 +487,16 @@ results ranked by authority rather than by date. On this run it surfaced Mindgar
 12 August), Oasis Security ($120M Series B, May), Twenty Technologies ($100M Series B) and Ent.AI ($100M seed,
 both in Crunchbase's 13 to 18 June week), and every one of them would have read as a find without the date check.
 A dry cyber search that has been date-checked is a result; an undated one is noise.
+
+**SECURITYWEEK ARTICLE PAGES FETCH CLEANLY EVEN THOUGH ITS CATEGORY PAGE 403s, AND CTECH FETCHES TOO (24 Sep 2026).**
+The 21 Sep entry above records the category-page block. The article pages are not blocked: `WebSearch` with
+`allowed_domains:["securityweek.com"]` returns article URLs, and `WebFetch` on each returns the publication date, lead
+investor and amount. CTech (calcalistech.com) article pages fetch as well. That combination turned today's cyber search
+into a real result rather than a date-checked shrug: **Island** ($400M Series F at $6.4B, dated the same day on CTech),
+plus two late finds with the misses admitted, **Comp AI** ($34M Series A, announced 17 Sep, missed by five searches) and
+**AIR** ($50M across two seeds, announced 1 Sep, missed for twenty-three days), while Empirical, Discern, Arrakis, Aryon,
+Geordie, Depthfirst and Raven were date-checked out as older than the tab. So the cyber sweep is now: search both domains,
+open every article the search returns, read the date off the page, and grep the company name before writing.
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
