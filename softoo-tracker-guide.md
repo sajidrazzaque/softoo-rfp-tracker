@@ -370,6 +370,17 @@ janitorial, hangar rental), which reads plausibly as an index and is not one. Th
 one is `artificial-intelligence-and-machine-learning-rfp-government-contract.html`. Take the index URLs from refs
 rather than guessing the slug, and if a "category" page shows US-FED rows and construction bids, it is the wrong page.
 
+**A PUBLIC BUYER CAN SPLIT AN AI BUILD FROM ITS INDEPENDENT AUDIT INTO TWO SAME-DAY SOLICITATIONS, AND THE AUDIT
+HALF IS THE ONE TO LOOK FOR (25 Sep 2026).** Washington posted **AI-1289** (build a production AI-enabled teacher
+planning tool on BigQuery and Google Workspace) and **AI-1290** (a separate USA-based vendor to penetration test it,
+audit access control, review FERPA compliance, PII handling and data minimisation, and check OAuth, SSO and session
+management) on the same day with the same close and question dates. That is the AI Audit and Compliance wedge procured
+as its own line item, by design, so the builder cannot audit its own work. Two rules follow. First, when an `AI-` row
+looks like a build, look for a sibling ID one or two numbers away from the same buyer before writing the row; the pair
+is worth more than either half, and the audit half is the one Softoo can pitch to every other public buyer. Second,
+the sibling will not be found by a newest-rows skim, because it sits next to the build row rather than on top of it,
+which is one more reason the AI/ML index is read as a full table.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
