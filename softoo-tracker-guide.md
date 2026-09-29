@@ -370,6 +370,23 @@ janitorial, hangar rental), which reads plausibly as an index and is not one. Th
 one is `artificial-intelligence-and-machine-learning-rfp-government-contract.html`. Take the index URLs from refs
 rather than guessing the slug, and if a "category" page shows US-FED rows and construction bids, it is the wrong page.
 
+**PAGE 1 OF THE SOFTWARE INDEX CAN BE SHORTER THAN THE GAP SINCE THE LAST RUN. READ PAGE 2 WHEN IT IS (29 Sep 2026).**
+The 21 Sep entry above says page 1 of a category index reaches back about three weeks, so pagination need not be
+chased. That was true on a quiet day and false on a Monday-after-a-weekend one: on 29 Sep the software index carried
+fifty rows posted that day and ten posted 28 Sep, so page 1 (about sixty-five rows) reached back only to 26 September
+and showed just five 26 Sep rows. Page 2, at `software-system-and-application-rfp-government-contract-page-2.html`,
+fetched cleanly and carried roughly fifty-five further 26 Sep rows plus all of 25 Sep, and it supplied SW-120082, SW-120046,
+SW-120047 and nine SLED rows (AI-1294, AI-1295, SW-120067, SW-120055, SW-120022, SW-120052, SW-120065, WD-16274, SW-120053)
+that page 1 never showed. The rule: after reading page 1, check its OLDEST posting date; if that date is not earlier than
+the previous run's date, fetch page 2 (and page 3 on the same URL form if needed) until it is. The lag rule already
+requires re-reading the previous run's date, and this is the mechanical step that makes that possible on a heavy day.
+
+**A NEW ELIGIBILITY SHAPE: "Onsite (US Organization Only)" WITH PERFORMANCE STATED AS OFFSITE (29 Sep 2026).** Three
+rows in one day (SW-120151 Georgia, SW-120119 Texas, SW-120145 Oregon) print the word Onsite in the eligibility field
+where every earlier row printed Onshore, while the performance line on the same page reads offsite. It reads like a
+template error rather than a requirement, but it is not for the sweep to decide: quote it as printed, keep the row amber
+or SLED as usual, and say "confirm with the buyer", the same handling as the date anomalies.
+
 **A PUBLIC BUYER CAN SPLIT AN AI BUILD FROM ITS INDEPENDENT AUDIT INTO TWO SAME-DAY SOLICITATIONS, AND THE AUDIT
 HALF IS THE ONE TO LOOK FOR (25 Sep 2026).** Washington posted **AI-1289** (build a production AI-enabled teacher
 planning tool on BigQuery and Google Workspace) and **AI-1290** (a separate USA-based vendor to penetration test it,
