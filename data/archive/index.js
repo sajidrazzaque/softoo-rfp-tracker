@@ -1,1 +1,1 @@
-window.ARCHIVES=[{"tab":"fund","month":"2026-08","file":"data/archive/fund-2026-08.js","groups":7,"rows":97},{"tab":"rfps","month":"2026-08","file":"data/archive/rfps-2026-08.js","groups":7,"rows":34}];
+window.ARCHIVES=[{"tab":"fund","month":"2026-08","file":"data/archive/fund-2026-08.js","groups":8,"rows":120},{"tab":"rfps","month":"2026-08","file":"data/archive/rfps-2026-08.js","groups":7,"rows":34}];

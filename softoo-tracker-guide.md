@@ -526,6 +526,22 @@ plus two late finds with the misses admitted, **Comp AI** ($34M Series A, announ
 Geordie, Depthfirst and Raven were date-checked out as older than the tab. So the cyber sweep is now: search both domains,
 open every article the search returns, read the date off the page, and grep the company name before writing.
 
+**CTECH KEEPS A RUNNING LIST OF EVERY ISRAELI ROUND OF THE YEAR, AND READING IT WOULD HAVE CAUGHT A THREE-WEEK MISS
+(30 Sep 2026).** Cymphony ($25M Series A led by Sequoia and SMBC, identity and permissions graph across employees and AI
+agents, exactly the agent-identity thesis Reco and Rig Security raised on the day before) was announced on 9 September on
+CTech and was missed by every cyber search from 10 to 29 September, surfacing only when each CTech result was opened and
+date-checked. The cheap fix: CTech publishes "Full list of Israeli high-tech funding rounds in 2026" at
+`calcalistech.com/ctechnews/article/rq8lzbs4c`, updated continuously (it carried a 29 Sep update on the 30 Sep run). Fetch
+it every run alongside the two-domain search and diff its newest entries against the array; it is one fetch and it is the
+only index-shaped cyber source left now that SecurityWeek's category page 403s.
+
+**AN INFO ONLY SKIP AT THE INDEX IS NOT A PERMANENT DROP. RE-OPEN IT WHEN THE NEXT INDEX READ SHOWS IT AGAIN (30 Sep 2026).**
+Two cases in two days: SW-120000 (Ontario) was skipped 25 Sep as INFO ONLY and published a full scope by 29 Sep, and AI-1298
+(Utah) was skipped 29 Sep as INFO ONLY and published a scope by 30 Sep. RFPMart appears to post the shell first and the scope
+a day or so later. So the index-time INFO ONLY skip stays (it saves the fetch), but the ID goes in the note box as skipped,
+not dropped, and a later run that finds the ID still absent from the array and still on a category index opens it once.
+Rows that have a detail page and read "RFP not found" (WD-16282 twice, SW-120125) are a different case and stay unread.
+
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
 a guess. Also skipped that day: Rentomojo's ₹1,256 Cr IPO RHP filing — a filing is not closed capital, so it is not
