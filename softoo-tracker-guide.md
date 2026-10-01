@@ -535,6 +535,16 @@ date-checked. The cheap fix: CTech publishes "Full list of Israeli high-tech fun
 it every run alongside the two-domain search and diff its newest entries against the array; it is one fetch and it is the
 only index-shaped cyber source left now that SecurityWeek's category page 403s.
 
+**THE CTECH RUNNING LIST DOES NOT RENDER TO WEBFETCH, BUT THE MONTHLY RECAP DOES, AND IT FOUND SIX MISSES (1 Oct 2026).**
+On the first run after the entry above, `rq8lzbs4c` came back truncated with no rows at all. CTech's month-end recap
+("Israel's startup funding hits $2.77 billion in September", `calcalistech.com/ctechnews/article/ryurpyo5fl`, published
+1 Oct) fetched cleanly and named 27 rounds; diffing them against the array found **Wonderful, HiBob, DataAgent, Catch,
+Buildots and Keewano**, announced 1 to 15 September and never logged by any sweep. They are not cyber, which is why the
+cyber search never surfaced them: CTech is the only source this tab reads for Israeli non-cyber rounds. So: if the
+running list returns no rows, search `allowed_domains:["calcalistech.com"]` for the latest weekly or monthly funding
+recap, diff it, and open each absent company's own article for the date before logging. On the first working day of
+each month, read the previous month's recap regardless.
+
 **AN INFO ONLY SKIP AT THE INDEX IS NOT A PERMANENT DROP. RE-OPEN IT WHEN THE NEXT INDEX READ SHOWS IT AGAIN (30 Sep 2026).**
 Two cases in two days: SW-120000 (Ontario) was skipped 25 Sep as INFO ONLY and published a full scope by 29 Sep, and AI-1298
 (Utah) was skipped 29 Sep as INFO ONLY and published a scope by 30 Sep. RFPMart appears to post the shell first and the scope
