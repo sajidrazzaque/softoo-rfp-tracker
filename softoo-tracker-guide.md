@@ -398,6 +398,20 @@ is worth more than either half, and the audit half is the one Softoo can pitch t
 the sibling will not be found by a newest-rows skim, because it sits next to the build row rather than on top of it,
 which is one more reason the AI/ML index is read as a full table.
 
+**"Onshore (Global World-Wide Organization Only)" IS AMBER, NOT GREEN. THIS IS THE FIXED HANDLING (2 Oct 2026).** WD-16301
+(Michigan non-profit CMS rebuild) sits on the Global index and carries `global` in its slug, yet its eligibility field prints
+that self-contradictory line. Two sweeps on the same run read it two ways, one green and one amber, so the handling is now
+fixed rather than left to each run: a green needs the clean verbatim World-Wide Global reading, and the word Global inside an
+Onshore clause does not supply it. Log it amber, quote the line, say "confirm with the buyer", and note that it becomes a
+direct green if the buyer confirms the Global half. Same family as EXTRA-75339's "Onshore (World-Wide Global)" from 7 Sep.
+
+**ON A HEAVY DAY THE PREVIOUS DATE'S BLOCK IS MOSTLY UNREAD, AND THE WEB-DESIGN INDEX NEEDS THE FULL-TABLE READ TOO
+(2 Oct 2026).** The 1 Oct run logged twelve SLED rows, but page 2 of the software index on 2 Oct held roughly 45 US rows posted
+1 Oct that the 1 Oct note box neither logs nor names, and six of them earned rows. So the lag re-read is not a formality, and on
+a day when page 1 is mostly today's postings, budget real time for page 2. Separately, grepping the whole web-design page 1
+(which reaches back about two weeks) found WD-16278 (Prince Edward Island, posted 26 Sep) never opened by any run. Read the
+web-design index as a full table, the same as the AI/ML index.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -544,6 +558,12 @@ cyber search never surfaced them: CTech is the only source this tab reads for Is
 running list returns no rows, search `allowed_domains:["calcalistech.com"]` for the latest weekly or monthly funding
 recap, diff it, and open each absent company's own article for the date before logging. On the first working day of
 each month, read the previous month's recap regardless.
+
+**TREAT THE CTECH RUNNING LIST AS BLOCKED, AND RE-READ ENTRACKR FOR THE PREVIOUS DATE (2 Oct 2026).** `rq8lzbs4c` returned only
+a header and a timestamp on 1 Oct and again on 2 Oct, so stop spending a fetch on it and rely on the calcalistech.com domain
+search plus the weekly and monthly recaps (that search found Enso on 2 Oct). Entrackr also posts late in the day: the 2 Oct
+read of its homepage carried Unveilr AI and two other 30 Sep and 1 Oct items that the 1 Oct run neither logged nor skipped.
+The lag rule therefore covers Entrackr as well as the techstartups daily and roundup: read the previous date's items every run.
 
 **AN INFO ONLY SKIP AT THE INDEX IS NOT A PERMANENT DROP. RE-OPEN IT WHEN THE NEXT INDEX READ SHOWS IT AGAIN (30 Sep 2026).**
 Two cases in two days: SW-120000 (Ontario) was skipped 25 Sep as INFO ONLY and published a full scope by 29 Sep, and AI-1298
