@@ -412,6 +412,16 @@ a day when page 1 is mostly today's postings, budget real time for page 2. Separ
 (which reaches back about two weeks) found WD-16278 (Prince Edward Island, posted 26 Sep) never opened by any run. Read the
 web-design index as a full table, the same as the AI/ML index.
 
+**RECORD BOTH THE RFPMART ID AND THE DOCUMENT NUMBER FOR EVERY DROPPED OR SKIPPED ROW (6 Oct 2026).** The 2 Oct note box
+named a Brazil sales-outsourcing skip only as #1180615; on 6 Oct the index showed it as SW-120320, the grep found nothing, and a
+fetch was spent re-opening it. This is the 21 Sep lesson from the other side. Write drop lists as "SW-xxxxx (#doc, reason)".
+Three more from the same run: (1) page 2 of the software index is NOT strictly date ordered (US-FED rows dated 3 and 5 Oct sat
+among 1 Oct rows), so judge a page's oldest date from the whole table, not its last row; (2) the WebFetch summariser labelled
+three listings as job adverts that were not (WD-16306 among them), so a recruitment flag needs the page's exact wording quoted
+before it drives a drop; (3) the AI/ML and web-design page 1 tables still held about twenty rows posted 15 to 30 Sep named
+nowhere in the repo, and three of the four opened earned SLED rows (ITES-11004, SW-119676, SW-119581). Grep every ID on those
+tables against the whole repo, not just the newest rows, and open the absent ones as budget allows.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -571,6 +581,13 @@ Two cases in two days: SW-120000 (Ontario) was skipped 25 Sep as INFO ONLY and p
 a day or so later. So the index-time INFO ONLY skip stays (it saves the fetch), but the ID goes in the note box as skipped,
 not dropped, and a later run that finds the ID still absent from the array and still on a category index opens it once.
 Rows that have a detail page and read "RFP not found" (WD-16282 twice, SW-120125) are a different case and stay unread.
+
+**DIFF ALL TEN NAMES IN EACH CRUNCHBASE WEEKLY ON THE FIRST RUN AFTER IT PUBLISHES (6 Oct 2026).** The weekly goes up on
+Friday and covers Friday to Thursday, so the late-week megarounds the dailies never carry are only in it. The 2 Oct weekly held
+EliseAI ($350M), Kahua ($250M) and GMI Cloud ($223M), all announced 29 to 30 Sep and missed by four sweeps. Reading it as
+"dry" because the top name is already logged is the miss. Also from this run: CTech's `/tags/Funding` page fetches cleanly
+with dates and is a usable index in place of the blocked running list; and the company-name dedupe must read the `c` key of
+each funding row (a scratch file built from `co`/`name` came out blank on 6 Oct and would have passed every duplicate).
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
 Photonics (€20M seed, Hannover) but no article URL could be resolved for it, so it was dropped rather than linked to
