@@ -422,6 +422,13 @@ before it drives a drop; (3) the AI/ML and web-design page 1 tables still held a
 nowhere in the repo, and three of the four opened earned SLED rows (ITES-11004, SW-119676, SW-119581). Grep every ID on those
 tables against the whole repo, not just the newest rows, and open the absent ones as budget allows.
 
+**"RFP NOT FOUND" IS NOT PERMANENT, AND A GREEN CAN RE-POST UNDER A NEW ID (6 Oct 2026, second run).** The 30 Sep entry
+below says rows reading "RFP not found" (WD-16282, SW-120125) stay unread. On 6 Oct WD-16282 (Kansas website, up to $30,000,
+closes 22 Oct) showed a full detail page and earned a SLED row, so treat "RFP not found" like INFO ONLY: if the ID is still
+absent from the repo and still on an index, open it once more. Separately, SW-120415 (#1181616) read World-Wide Globle and
+would have been a green, but it was a same-week re-post of SW-120370 (#1181190, same New York giving platform, same close)
+already in the array. The ID grep cannot catch that, so before writing a green also grep its title keywords and close date.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
