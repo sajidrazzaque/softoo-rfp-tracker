@@ -429,6 +429,12 @@ absent from the repo and still on an index, open it once more. Separately, SW-12
 would have been a green, but it was a same-week re-post of SW-120370 (#1181190, same New York giving platform, same close)
 already in the array. The ID grep cannot catch that, so before writing a green also grep its title keywords and close date.
 
+**A HEAVY DAY OUTRUNS THE FETCH BUDGET, SO THE NOTE BOX CARRIES A "NOT OPENED FOR BUDGET" LIST (7 Oct 2026).** The software
+index carried about 65 rows dated 7 Oct and 70 dated 6 Oct; 43 detail pages were opened and about 26 absent tech rows were not.
+They are named by ID in the 7 Oct RFP and SLED note boxes under "Not opened for budget". The next run should open those first
+if still absent, before the new day's rows, because they are the ones closest to closing. Licence and product buys dropped at
+the index were named by ID and document number on the same run, so the grep stops re-flagging them.
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
@@ -593,7 +599,8 @@ Rows that have a detail page and read "RFP not found" (WD-16282 twice, SW-120125
 Friday and covers Friday to Thursday, so the late-week megarounds the dailies never carry are only in it. The 2 Oct weekly held
 EliseAI ($350M), Kahua ($250M) and GMI Cloud ($223M), all announced 29 to 30 Sep and missed by four sweeps. Reading it as
 "dry" because the top name is already logged is the miss. Also from this run: CTech's `/tags/Funding` page fetches cleanly
-with dates and is a usable index in place of the blocked running list; and the company-name dedupe must read the `c` key of
+with dates and is a usable index in place of the blocked running list (but it returned 404 on the 6 Oct second run and again
+on 7 Oct, so treat it as unreliable and fall back to the calcalistech.com domain search when it fails); and the company-name dedupe must read the `c` key of
 each funding row (a scratch file built from `co`/`name` came out blank on 6 Oct and would have passed every duplicate).
 
 **A round with no citable article URL does not get a row.** On 4 Sep an eu-startups search snippet showed INLEAP
