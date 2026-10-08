@@ -435,6 +435,16 @@ They are named by ID in the 7 Oct RFP and SLED note boxes under "Not opened for 
 if still absent, before the new day's rows, because they are the ones closest to closing. Licence and product buys dropped at
 the index were named by ID and document number on the same run, so the grep stops re-flagging them.
 
+**A PRODUCT-SOUNDING TITLE IS NOT A SAFE INDEX DROP, FEDERAL ROWS STAY OFF SLED, AND "Global Worldwide" IS GREEN (8 Oct 2026).**
+Three things from one run. (1) The 6 Oct second run dropped SW-120421, SW-120391, SW-120409 and SW-120406 at the index as
+product buys; on 8 Oct their detail pages all earned HIGH SLED rows (implementation, integration or AI in scope). Drop at
+the index only for named licence renewals, maintenance renewals and hardware; anything titled "system", "platform" or
+"software" gets its detail page. (2) RFPMart carries US federal and defence notices under ordinary state labels
+(e.g. "Washington DC gov authority", "Frederick (MD)", "New York gov authority"): aerial refuelling, command and control,
+Air Force bases, "sources sought", SBA set-asides and US-FED twins. SLED means state, local and education, so these are
+dropped and named in the SLED note as "Dropped as federal", not logged. (3) WD-16325 printed eligibility as "Global
+Worldwide", a new spelling of the clean reading; it is green. Only the Onshore-wrapped form stays amber (2 Oct rule).
+
 **Re-check `status:"live"` rows whose deadline has simply gone past.** A row is written once and then rots. On
 4 Sep, SW-118710 still read "3 Sep — closes TODAY" with `status:"live"`, and the Zambia row SW-118162 still read
 `live` with a 2 Sep deadline. Both had to be rolled to expired. Each run should scan the newest two or three groups
