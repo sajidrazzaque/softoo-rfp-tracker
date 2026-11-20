@@ -87,7 +87,7 @@ newest group, and each note box has a paragraph for the newest date. Warnings ar
 ones this run introduced and leave inherited ones alone unless Sajid asked for a cleanup.
 
 A syntax error or a stale footer here is a broken or lying page for every visitor, and there is no human in
-the loop at 19:00 to catch it.
+the loop at 18:00 to catch it.
 
 ### Step 3 — Commit & push (straight to main)
 ```
@@ -768,13 +768,18 @@ A run is scoped to the data arrays, the Generated date and the note boxes, so th
 ---
 
 ## SCHEDULED (UNATTENDED) RUNS
-Set up 1 Sep 2026: weekday evenings, 19:00 Asia/Karachi, pushing straight to `main`.
+Set up 1 Sep 2026 at 19:00 Asia/Karachi; moved to **18:00 Asia/Karachi on 20 Nov 2026** at Sajid's request.
+Weekday evenings, Mon to Fri, pushing straight to `main`.
+**The hour earlier makes the source-lag rules below MORE important, not less.** Several entries in the Tab 1
+and Tab 2 specs were written against a 19:00 sweep and note that same-day rows often do not exist yet at that
+hour. At 18:00 that is more true, not less. Reading the previous date is the normal case, and a same-day blank
+is a publishing lag rather than an outage.
 - **Wrapper:** `run-daily-tracker.cmd` in this folder. Creates `logs\`, pulls, runs Claude Code headless
   against this guide, then records the exit code and the resulting git state.
 - **Permissions:** `.claude\settings.json` pre-grants exactly the tools a run needs, with
   `defaultMode: "dontAsk"`, so nothing prompts and anything outside the allow list is denied rather than
   waiting for a human who is not there.
-- **Task Scheduler:** one task. Trigger Weekly, Mon to Fri, 19:00. Action:
+- **Task Scheduler:** one task. Trigger Weekly, Mon to Fri, 18:00. Action:
   `cmd /c "C:\Users\Sajid Razzaque\softoo-rfp-tracker\run-daily-tracker.cmd"`.
   Leave "Run whether user is logged on or not" OFF: the push needs the logged-in session's credential.
 - **Stale git locks:** the wrapper sweeps `.git\**\*.lock` files older than 10 minutes before pulling.

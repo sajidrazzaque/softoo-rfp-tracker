@@ -1,6 +1,6 @@
 @echo off
 setlocal
-rem Daily Softoo tracker run. Task Scheduler: Mon-Fri 19:00 Asia/Karachi.
+rem Daily Softoo tracker run. Task Scheduler: Mon-Fri 18:00 Asia/Karachi (moved from 19:00 on 20 Nov 2026).
 rem Sweeps sources, updates index.html, verifies, commits and pushes to main.
 rem Two Windows gotchas this script works around:
 rem   1. claude is a .cmd shim, so it must be invoked with CALL or control never returns.
