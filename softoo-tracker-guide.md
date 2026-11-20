@@ -96,6 +96,26 @@ git commit -m "Daily tracker update <today's date>"
 git pull --rebase origin main
 git push origin main
 ```
+**KEEP THE COMMIT MESSAGE ON ONE LINE (added 20 Nov 2026).** This is the single most expensive mistake this
+run can make, because it fails silently at the very last step after all the work is done. On 19 and 20 Nov
+two runs completed the whole sweep, passed verification, and then could not commit. The run reported
+"git staging/commit/push commands are blocked in don't-ask mode" and printed the commands for a human
+instead. `.claude/settings.json` allows `Bash(git add:*)`, `Bash(git commit:*)` and `Bash(git push:*)`, and
+they had worked daily for two months. What changed was the message: the run wrote a multi-line `-m` string
+with bullet points and a trailing attribution line, so the command spanned newlines and the permission
+matcher refused the whole thing. Three days of data sat uncommitted and nobody noticed until Sajid asked.
+
+So: a one-line `-m` subject, nothing else. If a longer message is genuinely wanted, write it to a file and
+use `git commit -F <file>`, which keeps the command itself on one line. Never put a newline inside `-m`.
+
+**Then CHECK that it actually committed**, in the same breath, rather than assuming:
+```
+git log --oneline -1
+git status --short --branch
+```
+A fresh `Daily tracker update` on top and no "ahead" count means done. If the commit did not happen, say so
+loudly in the report rather than printing commands and exiting 0, because exit 0 reads as success in the log
+and in the task history.
 **Stage `data/` first, and do not copy an older version of this command that omits it (corrected 18 Sep 2026).** Since the 18 Sep split the rows live in `data/*.js`, so `git add index.html` alone would push a page whose footers and note boxes claim today while its rows stop at yesterday, and `git pull --rebase` would then abort on the unstaged data files anyway. Stage the guide alongside the page, so any notes Sajid added to this file since the last run go up with the same commit instead of blocking the pull. Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
 pulling first would fail on the very file this run just edited. Pulling after the commit still catches a
 commit made elsewhere (a web upload, another machine) and keeps it from becoming a divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
