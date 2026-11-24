@@ -89,37 +89,27 @@ ones this run introduced and leave inherited ones alone unless Sajid asked for a
 A syntax error or a stale footer here is a broken or lying page for every visitor, and there is no human in
 the loop at 18:00 to catch it.
 
-### Step 3 — Commit & push (straight to main)
-```
-git add data index.html softoo-tracker-guide.md
-git commit -m "Daily tracker update <today's date>"
-git pull --rebase origin main
-git push origin main
-```
-**KEEP THE COMMIT MESSAGE ON ONE LINE (added 20 Nov 2026).** This is the single most expensive mistake this
-run can make, because it fails silently at the very last step after all the work is done. On 19 and 20 Nov
-two runs completed the whole sweep, passed verification, and then could not commit. The run reported
-"git staging/commit/push commands are blocked in don't-ask mode" and printed the commands for a human
-instead. `.claude/settings.json` allows `Bash(git add:*)`, `Bash(git commit:*)` and `Bash(git push:*)`, and
-they had worked daily for two months. What changed was the message: the run wrote a multi-line `-m` string
-with bullet points and a trailing attribution line, so the command spanned newlines and the permission
-matcher refused the whole thing. Three days of data sat uncommitted and nobody noticed until Sajid asked.
+### Step 3 — Commit & push: NOT YOURS ANY MORE (changed 24 Nov 2026)
 
-So: a one-line `-m` subject, nothing else. If a longer message is genuinely wanted, write it to a file and
-use `git commit -F <file>`, which keeps the command itself on one line. Never put a newline inside `-m`.
+**Do not run any git command. `run-daily-tracker.cmd` commits and pushes after
+you exit.** Finish at Step 2b, say what you changed, and stop.
 
-**Then CHECK that it actually committed**, in the same breath, rather than assuming:
-```
-git log --oneline -1
-git status --short --branch
-```
-A fresh `Daily tracker update` on top and no "ahead" count means done. If the commit did not happen, say so
-loudly in the report rather than printing commands and exiting 0, because exit 0 reads as success in the log
-and in the task history.
-**Stage `data/` first, and do not copy an older version of this command that omits it (corrected 18 Sep 2026).** Since the 18 Sep split the rows live in `data/*.js`, so `git add index.html` alone would push a page whose footers and note boxes claim today while its rows stop at yesterday, and `git pull --rebase` would then abort on the unstaged data files anyway. Stage the guide alongside the page, so any notes Sajid added to this file since the last run go up with the same commit instead of blocking the pull. Commit BEFORE the rebase pull. `git pull --rebase` aborts when the working tree has unstaged changes, so
-pulling first would fail on the very file this run just edited. Pulling after the commit still catches a
-commit made elsewhere (a web upload, another machine) and keeps it from becoming a divergence. `main` is what Vercel auto-deploys. If the push fails, DO NOT retry blindly: report the exact
-error and tell Sajid he can finish it with one `git push` in this folder.
+Why it moved. Three runs (19, 20 and 23 Nov 2026) completed the entire sweep,
+passed verification, and then failed at the last step. Each time the run wrote
+a multi-line `-m` string, so the command spanned newlines and the permission
+matcher refused it. The run then printed the commands for a human and exited 0,
+so the job looked successful while nothing was published. On 23 Nov it added a
+`Co-Authored-By` trailer even though this guide had forbidden multi-line
+messages since 20 Nov.
+
+A written rule failed three times, so git no longer depends on one. The
+wrapper builds the message itself, as a single line that cannot grow a
+newline, and then proves the push landed by comparing `HEAD` to `origin/main`
+rather than trusting an exit code. It also fails loudly, exit code 2, if the
+sweep produced no file changes at all.
+
+If you believe something needs committing differently, say so in your Step 4
+report and leave it. Do not reach for git.
 
 ### Step 4 — Report
 Reply in 2-3 lines: what you added to each tab, and whether the push succeeded (or the exact error).
@@ -143,7 +133,7 @@ This file is the memory, so it is meant to be edited. Rules that keep edits safe
 
 ### Tab 1 — RFP Opportunities
 Open US/global software/AI/IT RFPs & tenders. Every row needs a working link.
-**Sources, in this order:** (1) **RFPMart Global/Offshore index** https://www.rfpmart.com/global-rfp-government-contract.html . Check this FIRST every run. The category indexes (software, AI/ML, web design) do not show eligibility, so a run that reads only those will report zero greens even when greens exist. That is exactly what happened on 1 Sep 2026, when the Global index yielded 7 verified greens after a reported 10-run drought. Still open each listing's detail page: index placement is not proof, and at least one listing on the Global index (SW-118310) reads Onshore on its detail page. (2) RFPMart category indexes (software, AI/ML, web design). (3) TendersOnTime, BidDetail, InstantMarkets, BidNet, gov procurement portals.
+**Sources, in this order:** (1) **RFPMart Global/Offshore index** https://www.rfpmart.com/global-rfp-government-contract.html . Check this FIRST every run. The category indexes (software, AI/ML, web design) do not show eligibility, so a run that reads only those will report zero greens even when greens exist. That is exactly what happened on 1 Sep 2026, when the Global index yielded 7 verified greens after a reported 10-run drought. Still open each listing's detail page: index placement is not proof, and at least one listing on the Global index (SW-118310) reads Onshore on its detail page. (2) RFPMart category indexes (software, AI/ML, web design). (3) TendersOnTime, BidDetail, InstantMarkets, BidNet, gov procurement portals. (4) **humanitariantenders.org, added 24 Nov 2026**: free, states so explicitly, updates daily, and aggregates World Bank, UN Procurement Division, IOM, GIZ and TED rather than reselling. On 23 Nov it carried 1,070 open tenders across 115 countries with 14 new in 24 hours. The catch is that it has no IT filter: the nearest is https://humanitariantenders.org/en/type/services/ and the IT content in there is thin, so treat it as a secondary scan and do not spend a long fetch budget on it. Eligibility for offshore bidders is not shown on its listing pages, so open the official notice before logging anything green.
 **Scan the Global index in full, by ID prefix.** It runs to ~100 rows and is mostly non-tech (MRB-, EXTRA-, ANIM-, MRB marketing/strategy work). The biddable tech rows are scattered all the way down it, not clustered at the top. Filter for `SW-`, `WD-`, `AI-`, `ITES-`, `SEO-`, `GIS-` prefixes across the whole table before opening detail pages. The 1 Sep fourth sweep found 3 greens the third sweep had missed (WD-16148, SW-118710, SW-118518) purely because it read past the first rows.
 **The Global index lags the category indexes by about a day — so read both.** On 2 Sep 2026 the Global index carried no tech row posted that day (its newest `SW-`/`WD-`/`AI-` rows were still 1 Sep), yet the software category index had ~80 fresh 2 Sep listings, one of which (SW-119011, Switzerland) verified green. The cheap trick: on the category indexes, look for the word **`global` inside the detail-page URL slug** — that is what flags a candidate worth opening. The slug is a candidate signal ONLY, never proof (AI-1235/AI-1236 carry it and read Onshore); the detail page still decides. Net effect: Global index first for anything 2+ days old, category indexes for same-day postings.
 **Grep `index.html` for every candidate ID before writing a row, not after.** On 3 Sep 2026 a run re-added SW-118336 as a fresh find when it was already in the 1 Sep group; `verify-tracker.js` caught it as a repeated-id warning and the row had to be pulled and folded back into the existing one. The Global index re-lists the same rows for weeks, so anything it shows that is more than a day old is probably already in the array. One grep of the ID prefixes up front costs nothing and saves the rework.
@@ -487,8 +477,66 @@ before today), roll what it finds, and never write "nothing rolled" from a readi
 **Reality:** live directly-biddable RFPs are rare (9+ straight runs with none). If none surface, keep the recurring index bookmarks and lean on funding.
 
 ### Tab 2 — Funding Signal Leads
+
+**PRIMARY SOURCE, ADDED 24 NOV 2026: Tech.eu Funding Explorer.**
+https://funding.tech.eu/rounds
+
+Read this before the news pages. It is a free, open, CC BY 4.0 database of
+52,725 rounds across 39,048 companies, with a public API that needs no key, so
+it gives dated structured rows instead of prose to be parsed. It is Europe
+only: the UK, Germany, France, Spain and Sweden dominate and India does not
+appear in the top twelve countries, so it cannot reintroduce the problem the
+NO INDIA rule exists to solve.
+
+Three things to know when reading it:
+
+- **Filter the stage.** A large share of rows are debt, grants or "Other".
+  Those are not buying signals. Keep equity rounds.
+- **Sector "Software" alone holds 11,920 rounds.** Filter to software, AI and
+  adjacent sectors rather than reading everything.
+- **It is a database, not a news feed**, so there is no publication lag to
+  reason about. Read by round date and take what is new since the last run.
+
+It does not cover the US, MENA, Africa or Southeast Asia. techstartups and
+Crunchbase remain the sources for those, and no free daily round-by-round feed
+was found for MENA, Africa or Southeast Asia when this was checked on
+23 Nov 2026.
+
+> ## NO INDIA. Set by Sajid, 23 Nov 2026.
+>
+> **Do not sweep Indian sources, and do not log Indian companies, on any tab.**
+> This tab was 34 percent India (71 of 203 rows) when the rule was set, because
+> two of its sources were India-only feeds. Those sources are gone. The rule
+> below stops the remainder arriving through the general feeds, which do carry
+> Indian rounds.
+>
+> **Sources removed from the sweep:** entrackr.com, startuptalky.com. Do not
+> reinstate either, and do not substitute another India feed. Historical
+> mentions of Entrackr further down this file are a record of past runs, not
+> an instruction.
+>
+> **Skip a row if any of these is true:**
+>
+> 1. The company is based in India. Check `reg`.
+> 2. The named founders, office or team are in India, whatever the holding
+>    company's country. An Indian city in `reg` counts: Bengaluru, Bangalore,
+>    Mumbai, Delhi, Gurgaon, Gurugram, Noida, Hyderabad, Chennai, Pune,
+>    Kolkata, Ahmedabad, Jaipur.
+> 3. The round is stated in rupees: Rs, Cr, crore, lakh, INR or the rupee sign.
+> 4. The item came from an Indian source, whoever it describes.
+>
+> Skip means do not write the row. It is not an amber, not a REPORTED, and it
+> does not go in a skip log that someone later mines. If a round is genuinely
+> borderline, for example a US-incorporated company whose entire team is in
+> Bengaluru, skip it. The cost of a wrong skip is one missed lead. The cost of
+> a wrong include is that Sajid asks for this again.
+>
+> **One carve-out.** A non-Indian company whose funding note happens to mention
+> India, for example "expanding into India", is not an Indian company. The test
+> is where the business is, not which countries appear in the text.
+
 Recently-funded companies = budget for external dev → direct B2B outreach (no procurement bar). Tag each `ACT FIRST`.
-**Sources (fetch clean):** techstartups.com "Startup Funding News Today" (daily) + roundups; **entrackr.com** homepage (daily India feed — added 1 Sep after the fourth sweep found 6 same-day names on it that no other source carried; note its `/exclusive/` posts are rounds *being led*, not closed, so tag them REPORTED); Crunchbase News "Week's 10 Biggest Funding Rounds" (check the stated week — some slugs are stale); startuptalky.com India weekly; todaysstartupnews.com recap (EU/US small rounds the daily feeds miss — these carry older round dates, group them under the date found); entARABI / Arab News "Startup Wrap" (MENA); eu-startups.com article pages; New Market Pitch (cyber).
+**Sources (fetch clean):** **funding.tech.eu** (see below, read it first); techstartups.com "Startup Funding News Today" (daily) + roundups; Crunchbase News "Week's 10 Biggest Funding Rounds" (check the stated week, some slugs are stale); todaysstartupnews.com recap (EU/US small rounds the daily feeds miss — these carry older round dates, group them under the date found); entARABI / Arab News "Startup Wrap" (MENA); eu-startups.com article pages; New Market Pitch (cyber).
 **Known fetch behaviour:** eu-startups.com index and category pages return HTTP 403 to automated fetch. **Changed 3 Sep 2026: individual ARTICLE URLs now 403 as well**, so the article body is no longer reachable at all. What still works is WebSearch against `allowed_domains:["eu-startups.com"]` — its result snippets carry company, amount, lead investor and city, which is enough for a row. Cite the article URL (it is valid for a human) and say in the row that the detail is snippet-level, so the row is not passed off as fully read. The weekly/roundup sources (Crunchbase, New Market Pitch, StartupTalky) usually have nothing new on a same-day second run — check the stated last-updated date and say "dry" rather than re-listing what is already in the array.
 **Two sources that keep coming back empty or wrong (checked again 2 Sep 2026):** the Arab News `startup-wrap` tag has published nothing since 25 Apr 2026, so MENA coverage now has to come from elsewhere; and the Crunchbase `biggest-funding-rounds` *index* URL returns a stale 2023 article to automated fetch. A stale fetch is **not** the same as "no rounds this week" — say the source went unswept rather than reporting it dry, and reach the current week's article via search if it matters.
 **Revisit every REPORTED row on later runs and convert it when it closes.** Added 4 Sep 2026, after two converted
@@ -612,11 +660,11 @@ running list returns no rows, search `allowed_domains:["calcalistech.com"]` for 
 recap, diff it, and open each absent company's own article for the date before logging. On the first working day of
 each month, read the previous month's recap regardless.
 
-**TREAT THE CTECH RUNNING LIST AS BLOCKED, AND RE-READ ENTRACKR FOR THE PREVIOUS DATE (2 Oct 2026).** `rq8lzbs4c` returned only
+**TREAT THE CTECH RUNNING LIST AS BLOCKED (2 Oct 2026).** (This heading also said to re-read Entrackr. Entrackr was dropped on 23 Nov 2026, see the NO INDIA rule under Tab 2.) `rq8lzbs4c` returned only
 a header and a timestamp on 1 Oct and again on 2 Oct, so stop spending a fetch on it and rely on the calcalistech.com domain
 search plus the weekly and monthly recaps (that search found Enso on 2 Oct). Entrackr also posts late in the day: the 2 Oct
 read of its homepage carried Unveilr AI and two other 30 Sep and 1 Oct items that the 1 Oct run neither logged nor skipped.
-The lag rule therefore covers Entrackr as well as the techstartups daily and roundup: read the previous date's items every run.
+The lag rule covers the techstartups daily and roundup: read the previous date's items every run. (It used to cover Entrackr too. Entrackr was dropped on 23 Nov 2026 as an India-only source. See the exclusion rule under Tab 2.)
 
 **AN INFO ONLY SKIP AT THE INDEX IS NOT A PERMANENT DROP. RE-OPEN IT WHEN THE NEXT INDEX READ SHOWS IT AGAIN (30 Sep 2026).**
 Two cases in two days: SW-120000 (Ontario) was skipped 25 Sep as INFO ONLY and published a full scope by 29 Sep, and AI-1298
@@ -758,7 +806,33 @@ A run is scoped to the data arrays, the Generated date and the note boxes, so th
   768 px wide with no horizontal scroll on any tab). Keep new content inside the existing card and row
   structure so it stays that way. Do not add fixed pixel widths or tables.
 
+## SOURCES CHECKED AND REJECTED (23 Nov 2026)
+
+Do not re-propose these. Each was fetched and assessed.
+
+| Source | Verdict |
+|---|---|
+| rfpdb.com | Zero open listings in its software category, now an upsell funnel for a paid product |
+| rfpschoolwatch.com | Free table shows no buyer, no deadline and no documents; everything useful needs payment |
+| samsearch.co SLED | Paid platform, six preview cards, no web or CMS items, and a listing dated 2028 |
+| highergov.com state and local | $500 a year, marketing page with no listings visible free |
+| startupdaily.world | Largely repackaged Crunchbase, adds nothing over the upstream |
+| iucn.org tenders | Not reachable |
+| entrackr.com, startuptalky.com | India only. Removed 23 Nov under the NO INDIA rule |
+
+Unverified and still worth checking if a fetch budget allows: ungm.org public
+notices, procurement-notices.undp.org, developmentaid.org. All three refused
+the fetch on 23 Nov. UNGM is the most promising of them, because UN agencies
+buy exactly this work and international eligibility is the default there
+rather than the exception.
+
 ## HONESTY RULES (apply to every tab)
+
+**NO INDIA, every tab.** Do not sweep Indian sources and do not log Indian
+companies, on any tab. The full rule and its four tests are under Tab 2. It
+applies to RFP rows and SLED rows too, even though neither currently carries
+any.
+
 - Every specific RFP row must have a working reference URL; if you only have an ID, link the source index and show the ID.
 - Never present inferred SLED primes as confirmed bidders.
 - Never mark an RFP green without a verified "Global World-wide" detail page.
